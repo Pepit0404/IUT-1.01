@@ -32,7 +32,7 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int taille  ){
     scanf("%d",&num);
 
     FILE *File;
-    File = fopen("client.csv", "r");
+    File = fopen("./ressource/client.csv", "r");
     int i=0;
 
     if (File==NULL)
