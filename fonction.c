@@ -23,22 +23,10 @@ int loadFile(int numClient[], float cagnotte[], int suspendu[], int taille)
 
 //Cette Fonction est appelé quand l'admin a choisis d'ajouter un CLient 
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int taille  ){
-    int num ;
+    int num,i ;
     printf("Quelle sera la nnuméros du client a ajouter : \n");
     scanf("%d",&num);
-
-    FILE *File;
-    File = fopen("client.csv", "r");
-    int i=0;
-
-    if (File==NULL)
-    {
-        printf("Erreur: fichier vide ou non existant \n");
-        return -1; //erreur fichier
-    }
-    fscanf(File, "numClient;cagnotte;suspendu\n");
-    while (feof(File)==0){
-        fscanf(File, "%d;%f;%d", &numClient[i], &cagnotte[i], &suspendu[i]);
+    for (i=0 ; i<taille ; i++){
         while(numClient[i]== num){
             printf("Erreur Saisir un autre numero client : \n");
             scanf("%d",&num);
@@ -50,7 +38,15 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int taille  ){
     cagnotte[taille]=0;
     suspendu[taille]=0;
 
-    return 0 ;
+    return taille+1 ;
+}
+void ShowClient (int Tclient[] ,float Tcagnotte[] , int Tsuspendue[] , int taille  ) {
+    int i ;
+    printf("NumClient\tcagnotte\tsuspendue\t\n");
+    for (i=0;i<taille;i++){
+        printf("%d\t%.2f\t%d\t\n",Tclient[i],Tcagnotte[i],Tsuspendue[i]);
+    }
+
 }
 
 //Faire fonction qui avec (s) ecris dans le cvs les nouveaux tableaux , et avec (e) quite et save 
@@ -68,5 +64,7 @@ void test(void)
     printf("%d\n" , result);
     printf("----------------\n");
     printf("%d;%.2f;%d \n",num[etat], cagnotte[etat], suspendu[etat]);
+    printf("----------------\n");
+    ShowClient(num,cagnotte,suspendu,result);
 
 }
