@@ -22,7 +22,7 @@ int loadFile(int numClient[], float cagnotte[], int suspendu[], int taille)
 }
 
 //Cette Fonction est appelé quand l'admin a choisis d'ajouter un CLient 
-int AjouteClient (int numClient[], float cagnotte[], int suspendu[], int taille  ){
+int AddClient (int numClient[], float cagnotte[], int suspendu[], int taille  ){
     int num ;
     printf("Quelle sera la nnuméros du client a ajouter : \n");
     scanf("%d",&num);
