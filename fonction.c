@@ -1,9 +1,9 @@
-#include "../main.h"
+#include "main.h"
 
 int loadFile(int numClient[], float cagnotte[], int suspendu[], int taille)
 {
     FILE *File;
-    File = fopen("client.csv", "r");
+    File = fopen("./ressource/client.csv", "r");
     int i=0;
 
     if (File==NULL)
