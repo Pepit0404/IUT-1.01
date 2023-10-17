@@ -1,4 +1,4 @@
-#include "main.h"
+#include "../main.h"
 
 int loadFile(int numClient[], float cagnotte[], int suspendu[], int taille)
 {
