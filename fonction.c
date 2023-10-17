@@ -87,11 +87,7 @@ void test(void)
     etat = loadFile(num, cagnotte, suspendu, taille);
     printf("etat :%d \n",etat);
     printf("%d;%.2f;%d \n",num[i], cagnotte[i], suspendu[i]);
-<<<<<<< HEAD
-    result=AjouteClient(num ,cagnotte ,suspendu ,etat);
-=======
     result=AddClient(num ,cagnotte ,suspendu ,etat);
->>>>>>> f738fea96014efc72e0a8c807a0ad359c274fd9a
     printf("%d\n" , result);
     printf("----------------\n");
     printf("%d;%.2f;%d \n",num[etat], cagnotte[etat], suspendu[etat]);
