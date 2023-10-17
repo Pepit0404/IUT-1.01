@@ -1,6 +1,6 @@
 #include "main.h"
 
-int loadFile(int numClient[], float cagnotte[], int suspendu[], int taille)
+int loadClient(int numClient[], float cagnotte[], int suspendu[], int taille)
 {
     FILE *File;
     File = fopen("ressource/client.csv", "r");
@@ -79,7 +79,7 @@ void test(void)
     int taille=100 , result; 
     int num[taille], suspendu[taille], etat, i=2;
     float cagnotte[taille];
-    etat = loadFile(num, cagnotte, suspendu, taille);
+    etat = loadClient(num, cagnotte, suspendu, taille);
     printf("etat :%d \n",etat);
     printf("%d;%.2f;%d \n",num[i], cagnotte[i], suspendu[i]);
     result=AddClient(num ,cagnotte ,suspendu ,etat);
