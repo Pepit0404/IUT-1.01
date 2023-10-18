@@ -110,7 +110,6 @@ void ShowClient (int Tclient[] ,float Tcagnotte[] , int Tsuspendue[] , int taill
 }
 
 //permet de rajouter les clients dans le fichier
-//ATTENTION MARCHE PAS
 void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int tailleStart, int tailleEnd){
     FILE *File;
     File = fopen("./ressource/client.csv", "a");
@@ -120,6 +119,20 @@ void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int tailleSt
     }
     for (int i =tailleStart; i<tailleEnd; i++) {
         fprintf(File, "\n%d;%f;%d", Tclient[i], Tcagnotte[i], Tsuspendue[i]);
+    }
+}
+
+//permet de rajouter les clients dans le fichier
+//a tester
+void saveArticle(int Tref[], float Tpoid[], int Tvolume[], int prix[], int tailleStart, int tailleEnd){
+    FILE *File;
+    File = fopen("./ressource/articles.csv", "a");
+    
+    if (File==NULL){
+        printf("Erreur: fichier vide ou non existant \n"); //erreur fichier
+    }
+    for (int i =tailleStart; i<tailleEnd; i++) {
+        fprintf(File, "\n%d;%f;%f;%f", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
     }
 }
 
@@ -140,6 +153,6 @@ void test(void)
     int numclient[100], suspendu[100];
     float cagnotte[100];
     taillebase = loadClient(numclient,cagnotte,suspendu, taille);
-    reelTaille = AddClient(numclient,cagnotte,suspendu,taille);
+    reelTaille = AddClient(numclient,cagnotte,suspendu,taillebase);
     saveClient(numclient,cagnotte,suspendu,taillebase,reelTaille);
 }
