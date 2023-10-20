@@ -138,7 +138,7 @@ void saveArticle(int Tref[], float Tpoid[], int Tvolume[], int prix[], int taill
 
 //Faire fonction Ajouts article (Enzo)
 //Faire Fonction ShowArticle (Enzo)
-//Finir le Menu (Maeva)
+//Finir le Menu (Maeva) 
 //Faire fonction qui avec (s) ecris dans le cvs les nouveaux tableaux , et avec (e) quite et save (Samuel)
 
 
