@@ -100,13 +100,39 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int taill
 
 }
 
-void ShowClient (int Tclient[] ,float Tcagnotte[] , int Tsuspendue[] , int taille  ) {
-    int i ;
-    printf("NumClient\tcagnotte\tsuspendue\t\n");
-    for (i=0;i<taille;i++){
-        printf("%d\t%.2f\t%d\t\n",Tclient[i],Tcagnotte[i],Tsuspendue[i]);
-    }
 
+void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) {
+        int i ;
+        printf("NumClient\tcagnotte\tsuspendue\t\n");
+        for (i=0;i<taille;i++){
+            printf("%d\t%.2f\t%d\t\n",numClient[i],cagnotte[i],suspendu[i]);
+        }
+
+}
+
+void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
+    int num ;
+    printf("Quelle est le numeros de client recherché  : \n");
+    scanf("%d",&num);
+    int dedans = inFile(num , numClient , taille);
+    if ( dedans!=-1){
+        printf("%d\t%.2f\t%d\n",numClient[dedans],cagnotte[dedans],suspendu[dedans]);
+    } else{
+        printf("Le numeros de client rechercher n'existe pas");
+    }
+}
+
+int DelClient  (int numClient[], float cagnotte[], int suspendu[], int taille) {
+    ShowClient(numClient, cagnotte, suspendu, taille);
+}
+
+//Attendre que sam finisse ca fonctio LoadArticle
+void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
+    int i ;
+    printf("Reference\tPoids\tVolume\tPrix\n");
+    for (i=0 ;i< taille ; i++){
+        printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
+    }
 }
 
 //permet de rajouter les clients dans le fichier
@@ -132,7 +158,7 @@ void saveArticle(int Tref[], float Tpoid[], int Tvolume[], int prix[], int taill
         printf("Erreur: fichier vide ou non existant \n"); //erreur fichier
     }
     for (int i =tailleStart; i<tailleEnd; i++) {
-        fprintf(File, "\n%d;%f;%f;%f", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
+        fprintf(File, "\n%d;%f;%d;%d", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
     }
 }
 
@@ -146,13 +172,19 @@ void test(void)
 {
     
     int taille=100 , reelTaille, taillebase;/*
-    int  ref[taille] ;
-    float volume[taille] ;
-    float poids[taille] , prix[taille] ;*/
+    int  ref[100] ;
+    float volume[100] ;
+    float poids[100] , prix[100] ;*/
 
     int numclient[100], suspendu[100];
     float cagnotte[100];
+
     taillebase = loadClient(numclient,cagnotte,suspendu, taille);
-    reelTaille = AddClient(numclient,cagnotte,suspendu,taillebase);
-    saveClient(numclient,cagnotte,suspendu,taillebase,reelTaille);
+    //reelTaille = AddClient(numclient,cagnotte,suspendu,taillebase);
+    saveClient(numclient,cagnotte,suspendu,taillebase,15);
+    printf("%d",numclient[0]);
+    ShowClient(numclient,cagnotte,suspendu,15);
+    ShowClientPrecis(numclient,cagnotte,suspendu,15);
+    /*ShowArticle(ref ,poids,volume,prix,5);*/
+
 }
