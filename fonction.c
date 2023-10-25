@@ -53,11 +53,14 @@ int inFile(int val, int tab[], int taille){
 
 //Cette Fonction est appelé quand l'admin a choisis d'ajouter un CLient
 // peut etre a refaire avec fonction inFile()
-int AddClient (int numClient[], float cagnotte[], int suspendu[], int taille  ){
+int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ){
     int num,i ;
+        if (*taille+1==tailleMax){
+        return -1; //Erreur: tableau trop petit
+    }
     printf("Quelle sera la numéros du client a ajouter : \n");
     scanf("%d",&num);
-    for (i=0 ; i<taille ; i++){
+    for (i=0 ; i<*taille ; i++){
         while(numClient[i]== num){
             printf("Erreur Saisir un autre numero client : \n");
             scanf("%d",&num);
@@ -65,21 +68,24 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int taille  ){
         
     }
     
-    numClient[taille]=num;    
-    cagnotte[taille]=0;
-    suspendu[taille]=0;
+    numClient[*taille]=num;    
+    cagnotte[*taille]=0;
+    suspendu[*taille]=0;
+    *taille+=1;
 
-    return taille+1 ;
+    return 1 ;
 }
 
-int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int taille ){
+int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *taille, int tailleMax ){
     int i , article  ;
     float vol ;
     float poids1, prix1;
-    int new_taille = loadArticle(ref,poids,volume,prix,taille) ;
+    if (*taille+1==tailleMax){
+        return -1; //Erreur: tableau trop petit
+    }
     printf("Quelle est la reference de l'article que vous voulez ajouter : \n");
     scanf("%d" ,&article);
-    for (i=0;i<new_taille;i++){
+    for (i=0;i<*taille;i++){
         while (ref[i]==article) {
             printf("L'article souhaité est déja existant sous un reference existante veuillez saisir une autre référence : \n");
             scanf("%d", &article);
@@ -92,11 +98,12 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int taill
     printf("Veuillez entrez le prix du produits ajouté : \n");
     scanf("%f",&prix1);
 
-    ref[taille]=article;
-    poids[taille]=poids1;
-    volume[taille]=vol;
-    prix[taille]=prix1;
-    return taille + 1 ;
+    ref[*taille]=article;
+    poids[*taille]=poids1;
+    volume[*taille]=vol;
+    prix[*taille]=prix1;
+    *taille+=1;
+    return 1 ;
 
 }
 
@@ -124,6 +131,7 @@ void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int ta
 
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int taille) {
     ShowClient(numClient, cagnotte, suspendu, taille);
+    return 1;
 }
 
 //Attendre que sam finisse ca fonctio LoadArticle
@@ -165,26 +173,52 @@ void saveArticle(int Tref[], float Tpoid[], int Tvolume[], int prix[], int taill
 //Faire fonction Ajouts article (Enzo)
 //Faire Fonction ShowArticle (Enzo)
 //Finir le Menu (Maeva) 
+
 //Faire fonction qui avec (s) ecris dans le cvs les nouveaux tableaux , et avec (e) quite et save (Samuel)
 
+void Menu(void)
+{
+    int admin=777, id, cadmin=0, tp=200, *tl, erreur;
+    int i;
+    int numClient[]={0},  suspendue[]={0};
+    float cagnotte[]={0};
+    *tl=loadClient(numClient, cagnotte, suspendue, tp);
+    erreur=AddClient (numClient, cagnotte, suspendue, *tl, tp);
+    printf("Bienvenue  sur l'application de BricoConstruction!\nRentrez votre identifiant\n");
+    scanf("%d",&id);
+    if (id==admin)
+    {
+        printf("Si vous voulez ajouter un adhérant tapez 0\nSi vous voulez suspendre taper 1\nSi vous voulez recréer une carte tapez 3 :\n");
+        scanf("%d",&cadmin);
+    }
+    if (id!=admin)
+    {
+        for (i=0, i<=tp, i++)
+            if (id==num>Client[i])
+                
+    }
+
+
+}
 
 void test(void)
 {
+    return ;
+    /*
     
-    int taille=100 , reelTaille, taillebase;/*
+    int taille=100 , reelTaille, taillebase, menu;
     int  ref[100] ;
     float volume[100] ;
     float poids[100] , prix[100] ;*/
 
-    int numclient[100], suspendu[100];
-    float cagnotte[100];
-
-    taillebase = loadClient(numclient,cagnotte,suspendu, taille);
+    //int numclient[100], suspendu[100];
+    //float cagnotte[100];
+    
+    /*taillebase = loadClient(numclient,cagnotte,suspendu, taille);
     //reelTaille = AddClient(numclient,cagnotte,suspendu,taillebase);
     saveClient(numclient,cagnotte,suspendu,taillebase,15);
     printf("%d",numclient[0]);
     ShowClient(numclient,cagnotte,suspendu,15);
-    ShowClientPrecis(numclient,cagnotte,suspendu,15);
+    ShowClientPrecis(numclient,cagnotte,suspendu,15);*/
     /*ShowArticle(ref ,poids,volume,prix,5);*/
-
 }
