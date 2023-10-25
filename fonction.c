@@ -51,40 +51,57 @@ int inFile(int val, int tab[], int taille){
     return -1;
 }
 
+int frecherche (int numClient[],int val ,int taille,int *trouve){
+    int i=0 ;
+    while (i<taille){
+        if (numClient[i]==val){
+            *trouve=1;
+            return i;
+        }
+        if (numClient[i]>val){
+            *trouve = 0;
+            return i ;
+        }
+        i++;
+    }
+}
 //Cette Fonction est appelé quand l'admin a choisis d'ajouter un CLient
 // peut etre a refaire avec fonction inFile()
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ){
-    int num,i,j ;
+    int num,j ;
+    int trouve;
         if (*taille+1==tailleMax){
         return -1; //Erreur: tableau trop petit
     }
     printf("Quelle sera la numéros du client a ajouter : \n");
     scanf("%d",&num);
-    j=*taille+1;
-    for (i=0 ; i<*taille ; i++){
-        while(numClient[i]== num){
+
+    int indice =inFile(num,numClient,*taille);
+        while(indice>0){
             printf("Erreur Saisir un autre numero client : \n");
             scanf("%d",&num);
+            indice =inFile(num,numClient,*taille);
         }
-        
-    }
-    while (numClient[j]>num){
-        numClient[j]=numClient[j-1];
-        cagnotte[j]=cagnotte[j-1];
-        suspendu[j]=suspendu[j-1];
-        j-=1;
+    int ind =frecherche(numClient,num,*taille,&trouve);
+    printf("%d\n",j);
+   for (j=*taille-1;j>ind;j--) {
+        printf("%d\n",numClient[j]);
+        numClient[j] = numClient[j -1];
+        cagnotte[j] = cagnotte[j - 1];
+        suspendu[j] = suspendu[j -1];
 
     }
-    numClient[j]=num;
-    cagnotte[j]=0;
-    suspendu[j]=0;
+
+    numClient[ind]=num;
+    cagnotte[ind]=0;
+    suspendu[ind]=0;
     *taille+=1;
 
     return 1 ;
 }
 
 int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *taille, int tailleMax ){
-    int i , article  ;
+    int i , article ,trouve ;
     float vol ;
     float poids1, prix1;
     if (*taille+1==tailleMax){
@@ -92,11 +109,18 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     }
     printf("Quelle est la reference de l'article que vous voulez ajouter : \n");
     scanf("%d" ,&article);
-    for (i=0;i<*taille;i++){
-        while (ref[i]==article) {
-            printf("L'article souhaité est déja existant sous un reference existante veuillez saisir une autre référence : \n");
-            scanf("%d", &article);
-        }
+    int indice =inFile(article,ref,*taille);
+    while(indice>0){
+        printf("Erreur Saisir une autre reference : \n");
+        scanf("%d",&article);
+        indice =inFile(article,ref,*taille);
+    }
+    int ind = frecherche(ref ,article,*taille,&trouve);
+    for (int j = *taille-1; j >ind ; j--) {
+        ref[j]=ref[j-1];
+        poids[j]=poids[j-1];
+        volume[j]=volume[j-1];
+        prix[j]=prix[j-1];
     }
     printf("Veuillez Rentrez le poids de l'artcicle ajouter : \n");
     scanf("%f",&poids1);
@@ -105,10 +129,10 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     printf("Veuillez entrez le prix du produits ajouté : \n");
     scanf("%f",&prix1);
 
-    ref[*taille]=article;
-    poids[*taille]=poids1;
-    volume[*taille]=vol;
-    prix[*taille]=prix1;
+    ref[ind]=article;
+    poids[ind]=poids1;
+    volume[ind]=vol;
+    prix[ind]=prix1;
     *taille+=1;
     return 1 ;
 
@@ -210,12 +234,12 @@ void Menu(void)
 {
     int admin=777, id, cadmin=0, tp=200, tl, erreur;
     int i;
-    int numClient[]={0},  suspendue[]={0};
-    float cagnotte[]={0};
+    int numClient[200],  suspendue[200];
+    float cagnotte[200];
     tl=loadClient(numClient, cagnotte, suspendue, tp);
     erreur=AddClient(numClient, cagnotte, suspendue, &tl, tp);
     saveClient(numClient,cagnotte,suspendue,tp,tl);
-    ShowClient(numClient,cagnotte,suspendue,15);
+    ShowClient(numClient,cagnotte,suspendue,tl);
     printf("Bienvenue  sur l'application de BricoConstruction!\nRentrez votre identifiant\n");
     scanf("%d",&id);
     if (id==admin)
