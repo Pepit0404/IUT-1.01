@@ -21,7 +21,7 @@ int loadClient(int numClient[], float cagnotte[], int suspendu[], int taille)
     return i;
 }
 
-int loadArticle(int id[], float poid[], float volume[], float prix[], int taille)
+int loadArticle(int id[], float poid[], float volume[], float prix[], int tailleMax)
 {
     FILE *File;
     File = fopen("./ressource/articles.csv", "r");
@@ -34,12 +34,13 @@ int loadArticle(int id[], float poid[], float volume[], float prix[], int taille
         return -1; //erreur fichier
     }
 
-    fscanf(File, "numClient;cagnotte;suspendu\n");
-    while (feof(File)==0 && i<taille){
+    fscanf(File, "reference;poids (kg);volume (l);prix Unitaire\n");
+    while (feof(File)==0 && i<tailleMax){
         fscanf(File, "%d;%f;%f;%f", &id[i], &poid[i], &volume[i], &prix[i]);
         i++;
     }
-    if (i==taille && feof(File)==0) return -2; //erreur tableau trop court
+    if (i==tailleMax && feof(File)==0) return -2; //erreur tableau trop court
+    printf("%d;%.2f;%.2f;%.2f",id[1],poid[1],volume[1],prix[1]);
     return i;
 }
 
@@ -76,16 +77,17 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     printf("Quelle sera la numéros du client a ajouter : \n");
     scanf("%d",&num);
 
-    int indice =inFile(num,numClient,*taille);
-        while(indice>0){
-            printf("Erreur Saisir un autre numero client : \n");
-            scanf("%d",&num);
-            indice =inFile(num,numClient,*taille);
-        }
     int ind =frecherche(numClient,num,*taille,&trouve);
+        while(trouve==1 || num<0) {
+            printf("Erreur Saisir un autre numero client : \n");
+            scanf("%d", &num);
+            ind =frecherche(numClient,num,*taille,&trouve);
+        }
+
+
+
     printf("%d\n",j);
    for (j=*taille-1;j>ind;j--) {
-        printf("%d\n",numClient[j]);
         numClient[j] = numClient[j -1];
         cagnotte[j] = cagnotte[j - 1];
         suspendu[j] = suspendu[j -1];
@@ -109,13 +111,13 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     }
     printf("Quelle est la reference de l'article que vous voulez ajouter : \n");
     scanf("%d" ,&article);
-    int indice =inFile(article,ref,*taille);
-    while(indice>0){
+    int ind = frecherche(ref ,article,*taille,&trouve);
+    while(trouve==1 || article <0){
         printf("Erreur Saisir une autre reference : \n");
         scanf("%d",&article);
-        indice =inFile(article,ref,*taille);
+        ind = frecherche(ref ,article,*taille,&trouve);
     }
-    int ind = frecherche(ref ,article,*taille,&trouve);
+
     for (int j = *taille-1; j >ind ; j--) {
         ref[j]=ref[j-1];
         poids[j]=poids[j-1];
@@ -236,10 +238,18 @@ void Menu(void)
     int i;
     int numClient[200],  suspendue[200];
     float cagnotte[200];
-    tl=loadClient(numClient, cagnotte, suspendue, tp);
+    int  ref[100] ;
+    float volume[100] ;
+    float poids[100] , prix[100] ;
+    int tl1 ;
+    tl1= loadArticle(ref,poids,volume,prix,tp);
+    printf("%d\n",tl1);
+    tl = loadClient(numClient, cagnotte, suspendue, tp);
     erreur=AddClient(numClient, cagnotte, suspendue, &tl, tp);
     saveClient(numClient,cagnotte,suspendue,tp,tl);
     ShowClient(numClient,cagnotte,suspendue,tl);
+    int Error = AddArticle(ref,poids,volume,prix,&tl,tp);
+    ShowArticle(ref,poids,volume,prix,tl1);
     printf("Bienvenue  sur l'application de BricoConstruction!\nRentrez votre identifiant\n");
     scanf("%d",&id);
     if (id==admin)
