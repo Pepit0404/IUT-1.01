@@ -83,10 +83,6 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
             scanf("%d", &num);
             ind =frecherche(numClient,num,*taille,&trouve);
         }
-
-
-
-    printf("%d\n",j);
    for (j=*taille-1;j>ind;j--) {
         numClient[j] = numClient[j -1];
         cagnotte[j] = cagnotte[j - 1];
@@ -103,7 +99,7 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
 }
 
 int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *taille, int tailleMax ){
-    int i , article ,trouve ;
+    int  article ,trouve ;
     float vol ;
     float poids1, prix1;
     if (*taille+1==tailleMax){
@@ -124,11 +120,11 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         volume[j]=volume[j-1];
         prix[j]=prix[j-1];
     }
-    printf("Veuillez Rentrez le poids de l'artcicle ajouter : \n");
+    printf("Veuillez Rentrer le poids de l'article ajouté : \n");
     scanf("%f",&poids1);
-    printf("Veuillez entrez le volume de produits ajouté : \n");
+    printf("Veuillez entrer le volume de produit ajouté : \n");
     scanf("%fm",&vol);
-    printf("Veuillez entrez le prix du produits ajouté : \n");
+    printf("Veuillez entrer le prix du produit ajouté : \n");
     scanf("%f",&prix1);
 
     ref[ind]=article;
@@ -143,9 +139,9 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
 
 void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) {
         int i ;
-        printf("NumClient\tcagnotte\tsuspendue\t\n");
+        printf("Num\tcagnotte\tsuspendue\t\n");
         for (i=0;i<taille;i++){
-            printf("%d\t%.2f\t%d\t\n",numClient[i],cagnotte[i],suspendu[i]);
+            printf("%d\t%.2f\t\t%d\t\n",numClient[i],cagnotte[i],suspendu[i]);
         }
 
 }
@@ -161,40 +157,38 @@ void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int ta
         printf("Le numeros de client rechercher n'existe pas");
     }
 }
-/*
-int DelClient  (int numClient[], float cagnotte[], int suspendu[], int taille) {
 
-    int num ,i;
-    i=taille ;
-    ShowClient(numClient, cagnotte, suspendu, taille);
+int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
+
+    int num ,i , trouve ;
+    if (*taille+1==tailleMax){
+        return -1; //Erreur: tableau trop petit
+    }
+    printf("Voici la liste des clients : \n");
+    ShowClient(numClient, cagnotte, suspendu, *taille);
     printf("Quelle est la reference du client  que vous souhaitez supprimer : \n ");
     scanf("%d",&num);
-    int dedans = inFile(num , numClient , taille);
-    if (dedans!=-1){
-
-        while (numClient[i]>num){
-            numClient[i]=numClient[i-1];
-            cagnotte[i]=cagnotte[i-1];
-            suspendu[i]=suspendu[i-1];
-            i-=1;
-        }
-        numClient[i-1]=numClient[i];
+    int indice = frecherche(numClient,num,*taille,&trouve);
+    while (trouve==0 || num <0){
+        printf("La reference client est inexistante ou incorrect veuillez re saisir la reference :\n");
+        scanf("%d",&num);
+        indice = frecherche(numClient,num,*taille,&trouve);
     }
-    else {
-        printf("La valeur choisis n'est pas dans la base \n");
-        return -1;
+    indice = frecherche(numClient,num,*taille,&trouve);
+    for (i=indice;i<*taille;i++){
+        numClient[i]=numClient[i+1];
+        cagnotte[i]=cagnotte[i+1];
+        suspendu[i]=suspendu[i+1];
     }
-
-
-
+    *taille-=1;
     return 1;
-}*/
+}
 
 //Attendre que sam finisse ca fonction LoadArticle
 void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
     int i ;
-    printf("Reference\tPoids\tVolume\tPrix\n");
-    for (i=0 ;i< taille ; i++){
+    printf("Ref\tPoids\tVolume\tPrix\n");
+    for (i=0 ;i<taille-1 ; i++){
         printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
     }
 }
@@ -245,17 +239,21 @@ void Menu(void)
     tl1= loadArticle(ref,poids,volume,prix,tp);
     printf("%d\n",tl1);
     tl = loadClient(numClient, cagnotte, suspendue, tp);
-    erreur=AddClient(numClient, cagnotte, suspendue, &tl, tp);
+    erreur= DelClient(numClient, cagnotte, suspendue, &tl, tp);
     saveClient(numClient,cagnotte,suspendue,tp,tl);
     ShowClient(numClient,cagnotte,suspendue,tl);
-    int Error = AddArticle(ref,poids,volume,prix,&tl,tp);
+    int Error = AddArticle(ref,poids,volume,prix,&tl1,tp);
     ShowArticle(ref,poids,volume,prix,tl1);
     printf("Bienvenue  sur l'application de BricoConstruction!\nRentrez votre identifiant\n");
     scanf("%d",&id);
     if (id==admin)
     {
-        printf("Si vous voulez ajouter un adhérant tapez 0\nSi vous voulez suspendre taper 1\nSi vous voulez recréer une carte tapez 3 :\n");
+        printf("===========================================================\n");
+        printf("||Bienvenue dans la partie Administration de l application \n");
+        printf("||Si vous voulez ajouter un adhérant tapez 0\n||Si vous voulez suspendre taper 1\n||Si vous voulez recréer une carte tapez 3 :\n");
+        printf("===========================================================\n");
         scanf("%d",&cadmin);
+
     }
     /*
     if (id!=admin)

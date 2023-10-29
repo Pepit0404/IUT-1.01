@@ -13,10 +13,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7c41e9e8-1d6d-4850-8fa0-971041dbf697" name="Changes" comment="Corrige bug">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fonction.c" beforeDir="false" afterPath="$PROJECT_DIR$/fonction.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/articles.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/articles.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ressource/client.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/client.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,13 +100,6 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -122,7 +115,8 @@
       <workItem from="1698055047130" duration="665000" />
       <workItem from="1698253400027" duration="2964000" />
       <workItem from="1698260179572" duration="2965000" />
-      <workItem from="1698301532434" duration="1694000" />
+      <workItem from="1698301532434" duration="2371000" />
+      <workItem from="1698599820600" duration="2149000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout fontion">
       <option name="closed" value="true" />
