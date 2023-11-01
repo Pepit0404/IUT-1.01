@@ -2,6 +2,7 @@
 
 int main(void)
 {
-    Menu();
+    //Menu();
+    test();
     return 0;
 }

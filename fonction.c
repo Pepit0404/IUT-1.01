@@ -40,7 +40,6 @@ int loadArticle(int id[], float poid[], float volume[], float prix[], int taille
         i++;
     }
     if (i==tailleMax && feof(File)==0) return -2; //erreur tableau trop court
-    printf("%d;%.2f;%.2f;%.2f",id[1],poid[1],volume[1],prix[1]);
     return i;
 }
 
@@ -78,12 +77,12 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     scanf("%d",&num);
 
     int ind =frecherche(numClient,num,*taille,&trouve);
-        while(trouve==1 || num<0) {
-            printf("Erreur Saisir un autre numero client : \n");
-            scanf("%d", &num);
-            ind =frecherche(numClient,num,*taille,&trouve);
-        }
-   for (j=*taille-1;j>ind;j--) {
+    while(trouve==1 || num<0) {
+        printf("Erreur Saisir un autre numero client : \n");
+        scanf("%d", &num);
+        ind =frecherche(numClient,num,*taille,&trouve);
+    }
+   for (j=*taille;j>ind;j--) {
         numClient[j] = numClient[j -1];
         cagnotte[j] = cagnotte[j - 1];
         suspendu[j] = suspendu[j -1];
@@ -114,7 +113,7 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         ind = frecherche(ref ,article,*taille,&trouve);
     }
 
-    for (int j = *taille-1; j >ind ; j--) {
+    for (int j = *taille; j >ind ; j--) {
         ref[j]=ref[j-1];
         poids[j]=poids[j-1];
         volume[j]=volume[j-1];
@@ -194,30 +193,33 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
 }
 
 //permet de rajouter les clients dans le fichier
-void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int tailleStart, int tailleEnd){
+void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
     FILE *File;
-    File = fopen("./ressource/client.csv", "a");
-    
-    if (File==NULL){
-        printf("Erreur: fichier vide ou non existant \n"); //erreur fichier
-    }
-    for (int i =tailleStart; i<tailleEnd; i++) {
-        fprintf(File, "\n%d;%f;%d", Tclient[i], Tcagnotte[i], Tsuspendue[i]);
+    File = fopen("ressource/client.csv", "w");
+
+    if (File != NULL){
+        fprintf(File, "numClient;cagnotte;suspendu");
+        for (int i = 0; i<taille; i++){
+            fprintf(File, "\n%d;%.2f;%d", Tclient[i], Tcagnotte[i], Tsuspendue[i]);
+        }
+        fclose(File);
     }
 }
 
 //permet de rajouter les clients dans le fichier
 //a tester
-void saveArticle(int Tref[], float Tpoid[], int Tvolume[], int prix[], int tailleStart, int tailleEnd){
+void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int taille){
     FILE *File;
-    File = fopen("./ressource/articles.csv", "a");
+    File = fopen("ressource/articles.csv", "w");
     
-    if (File==NULL){
-        printf("Erreur: fichier vide ou non existant \n"); //erreur fichier
+    if (File!=NULL){
+        fprintf(File, "reference;poids (kg);volume (l);prix Unitaire");
+        for (int i = 0; i<taille; i++) {
+            fprintf(File, "\n%d;%.3f;%.2f;%.2f", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
+        }
+        fclose(File);
     }
-    for (int i =tailleStart; i<tailleEnd; i++) {
-        fprintf(File, "\n%d;%f;%d;%d", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
-    }
+
 }
 
 //Faire fonction Ajouts article (Enzo)
@@ -240,7 +242,7 @@ void Menu(void)
     printf("%d\n",tl1);
     tl = loadClient(numClient, cagnotte, suspendue, tp);
     erreur= DelClient(numClient, cagnotte, suspendue, &tl, tp);
-    saveClient(numClient,cagnotte,suspendue,tp,tl);
+    //saveClient(numClient,cagnotte,suspendue,tp,tl); a changer
     ShowClient(numClient,cagnotte,suspendue,tl);
     int Error = AddArticle(ref,poids,volume,prix,&tl1,tp);
     ShowArticle(ref,poids,volume,prix,tl1);
@@ -268,22 +270,25 @@ void Menu(void)
 
 void test(void)
 {
-    return ;
     /*
-    
-    int taille=100 , reelTaille, taillebase, menu;
-    int  ref[100] ;
-    float volume[100] ;
-    float poids[100] , prix[100] ;*/
-
-    //int numclient[100], suspendu[100];
-    //float cagnotte[100];
-    
-    /*taillebase = loadClient(numclient,cagnotte,suspendu, taille);
-    //reelTaille = AddClient(numclient,cagnotte,suspendu,taillebase);
-    saveClient(numclient,cagnotte,suspendu,taillebase,15);
-    printf("%d",numclient[0]);
-    ShowClient(numclient,cagnotte,suspendu,15);
-    ShowClientPrecis(numclient,cagnotte,suspendu,15);*/
-    /*ShowArticle(ref ,poids,volume,prix,5);*/
+    int ref[100], tmax = 100, tailleA;
+    float poid[100], volume[100], prix[100];
+    tailleA = loadArticle(ref, poid, volume, prix, tmax);
+    int numClient[100], suspendu[100], tailleC;
+    float cagnotte[100];
+    tailleC = loadClient(numClient, cagnotte, suspendu, tmax);
+    printf("taille Article: %d\ntaille Client: %d\n", tailleA, tailleC);
+    */
+    int ref[100], tmax = 100, taille, erreur;
+    float poid[100], volume[100], prix[100];
+    taille = loadArticle(ref, poid, volume, prix, tmax);
+    erreur = AddArticle(ref, poid, volume, prix, &taille, tmax);
+    saveArticle(ref, poid, volume, prix, taille);
+    /*
+    int numClient[100], suspendu[100], taille, error, tmax=100, tailleC;
+    float cagnotte[100];
+    taille = loadClient(numClient, cagnotte, suspendu, tmax);
+    error = AddClient(numClient, cagnotte, suspendu, &taille, tmax);
+    saveClient(numClient, cagnotte, suspendu, taille);
+        */
 }
