@@ -14,9 +14,6 @@
   <component name="ChangeListManager">
     <list default="true" id="7c41e9e8-1d6d-4850-8fa0-971041dbf697" name="Changes" comment="Corrige bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fonction.c" beforeDir="false" afterPath="$PROJECT_DIR$/fonction.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressource/articles.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/articles.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ressource/client.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ressource/client.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,7 +113,7 @@
       <workItem from="1698253400027" duration="2964000" />
       <workItem from="1698260179572" duration="2965000" />
       <workItem from="1698301532434" duration="2371000" />
-      <workItem from="1698599820600" duration="2149000" />
+      <workItem from="1698599820600" duration="3064000" />
     </task>
     <task id="LOCAL-00001" summary="Ajout fontion">
       <option name="closed" value="true" />
