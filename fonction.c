@@ -40,34 +40,28 @@ int loadArticle(int id[], float poid[], float volume[], float prix[], int taille
         i++;
     }
     if (i==tailleMax && feof(File)==0) return -2; //erreur tableau trop court
-    printf("%d;%.2f;%.2f;%.2f",id[1],poid[1],volume[1],prix[1]);
     return i;
 }
 
 // recherche si la valeur (numéro client ou reference objet) est déjà dans le fichier
-int inFile(int val, int tab[], int taille){
-    for (int i=0 ; i<taille ; i++){
-        if (tab[i] == val) return i;
-    }
-    return -1;
-}
-
-int frecherche (int numClient[],int val ,int taille,int *trouve){
+int frecherche (int tab[], int val , int taille, int *trouve){
     int i=0 ;
     while (i<taille){
-        if (numClient[i]==val){
+        if (tab[i]==val){
             *trouve=1;
             return i;
         }
-        if (numClient[i]>val){
+        if (tab[i]>val){
             *trouve = 0;
             return i ;
         }
         i++;
     }
+    *trouve = 0;
+    return -1;
 }
+
 //Cette Fonction est appelé quand l'admin a choisis d'ajouter un CLient
-// peut etre a refaire avec fonction inFile()
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ){
     int num,j ;
     int trouve;
@@ -78,12 +72,12 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     scanf("%d",&num);
 
     int ind =frecherche(numClient,num,*taille,&trouve);
-        while(trouve==1 || num<0) {
-            printf("Erreur Saisir un autre numero client : \n");
-            scanf("%d", &num);
-            ind =frecherche(numClient,num,*taille,&trouve);
-        }
-   for (j=*taille-1;j>ind;j--) {
+    while(trouve==1 || num<0) {
+        printf("Erreur Saisir un autre numero client : \n");
+        scanf("%d", &num);
+        ind =frecherche(numClient,num,*taille,&trouve);
+    }
+   for (j=*taille;j>ind;j--) {
         numClient[j] = numClient[j -1];
         cagnotte[j] = cagnotte[j - 1];
         suspendu[j] = suspendu[j -1];
@@ -114,7 +108,7 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         ind = frecherche(ref ,article,*taille,&trouve);
     }
 
-    for (int j = *taille-1; j >ind ; j--) {
+    for (int j = *taille; j >ind ; j--) {
         ref[j]=ref[j-1];
         poids[j]=poids[j-1];
         volume[j]=volume[j-1];
@@ -136,7 +130,6 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
 
 }
 
-
 void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) {
         int i ;
         printf("Num\tcagnotte\tsuspendue\t\n");
@@ -147,17 +140,24 @@ void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) 
 }
 
 void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
-    int num ;
+    int num, dedans;
     printf("Quelle est le numeros de client recherché  : \n");
     scanf("%d",&num);
-    int dedans = inFile(num , numClient , taille);
-    if ( dedans!=-1){
-        printf("%d\t%.2f\t%d\n",numClient[dedans],cagnotte[dedans],suspendu[dedans]);
+    int position = frecherche(numClient, num, taille, &dedans);
+    if ( dedans==1){
+        printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
     } else{
         printf("Le numeros de client rechercher n'existe pas");
     }
 }
 
+void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
+    int i ;
+    printf("Ref\tPoids\tVolume\tPrix\n");
+    for (i=0 ;i<taille-1 ; i++){
+        printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
+    }
+}
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
@@ -184,40 +184,129 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
     return 1;
 }
 
-//Attendre que sam finisse ca fonction LoadArticle
-void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
-    int i ;
-    printf("Ref\tPoids\tVolume\tPrix\n");
-    for (i=0 ;i<taille-1 ; i++){
-        printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
+
+int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax ){
+    int ref1 , i ,trouve ;
+    if (*taille+1==tailleMax){
+        return -1; //Erreur: tableau trop petit
+    }
+    printf("Voicie la liste des artciles : \n");
+    ShowArticle(ref,poids,volume,prix,*taille);
+    printf("Quelle est la ref de l article que vous souhaitez supprimer : \n");
+    scanf("%d",&ref1);
+    int indice = frecherche(ref,ref1,*taille,&trouve);
+    while (trouve==0 || ref <0){
+        printf("La reference de l'artcile est inexistante ou negatif veuillez re saisir : \n");
+        scanf("%d",&ref1);
+        indice =frecherche(ref,ref1,*taille,&trouve);
+    }
+    for (i=indice;i<*taille;i++){
+        ref[i]=ref[i+1];
+        poids[i]=poids[i+1];
+        volume[i]=volume[i+1];
+        prix[i]=prix[i+1];
+
+    }
+    *taille-=1;
+    return 1;
+
+}
+
+
+
+//permet de rajouter les clients dans le fichier
+void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
+    FILE *File;
+    File = fopen("ressource/client.csv", "w");
+
+    if (File != NULL){
+        fprintf(File, "numClient;cagnotte;suspendu");
+        for (int i = 0; i<taille; i++){
+            fprintf(File, "\n%d;%.2f;%d", Tclient[i], Tcagnotte[i], Tsuspendue[i]);
+        }
+        fclose(File);
     }
 }
 
 //permet de rajouter les clients dans le fichier
-void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int tailleStart, int tailleEnd){
+void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int taille){
     FILE *File;
-    File = fopen("./ressource/client.csv", "a");
+    File = fopen("ressource/articles.csv", "w");
     
-    if (File==NULL){
-        printf("Erreur: fichier vide ou non existant \n"); //erreur fichier
+    if (File!=NULL){
+        fprintf(File, "reference;poids (kg);volume (l);prix Unitaire");
+        for (int i = 0; i<taille; i++) {
+            fprintf(File, "\n%d;%.3f;%.2f;%.2f", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
+        }
+        fclose(File);
     }
-    for (int i =tailleStart; i<tailleEnd; i++) {
-        fprintf(File, "\n%d;%f;%d", Tclient[i], Tcagnotte[i], Tsuspendue[i]);
-    }
+
 }
 
-//permet de rajouter les clients dans le fichier
-//a tester
-void saveArticle(int Tref[], float Tpoid[], int Tvolume[], int prix[], int tailleStart, int tailleEnd){
-    FILE *File;
-    File = fopen("./ressource/articles.csv", "a");
-    
-    if (File==NULL){
-        printf("Erreur: fichier vide ou non existant \n"); //erreur fichier
+//a ajouter cagnotte (oui c'est la flemme)
+void affficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax){
+    int place, trouve, quantite;
+    float volTT=0, chargeTT=0, prixTT=0, cagnotteTT=0;
+    printf("\n\n===========================================================\n");
+    printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
+    for (int i=0; i<ptaille; i++){
+        quantite = pQuantite[i];
+        place = frecherche(Tref, pRef[i], Ttaille, &trouve);
+        prixTT += Tprix[place]*quantite;
+        volTT += Tvolume[place]*quantite;
+        chargeTT += Tpoids[place]*quantite;
+        printf("%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\t%.2f\t%.2f\n", pRef[i], quantite, Tpoids[place], Tvolume[place], Tprix[place], Tpoids[place]*quantite, Tvolume[place]*quantite, Tprix[place]*quantite, cagnotte);
     }
-    for (int i =tailleStart; i<tailleEnd; i++) {
-        fprintf(File, "\n%d;%f;%d;%d", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
+    printf("\nPrix total à payer:\t%.2f euros\n", prixTT);
+    printf("Cagnotte totale:\t?? euros\n");
+    printf("\nVolume utilisé\t: %.2f litres\nVolume restant\t: %.2f litres\n", volTT, volmax-volTT);
+    printf("\nCharge Actuelle\t: %.2f kg\n", chargeTT);
+    printf("Charge resatante: %.2f kg\n", poidmax-chargeTT);
+}
+
+//demander caractéristique client (poids, prix, volume)
+//demander action client (ajout, supretion, modification, rénitialisation,...)
+//utilisation cagnotte entiérement ou partiellement
+//mise a jour cagnotte (10%)
+float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, int id, float cagnotte){
+    int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action;
+    float volMax, poidMax, cagnotteTT;
+    printf("===========================================================\n");
+    printf("||Bienvenue Monsieur \n");
+    printf("===========================================================\n");
+    printf("Veuillez définir la charge max de votre véhicule (kg): ");
+    scanf("%f", &poidMax);
+    printf("Veuillez définir le volume max de votre véhicule (L): ");
+    scanf("%f", &volMax);
+    while (action!=-1)
+    {
+        printf("\n\n===========================================================\n");
+        printf("||Si vous voulez arréter là tapez -1:\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez modifier un article taper 1\n||Si vous voulez suprimer un article tapez 3 :\n||Si vous voulez rénitialiser le panier tapez 4:\n");
+        scanf("%d", &action);
+        if (action!=-1){
+            if (action==0){
+                int ref, trouve, place, quantite;
+                printf("\n\nReference article: ");
+                scanf("%d", &ref);
+                place = frecherche(Tref, ref, Ttaille, &trouve);
+                while (trouve!=1)
+                {
+                    printf("L'artile %d n'existe pas\n", ref);
+                    printf("Veuillez réessyer: ");
+                    scanf("%d", &ref);
+                    place = frecherche(Tref, ref, Ttaille, &trouve);
+                }
+                printf("Quantité prise: ");
+                scanf("%d", &quantite);
+                pRef[ptaille] = ref;
+                pQuantite[ptaille] = quantite;
+                ptaille+=1;
+            }
+
+            affficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax);
+        }
     }
+    return 0.1;
 }
 
 //Faire fonction Ajouts article (Enzo)
@@ -240,7 +329,7 @@ void Menu(void)
     printf("%d\n",tl1);
     tl = loadClient(numClient, cagnotte, suspendue, tp);
     erreur= DelClient(numClient, cagnotte, suspendue, &tl, tp);
-    saveClient(numClient,cagnotte,suspendue,tp,tl);
+    //saveClient(numClient,cagnotte,suspendue,tp,tl); a changer
     ShowClient(numClient,cagnotte,suspendue,tl);
     int Error = AddArticle(ref,poids,volume,prix,&tl1,tp);
     ShowArticle(ref,poids,volume,prix,tl1);
@@ -268,22 +357,14 @@ void Menu(void)
 
 void test(void)
 {
-    return ;
-    /*
-    
-    int taille=100 , reelTaille, taillebase, menu;
+    int numClient[200],  suspendue[200], tp=200;
+    float cagnotte[200];
     int  ref[100] ;
     float volume[100] ;
-    float poids[100] , prix[100] ;*/
-
-    //int numclient[100], suspendu[100];
-    //float cagnotte[100];
-    
-    /*taillebase = loadClient(numclient,cagnotte,suspendu, taille);
-    //reelTaille = AddClient(numclient,cagnotte,suspendu,taillebase);
-    saveClient(numclient,cagnotte,suspendu,taillebase,15);
-    printf("%d",numclient[0]);
-    ShowClient(numclient,cagnotte,suspendu,15);
-    ShowClientPrecis(numclient,cagnotte,suspendu,15);*/
-    /*ShowArticle(ref ,poids,volume,prix,5);*/
+    float poids[100] , prix[100] ;
+    int tl1 ;
+    tl1= loadArticle(ref,poids,volume,prix,tp);
+    DelArticle(ref,poids,volume,prix,&tl1,100);
+    ShowArticle(ref,poids,volume,prix,tl1);
+    Client(ref, poids, volume, prix, tp, tl1, 42, 0);
 }

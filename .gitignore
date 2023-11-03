@@ -1,3 +1,5 @@
 *.o
 .ideas
+.idea
 exe
+.DS_Store
