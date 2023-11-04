@@ -216,24 +216,33 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 }
 
 //a ajouter cagnotte (oui c'est la flemme)
-void affficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax){
+float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax){
     int place, trouve, quantite;
-    float volTT=0, chargeTT=0, prixTT=0, cagnotteTT=0;
+    float volTT=0, chargeTT=0, prixTT=0, cagnotteA=0;
     printf("\n\n===========================================================\n");
     printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
     for (int i=0; i<ptaille; i++){
         quantite = pQuantite[i];
         place = frecherche(Tref, pRef[i], Ttaille, &trouve);
         prixTT += Tprix[place]*quantite;
+        cagnotteA = Tprix[place]*quantite/10.0;
+        cagnotte += cagnotteA;
         volTT += Tvolume[place]*quantite;
         chargeTT += Tpoids[place]*quantite;
-        printf("%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\t%.2f\t%.2f\n", pRef[i], quantite, Tpoids[place], Tvolume[place], Tprix[place], Tpoids[place]*quantite, Tvolume[place]*quantite, Tprix[place]*quantite, cagnotte);
+        printf("%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\t%.2f\t%.2f\n", pRef[i], quantite, Tpoids[place], Tvolume[place], Tprix[place], Tpoids[place]*quantite, Tvolume[place]*quantite, Tprix[place]*quantite, cagnotteA);
     }
     printf("\nPrix total à payer:\t%.2f euros\n", prixTT);
-    printf("Cagnotte totale:\t?? euros\n");
-    printf("\nVolume utilisé\t: %.2f litres\nVolume restant\t: %.2f litres\n", volTT, volmax-volTT);
+    printf("Cagnotte totale:\t%.2f euros\n", cagnotte);
+    printf("\nVolume utilisé\t: %.2f litres\n", volTT);
+    printf("Volume restant\t:");
+    if (volmax-volTT < 0) printf("Attention dépassement du volume autorisée de ");
+    printf("%.2f litres\n", volmax-volTT);
     printf("\nCharge Actuelle\t: %.2f kg\n", chargeTT);
-    printf("Charge resatante: %.2f kg\n", poidmax-chargeTT);
+    printf("Charge resatante: ");
+    if (poidmax-chargeTT < 0) printf("Attention dépassement de la charge autorisée de ");
+    printf("%.2f kg\n", poidmax-chargeTT);
+
+    return cagnotte;
 }
 
 //demander caractéristique client (poids, prix, volume)
@@ -242,7 +251,7 @@ void affficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
 //mise a jour cagnotte (10%)
 float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, int id, float cagnotte){
     int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action;
-    float volMax, poidMax, cagnotteTT;
+    float volMax, poidMax, cagnotteTT, nCagnotte;
     printf("===========================================================\n");
     printf("||Bienvenue Monsieur \n");
     printf("===========================================================\n");
@@ -253,7 +262,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     while (action!=-1)
     {
         printf("\n\n===========================================================\n");
-        printf("||Si vous voulez arréter là tapez -1:\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez modifier un article taper 1\n||Si vous voulez suprimer un article tapez 3 :\n||Si vous voulez rénitialiser le panier tapez 4:\n");
+        printf("||Si vous voulez arréter là tapez -1\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez modifier un article taper 1\n||Si vous voulez suprimer un article tapez 2\n||Si vous voulez rénitialiser le panier tapez 3\n");
         scanf("%d", &action);
         if (action!=-1){
             if (action==0){
@@ -264,21 +273,70 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 while (trouve!=1)
                 {
                     printf("L'artile %d n'existe pas\n", ref);
-                    printf("Veuillez réessyer: ");
+                    printf("Veuillez réessayer: ");
                     scanf("%d", &ref);
                     place = frecherche(Tref, ref, Ttaille, &trouve);
                 }
-                printf("Quantité prise: ");
-                scanf("%d", &quantite);
-                pRef[ptaille] = ref;
-                pQuantite[ptaille] = quantite;
-                ptaille+=1;
+                place = frecherche(pRef, ref, ptaille, &trouve);
+                if (trouve == 0){
+                    printf("Quantité prise: ");
+                    scanf("%d", &quantite);
+                    pRef[ptaille] = ref;
+                    pQuantite[ptaille] = quantite;
+                    ptaille+=1;
+                }else printf("L'article %d déjà present dans votre panier \n", ref);
             }
-
-            affficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax);
+            else if (action==1) {
+                int ref, trouve, place, quantite;
+                printf("\n\nReference article: ");
+                scanf("%d", &ref);
+                place = frecherche(pRef, ref, ptaille, &trouve);
+                while (trouve!=1)
+                {
+                    printf("Vous n'avez pas l'artile %d dans votre panier\n", ref);
+                    printf("Veuillez réessayer: ");
+                    scanf("%d", &ref);
+                    place = frecherche(pRef, ref, ptaille, &trouve);
+                }
+                printf("Nouvelle quantité voulu: ");
+                scanf("%d", &quantite);
+                while (quantite<=0)
+                {
+                    printf("La quantité ne peut pas etre inférieur ou égale à 0\n");
+                    printf("Veuillez réessayer: ");
+                    scanf("%d", &quantite);
+                }
+                pQuantite[place] = quantite;
+            }
+            else if (action == 2) {
+                int ref, trouve, place, quantite;
+                printf("\n\nReference article: ");
+                scanf("%d", &ref);
+                place = frecherche(pRef, ref, ptaille, &trouve);
+                while (trouve!=1)
+                {
+                    printf("Vous n'avez pas l'artile %d dans votre panier\n", ref);
+                    printf("Veuillez réessayer: ");
+                    scanf("%d", &ref);
+                    place = frecherche(pRef, ref, ptaille, &trouve);
+                }
+                for (int i=place; i<ptaille; i++) {
+                    pRef[i]=pRef[i+1];
+                    pQuantite[i]=pQuantite[i+1];
+                }
+                ptaille--;
+                printf("Article %d supprimé\n", ref);
+            }
+            else if (action == 3){
+                char choix;
+                printf("\nEtes vous sur de vouloir remettre à 0 votre panier ? (y/n)\n");
+                scanf("%*c%c", &choix);
+                if (choix=='y' || choix=='Y') ptaille = 0;
+            }
+            nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax);
         }
     }
-    return 0.1;
+    return nCagnotte;
 }
 
 //Faire fonction Ajouts article (Enzo)
@@ -336,5 +394,5 @@ void test(void)
     float poids[100] , prix[100] ;
     int tl1 ;
     tl1= loadArticle(ref,poids,volume,prix,tp);
-    Client(ref, poids, volume, prix, tp, tl1, 42, 0);
+    Client(ref, poids, volume, prix, tp, tl1, 42, 100);
 }
