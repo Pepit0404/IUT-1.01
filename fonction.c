@@ -151,6 +151,13 @@ void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int ta
     }
 }
 
+void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
+    int i ;
+    printf("Ref\tPoids\tVolume\tPrix\n");
+    for (i=0 ;i<taille-1 ; i++){
+        printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
+    }
+}
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
@@ -177,14 +184,35 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
     return 1;
 }
 
-//Attendre que sam finisse ca fonction LoadArticle
-void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
-    int i ;
-    printf("Ref\tPoids\tVolume\tPrix\n");
-    for (i=0 ;i<taille-1 ; i++){
-        printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
+
+int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax ){
+    int ref1 , i ,trouve ;
+    if (*taille+1==tailleMax){
+        return -1; //Erreur: tableau trop petit
     }
+    printf("Voicie la liste des artciles : \n");
+    ShowArticle(ref,poids,volume,prix,*taille);
+    printf("Quelle est la ref de l article que vous souhaitez supprimer : \n");
+    scanf("%d",&ref1);
+    int indice = frecherche(ref,ref1,*taille,&trouve);
+    while (trouve==0 || ref <0){
+        printf("La reference de l'artcile est inexistante ou negatif veuillez re saisir : \n");
+        scanf("%d",&ref1);
+        indice =frecherche(ref,ref1,*taille,&trouve);
+    }
+    for (i=indice;i<*taille;i++){
+        ref[i]=ref[i+1];
+        poids[i]=poids[i+1];
+        volume[i]=volume[i+1];
+        prix[i]=prix[i+1];
+
+    }
+    *taille-=1;
+    return 1;
+
 }
+
+
 
 //permet de rajouter les clients dans le fichier
 void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
@@ -394,5 +422,11 @@ void test(void)
     float poids[100] , prix[100] ;
     int tl1 ;
     tl1= loadArticle(ref,poids,volume,prix,tp);
+<<<<<<< HEAD
     Client(ref, poids, volume, prix, tp, tl1, 42, 100);
+=======
+    DelArticle(ref,poids,volume,prix,&tl1,100);
+    ShowArticle(ref,poids,volume,prix,tl1);
+    Client(ref, poids, volume, prix, tp, tl1, 42, 0);
+>>>>>>> 02706e68eeb45e899e82bc27d4256965d6c791e3
 }
