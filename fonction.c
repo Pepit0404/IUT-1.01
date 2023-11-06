@@ -218,7 +218,7 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 //a ajouter cagnotte (oui c'est la flemme)
 void affficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax){
     int place, trouve, quantite;
-    float volTT=0, chargeTT=0, prixTT=0, cagnotteTT=0;
+    float volTT=0, chargeTT=0, prixTT=0 /*cagnotteTT=0*/;
     printf("\n\n===========================================================\n");
     printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
     for (int i=0; i<ptaille; i++){
@@ -234,6 +234,7 @@ void affficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     printf("\nVolume utilisé\t: %.2f litres\nVolume restant\t: %.2f litres\n", volTT, volmax-volTT);
     printf("\nCharge Actuelle\t: %.2f kg\n", chargeTT);
     printf("Charge resatante: %.2f kg\n", poidmax-chargeTT);
+
 }
 
 //demander caractéristique client (poids, prix, volume)
@@ -263,7 +264,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 place = frecherche(Tref, ref, Ttaille, &trouve);
                 while (trouve!=1)
                 {
-                    printf("L'artile %d n'existe pas\n", ref);
+                    printf("L'artile %d n'existe pas\n", &ref);
                     printf("Veuillez réessyer: ");
                     scanf("%d", &ref);
                     place = frecherche(Tref, ref, Ttaille, &trouve);
@@ -280,6 +281,21 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     return 0.1;
 }
+void admin(int numClient[], int suspendue[], int ref[], float volume[], float prix[], int tp, int tl)
+{
+    int choix,choixa;
+    printf("===========================================================\n");
+    printf("|| Bienvenue sur l'interface administrative du magasin");
+    printf("===========================================================\n");
+    printf("Que voulez vous faire ?");
+    printf("si vous voulez modifier, ajouter ou supprimer un article tapez 0\nsi vous voulez ajouter, supprimer ou suspendre une carte tapez 1\n");
+    scanf("%d",&choix);
+    if (choix==0);
+        printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 et si vous voulez en ajouter un faites le 3");
+        scanf("%d",choixa);
+
+
+}
 
 //Faire fonction Ajouts article (Enzo)
 //Faire Fonction ShowArticle (Enzo)
@@ -287,9 +303,10 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 
 //Faire fonction qui avec (s) ecris dans le cvs les nouveaux tableaux , et avec (e) quite et save (Samuel)
 
+
 void Menu(void)
 {
-    int admin=777, id, cadmin=0, tp=200, tl, erreur;
+    int admin=777, id, cadmin=0, tp=200, tl;
     int i;
     int numClient[200],  suspendue[200];
     float cagnotte[200];
@@ -300,30 +317,32 @@ void Menu(void)
     tl1= loadArticle(ref,poids,volume,prix,tp);
     printf("%d\n",tl1);
     tl = loadClient(numClient, cagnotte, suspendue, tp);
-    erreur= DelClient(numClient, cagnotte, suspendue, &tl, tp);
     //saveClient(numClient,cagnotte,suspendue,tp,tl); a changer
     ShowClient(numClient,cagnotte,suspendue,tl);
-    int Error = AddArticle(ref,poids,volume,prix,&tl1,tp);
     ShowArticle(ref,poids,volume,prix,tl1);
     printf("Bienvenue  sur l'application de BricoConstruction!\nRentrez votre identifiant\n");
     scanf("%d",&id);
     if (id==admin)
     {
-        printf("===========================================================\n");
-        printf("||Bienvenue dans la partie Administration de l application \n");
-        printf("||Si vous voulez ajouter un adhérant tapez 0\n||Si vous voulez suspendre taper 1\n||Si vous voulez recréer une carte tapez 3 :\n");
-        printf("===========================================================\n");
-        scanf("%d",&cadmin);
+        admin();
 
     }
-    /*
+    
     if (id!=admin)
     {
-        for (i=0, i<=tp, i++)
-            if (id==num>Client[i])
+        for (i=0; i<=tp; i++)
+        {
+            if (id==numClient[i])
+                if (suspendue[i]==0)
+                    Client(ref, poids, volume,  prix,tp, *volume, numClient[i], cagnotte[i]);
+                else 
+                    printf("cette carte a été suspendue");
+            else
+                printf("cette carte n'existe pas");
+        }
+                    
                 
     }
-*/
 
 }
 
