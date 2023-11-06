@@ -161,9 +161,8 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
-    if (*taille+1==tailleMax){
+    if (*taille+1==tailleMax);
         return -1; //Erreur: tableau trop petit
-    }
     printf("Voici la liste des clients : \n");
     ShowClient(numClient, cagnotte, suspendu, *taille);
     printf("Quelle est la reference du client  que vous souhaitez supprimer : \n ");
@@ -187,10 +186,9 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
 
 int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax ){
     int ref1 , i ,trouve ;
-    if (*taille+1==tailleMax){
+    if (*taille+1==tailleMax);
         return -1; //Erreur: tableau trop petit
-    }
-    printf("Voicie la liste des artciles : \n");
+    printf("Voicie la liste des articles : \n");
     ShowArticle(ref,poids,volume,prix,*taille);
     printf("Quelle est la ref de l article que vous souhaitez supprimer : \n");
     scanf("%d",&ref1);
@@ -366,9 +364,9 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     return nCagnotte;
 }
-void admin(int numClient[], int suspendue[], int ref[], float volume[], float prix[], int tp, int tl)
+void admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
-    int choix,choixa;
+    int choix,choixa, refa, refc, choixc, id, trouve;
     printf("===========================================================\n");
     printf("|| Bienvenue sur l'interface administrative du magasin");
     printf("===========================================================\n");
@@ -376,8 +374,30 @@ void admin(int numClient[], int suspendue[], int ref[], float volume[], float pr
     printf("si vous voulez modifier, ajouter ou supprimer un article tapez 0\nsi vous voulez ajouter, supprimer ou suspendre une carte tapez 1\n");
     scanf("%d",&choix);
     if (choix==0);
+    {
         printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 et si vous voulez en ajouter un faites le 3");
         scanf("%d",choixa);
+        //if (choixa==0)
+        if (choixa==1)
+            DelArticle (id,poids ,volume , prix,  &tl, tp);
+        if (choixa==2)
+            AddArticle(ref,poids,volume,prix,&tl, tp);
+    }
+    if (choix == 1)
+    {
+        printf("si vous voulez modifier le statut d'un client tapez 0, si vous voulez supprimer un client tapez 1, si vous voulez ajouter unn client faites le 3");
+        scanf("%d",choixc);
+        //if (choix==0)
+        if (choixc==1)
+            DelClient(numClient, cagnotte,suspendue, &tl, tp);
+        if (choixc==2)
+            AddClient(numClient,cagnotte,suspendue,&tl,tp);
+    }
+    
+
+
+
+
 
 
 }
