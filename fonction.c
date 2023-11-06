@@ -65,9 +65,8 @@ int frecherche (int tab[], int val , int taille, int *trouve){
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ){
     int num,j ;
     int trouve;
-        if (*taille+1==tailleMax){
+    if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
-    }
     printf("Quelle sera la numéros du client a ajouter : \n");
     scanf("%d",&num);
 
@@ -96,9 +95,8 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     int  article ,trouve ;
     float vol ;
     float poids1, prix1;
-    if (*taille+1==tailleMax){
+    if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
-    }
     printf("Quelle est la reference de l'article que vous voulez ajouter : \n");
     scanf("%d" ,&article);
     int ind = frecherche(ref ,article,*taille,&trouve);
@@ -161,8 +159,6 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
-    if (*taille+1==tailleMax);
-        return -1; //Erreur: tableau trop petit
     printf("Voici la liste des clients : \n");
     ShowClient(numClient, cagnotte, suspendu, *taille);
     printf("Quelle est la reference du client  que vous souhaitez supprimer : \n ");
@@ -184,10 +180,9 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
 }
 
 
-int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax ){
+int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax )
+{
     int ref1 , i ,trouve ;
-    if (*taille+1==tailleMax);
-        return -1; //Erreur: tableau trop petit
     printf("Voicie la liste des articles : \n");
     ShowArticle(ref,poids,volume,prix,*taille);
     printf("Quelle est la ref de l article que vous souhaitez supprimer : \n");
