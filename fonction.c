@@ -246,11 +246,7 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 //a ajouter cagnotte (oui c'est la flemme)
 float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax){
     int place, trouve, quantite;
-<<<<<<< HEAD
-    float volTT=0, chargeTT=0, prixTT=0 /*cagnotteTT=0*/;
-=======
     float volTT=0, chargeTT=0, prixTT=0, cagnotteA=0;
->>>>>>> 1e768325b52230d80fb898c60e91d2d8f466d38c
     printf("\n\n===========================================================\n");
     printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
     for (int i=0; i<ptaille; i++){
@@ -270,16 +266,11 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     if (volmax-volTT < 0) printf("Attention dépassement du volume autorisée de ");
     printf("%.2f litres\n", volmax-volTT);
     printf("\nCharge Actuelle\t: %.2f kg\n", chargeTT);
-<<<<<<< HEAD
-    printf("Charge resatante: %.2f kg\n", poidmax-chargeTT);
-
-=======
-    printf("Charge resatante: ");
+    printf("Charge restante: ");
     if (poidmax-chargeTT < 0) printf("Attention dépassement de la charge autorisée de ");
     printf("%.2f kg\n", poidmax-chargeTT);
 
     return cagnotte;
->>>>>>> 1e768325b52230d80fb898c60e91d2d8f466d38c
 }
 
 //demander caractéristique client (poids, prix, volume)
@@ -309,13 +300,8 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 place = frecherche(Tref, ref, Ttaille, &trouve);
                 while (trouve!=1)
                 {
-<<<<<<< HEAD
-                    printf("L'artile %d n'existe pas\n", &ref);
-                    printf("Veuillez réessyer: ");
-=======
                     printf("L'artile %d n'existe pas\n", ref);
                     printf("Veuillez réessayer: ");
->>>>>>> 1e768325b52230d80fb898c60e91d2d8f466d38c
                     scanf("%d", &ref);
                     place = frecherche(Tref, ref, Ttaille, &trouve);
                 }
@@ -454,11 +440,7 @@ void test(void)
     float poids[100] , prix[100] ;
     int tl1 ;
     tl1= loadArticle(ref,poids,volume,prix,tp);
-<<<<<<< HEAD
-    Client(ref, poids, volume, prix, tp, tl1, 42, 100);
-=======
     DelArticle(ref,poids,volume,prix,&tl1,100);
     ShowArticle(ref,poids,volume,prix,tl1);
     Client(ref, poids, volume, prix, tp, tl1, 42, 0);
->>>>>>> 02706e68eeb45e899e82bc27d4256965d6c791e3
 }
