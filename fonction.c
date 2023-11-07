@@ -235,7 +235,7 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
         printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
     }
 }
-<<<<<<< HEAD
+
 
 void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , int taille )
 {
@@ -250,7 +250,6 @@ void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , 
         printf("Le numeros d'article rechercher n'existe pas");
     }
 }
-=======
 /**
 * \brief Fonction qui permet a l'administrateur de supprimer un client 
 * \param[in,out] numClient tableau des clients 
