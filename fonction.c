@@ -361,32 +361,85 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 }
 void admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
-    int choix,choixa, refa, refc, choixc, id, trouve;
+    int choix,choixa, refa, refc, choixc, id, trouve,num, modifa, modifc;
+    float nvvol,nvpo,nvpr;
     printf("===========================================================\n");
-    printf("|| Bienvenue sur l'interface administrative du magasin");
+    printf("|| Bienvenue sur l'interface administrative du magasin\n");
     printf("===========================================================\n");
     printf("Que voulez vous faire ?");
-    printf("si vous voulez modifier, ajouter ou supprimer un article tapez 0\nsi vous voulez ajouter, supprimer ou suspendre une carte tapez 1\n");
-    scanf("%d",&choix);
-    if (choix==0);
+    printf("si vous voulez modifier, ajouter ou supprimer un article tapez 0\nsi vous voulez ajouter, supprimer ou suspendre une carte tapez 1 et si vous voulez arreter faites -1\n");
+    
+    while(choix<-1|| choix>1)
+        {
+            printf("cela ne fait pas parti des choix possibles")
+            scanf("%d",&choix);
+        }
+
+    while(choix!=-1)
     {
-        printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 et si vous voulez en ajouter un faites le 3");
-        scanf("%d",choixa);
-        //if (choixa==0)
-        if (choixa==1)
-            DelArticle (id,poids ,volume , prix,  &tl, tp);
-        if (choixa==2)
-            AddArticle(ref,poids,volume,prix,&tl, tp);
-    }
-    if (choix == 1)
-    {
-        printf("si vous voulez modifier le statut d'un client tapez 0, si vous voulez supprimer un client tapez 1, si vous voulez ajouter unn client faites le 3");
-        scanf("%d",choixc);
-        //if (choix==0)
-        if (choixc==1)
-            DelClient(numClient, cagnotte,suspendue, &tl, tp);
-        if (choixc==2)
-            AddClient(numClient,cagnotte,suspendue,&tl,tp);
+        if (choix==0);
+            {
+                printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 et si vous voulez en ajouter un faites le 2 ");
+                scanf("%d",choixa);
+                while(choix<0 || choix>2)
+                {
+                    printf("cela ne fait pas parti des choix possibles")
+                    scanf("%d",&choix);
+                }
+                if (choixa==0)
+                {
+                    printf("Quel article voulez vous modifier ?");
+                    scanf("%d", id);
+                    refa=frecherche (numClient,id , tl, &trouve);
+                    while (trouve==0 || num <0)
+                    {
+                        printf("La reference client est inexistante ou incorrect veuillez re saisir la reference :\n");
+                        scanf("%d",&num);
+                        id = frecherche(numClient,num,*taille,&trouve);
+                    }
+                    printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) ")
+                    scanf("%d",modifa);
+
+                    if (modifa==0)
+                    {
+                        printf("Donnez le nouveau volume de l'article");
+                        scanf("%d",nvvol);
+                        volume[id]==nvvol;
+                    }
+                    if (modifa==1)
+                    {
+                        printf("Donnez le nouveau prix de l'article");
+                        scanf("%d",nvpr);
+                        prix[id]==nvpr;
+                    }
+                    if (modifa==2)
+                    {
+                        printf("Donnez le nouveau poids de l'article");
+                        scanf("%d",nvpo);
+                        poids[id]==nvpo;
+                    }
+                    
+                    
+
+
+            }
+
+                }
+                if (choixa==1)
+                    DelArticle (ref,poids ,volume , prix,  &tl, tp);
+                if (choixa==2)
+                    AddArticle(ref,poids,volume,prix,&tl, tp);
+            }
+        if (choix == 1)
+            {
+                printf("si vous voulez modifier le statut d'un client tapez 0, si vous voulez supprimer un client tapez 1, si vous voulez ajouter unn client faites le 2");
+                scanf("%d",choixc);
+                //if (choix==0)
+                if (choixc==1)
+                    DelClient(numClient, cagnotte,suspendue, &tl, tp);
+                if (choixc==2)
+                    AddClient(numClient,cagnotte,suspendue,&tl,tp);
+            }
     }
     
 
