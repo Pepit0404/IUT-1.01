@@ -267,7 +267,16 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
     return 1;
 }
 
-
+/**
+* \brief Foncion qui permet a l'administrateur de supprimé un article 
+* \param[in,out] numClient tableau des clients 
+* \param[in,out] cagnotte tableau des cagnottes 
+* \param[in,out] suspendue tableau de l'etat de la carte (O/1)
+* \param[in,out] taille taille logique des tableaux qui diminue de 1 
+* \param[in] tailleMax taille physique des tableaux 
+* \author Enzo gubbiotti
+* \return 1 si tout c'est bien passé sinon -1 
+*/
 int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax )
 {
     int ref1 , i ,trouve ;
@@ -295,7 +304,14 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
 
 
 
-//permet de rajouter les clients dans le fichier
+/**
+* \brief Fonction qui prend les tableaux des données des clients et ecris ces données dans le fichier csv 
+* \param[in] Tclient tableau contenant les référence des clients 
+* \param[in] Tcagnotte tableau contenant les cagnottes des clients 
+* \param[in] Tsuspendue tableau qui contient l'etat de la carte des clients (0/1)
+* \param[in] taille taille logique des tableaux
+* \author Samuel Pinto 
+*/
 void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
     FILE *File;
     File = fopen("ressource/client.csv", "w");
