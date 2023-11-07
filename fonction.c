@@ -139,11 +139,12 @@ void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) 
 
 void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
     int num, dedans;
-    printf("Quelle est le numeros de client recherché  : \n");
+    printf("Quelle est le numeros de client recherché  : \n ");
     scanf("%d",&num);
     int position = frecherche(numClient, num, taille, &dedans);
     if ( dedans==1){
         printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
+
     } else{
         printf("Le numeros de client rechercher n'existe pas");
     }
@@ -156,9 +157,25 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
         printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
     }
 }
+
+void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , int taille )
+{
+    int num, dedans;
+    printf("Quelle est le numeros de l'article recherché  : \n ");
+    scanf("%d",&num);
+    int position = frecherche(ref, num, taille, &dedans);
+    if ( dedans==1){
+        printf("%d\t%.2f\t%.2f\t%.2f\t\n",ref[position],poids[position],volume[position],prix[position]);
+
+    } else{
+        printf("Le numeros d'article rechercher n'existe pas");
+    }
+}
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
+    if (*taille==0)
+        return -1;
     printf("Voici la liste des clients : \n");
     ShowClient(numClient, cagnotte, suspendu, *taille);
     printf("Quelle est la reference du client  que vous souhaitez supprimer : \n ");
@@ -183,6 +200,8 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
 int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax )
 {
     int ref1 , i ,trouve ;
+    if (*taille==0)
+        return -1;
     printf("Voicie la liste des articles : \n");
     ShowArticle(ref,poids,volume,prix,*taille);
     printf("Quelle est la ref de l article que vous souhaitez supprimer : \n");
@@ -359,92 +378,118 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     return nCagnotte;
 }
-void admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
+int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
-    int choix,choixa, refa, refc, choixc, id, trouve,num, modifa, modifc;
+    int choix,choixa, refa, refc, choixc, id, trouve,num, modifa, modifc, nvref,erreur;
     float nvvol,nvpo,nvpr;
     printf("===========================================================\n");
     printf("|| Bienvenue sur l'interface administrative du magasin\n");
     printf("===========================================================\n");
-    printf("Que voulez vous faire ?");
-    printf("si vous voulez modifier, ajouter ou supprimer un article tapez 0\nsi vous voulez ajouter, supprimer ou suspendre une carte tapez 1 et si vous voulez arreter faites -1\n");
-    
-    while(choix<-1|| choix>1)
-        {
-            printf("cela ne fait pas parti des choix possibles")
-            scanf("%d",&choix);
-        }
 
+    
     while(choix!=-1)
     {
-        if (choix==0);
+        printf("Voulez vous modifier un article (tapez 0) modifier une carte (tapez 1) si vous voulez afficher un client en particulier tapez 2 ou 3 pour un article");
+        scanf("%d",&choix);
+        if (choix==0)
+        { 
+            printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 si vous voulez en ajouter un faites le 2 et si vous voulez modifier la reference faites le 3 \n");
+            scanf("%d",&choixa);
+            if (choixa==0)
             {
-                printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 et si vous voulez en ajouter un faites le 2 ");
-                scanf("%d",choixa);
-                while(choix<0 || choix>2)
+
+                printf("Quel article voulez vous modifier ?");
+                scanf("%d", &id);
+                refa=frecherche (ref,id , tl, &trouve);
+                while (trouve==0 || num <0)
                 {
-                    printf("cela ne fait pas parti des choix possibles")
-                    scanf("%d",&choix);
+                    printf("La reference artcile est inexistante ou incorrect veuillez re saisir la reference :\n");
+                    scanf("%d",&num);
+                    id = frecherche(ref,num,tl,&trouve);
                 }
-                if (choixa==0)
+                printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) ");
+                scanf("%d",&modifa);
+
+
+                if (modifa==0)
                 {
-                    printf("Quel article voulez vous modifier ?");
-                    scanf("%d", id);
-                    refa=frecherche (numClient,id , tl, &trouve);
-                    while (trouve==0 || num <0)
-                    {
-                        printf("La reference client est inexistante ou incorrect veuillez re saisir la reference :\n");
-                        scanf("%d",&num);
-                        id = frecherche(numClient,num,*taille,&trouve);
-                    }
-                    printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) ")
-                    scanf("%d",modifa);
-
-                    if (modifa==0)
-                    {
-                        printf("Donnez le nouveau volume de l'article");
-                        scanf("%d",nvvol);
-                        volume[id]==nvvol;
-                    }
-                    if (modifa==1)
-                    {
-                        printf("Donnez le nouveau prix de l'article");
-                        scanf("%d",nvpr);
-                        prix[id]==nvpr;
-                    }
-                    if (modifa==2)
-                    {
-                        printf("Donnez le nouveau poids de l'article");
-                        scanf("%d",nvpo);
-                        poids[id]==nvpo;
-                    }
-                    
-                    
-
-
-            }
-
+                    printf("Donnez le nouveau volume de l'article");
+                    scanf("%f",&nvvol);
+                    volume[id]==nvvol;
                 }
-                if (choixa==1)
-                    DelArticle (ref,poids ,volume , prix,  &tl, tp);
-                if (choixa==2)
-                    AddArticle(ref,poids,volume,prix,&tl, tp);
+                if (modifa==1)
+                {
+                    printf("Donnez le nouveau prix de l'article");
+                    scanf("%f",&nvpr);
+                    prix[id]==nvpr;
+                }
+                if (modifa==2)
+                {
+                    printf("Donnez le nouveau poids de l'article");
+                    scanf("%f",&nvpo);
+                    poids[id]==nvpo;
+                }
+                if (modifa==3)
+                {
+                    printf("Donnez la nouvelle référence de l'article l'article");
+                    scanf("%d",&nvref);
+                    numClient[id]==nvref;
+                }
+                
+                
+            }   
+
+
+        
+
+            
+            if (choixa==1)
+            {
+                erreur=DelArticle (ref,poids ,volume , prix,  &tl, tp);
+                if (erreur==-1)printf("vous ne pouvez pas supprimer, le tableau est vide\n");
             }
+            if (choixa==2)
+            {
+                erreur=AddArticle(ref,poids,volume,prix,&tl, tp);
+                if (erreur==-1) printf("tableau trop petit\n");
+            }
+        }
         if (choix == 1)
+        {
+            printf("si vous voulez modifier le statut d'une carte tapez 0, si vous voulez creer une carte tapez 1, si vous voulez supprimer une carte faites le 2");
+            scanf("%d",&choixc);
+            if (choixc==0)
             {
-                printf("si vous voulez modifier le statut d'un client tapez 0, si vous voulez supprimer un client tapez 1, si vous voulez ajouter unn client faites le 2");
-                scanf("%d",choixc);
-                //if (choix==0)
-                if (choixc==1)
-                    DelClient(numClient, cagnotte,suspendue, &tl, tp);
-                if (choixc==2)
-                    AddClient(numClient,cagnotte,suspendue,&tl,tp);
+                printf("Quel carte voulez vous suspendre");
+                scanf("%d",&num);
+                id=frecherche(numClient,num,tl,&trouve);
+                suspendue[id]=1;
+                printf("voulez vous à présent créer une nouvel carte pour se client (si oui tapez 0 si non tapez 1)\n");
+                scanf("%d",&choixc);
             }
+            if (choixc==1)
+            {
+                erreur=AddClient(numClient,cagnotte,suspendue,&tl,tp);
+                if (erreur=-1)
+                    printf("tableau trop petit\n");
+            }
+            if (choixc==2)
+            {
+                erreur=DelClient(numClient, cagnotte,suspendue, &tl, tp);
+                if (erreur=-1) printf("vous ne pouvez pas supprimer, le tableau est vide\n");
+            }
+        }
+        if (choix == 2)
+            ShowClientPrecis(numClient, cagnotte, suspendue,tl);
+        if (choix == 3)
+            ShowArticlePrecis(ref,poids,volume,prix,tl);
+
+
     }
-    
 
 
 
+return -1;
 
 
 
@@ -477,7 +522,7 @@ void Menu(void)
     scanf("%d",&id);
     if (id==admin)
     {
-        admin();
+        administrateur(numClient, cagnotte, suspendue, ref, volume, prix, poids, tp,  tl);
 
     }
     
@@ -489,9 +534,9 @@ void Menu(void)
                 if (suspendue[i]==0)
                     Client(ref, poids, volume,  prix,tp, *volume, numClient[i], cagnotte[i]);
                 else 
-                    printf("cette carte a été suspendue");
+                    printf("Cette carte a été suspendue. Veuillez contacter l'assistance.");
             else
-                printf("cette carte n'existe pas");
+                printf("Cette carte a été suspendue. Veuillez contacter l'assistance.");
         }
                     
                 
@@ -507,6 +552,7 @@ void test(void)
     float volume[100] ;
     float poids[100] , prix[100] ;
     int tl1 ;
+    Menu();
     tl1= loadArticle(ref,poids,volume,prix,tp);
     DelArticle(ref,poids,volume,prix,&tl1,100);
     ShowArticle(ref,poids,volume,prix,tl1);
