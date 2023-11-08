@@ -391,36 +391,39 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 //a ajouter cagnotte (oui c'est la flemme)
 float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax, float prixMax, float *prixTT){
     int place, trouve, quantite;
-    float volTT=0, chargeTT=0, cagnotteA=0;
+    float volTT=0, chargeTT=0, cagnotteA=0, prixC=0;
     *prixTT = 0;
     printf("\n\n===========================================================\n");
     printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
     for (int i=0; i<ptaille; i++){
         quantite = pQuantite[i];
         place = frecherche(Tref, pRef[i], Ttaille, &trouve);
-        *prixTT += Tprix[place]*quantite;
+        *prixTT = *prixTT + Tprix[place]*quantite;
         cagnotteA = Tprix[place]*quantite/10.0;
         cagnotte += cagnotteA;
         volTT += Tvolume[place]*quantite;
         chargeTT += Tpoids[place]*quantite;
         printf("%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\t%.2f\t%.2f\n", pRef[i], quantite, Tpoids[place], Tvolume[place], Tprix[place], Tpoids[place]*quantite, Tvolume[place]*quantite, Tprix[place]*quantite, cagnotteA);
     }
+    printf("%.2f", prixMax);
+    printf("\nPrix total à payer:\t%.2f euros\n", *prixTT);
     if (prixMax!=-1) {
-        printf("\t\t\t\t\t\t\t\tBudget restant: ");
-        if (prixMax-(*prixTT)<0) printf("Attention dépassement de la limite de budget de ");
-        printf("%.2f\n", prixMax-(*prixTT));
+        if (prixMax-(*prixTT)<0){
+            printf("Attention dépassement de la limite de budget de ");
+            printf("%.2f\n", (*prixTT)-prixMax);
+        } else printf("Budget restant: %.2f\n", prixMax-(*prixTT));
     }
-    printf("\nPrix total à payer:\t%.2f euros\n", prixTT);
     printf("Cagnotte totale:\t%.2f euros\n", cagnotte);
     printf("\nVolume utilisé\t: %.2f litres\n", volTT);
-    printf("Volume restant\t:");
+    printf("Volume restant\t: ");
     if (volmax-volTT < 0) printf("Attention dépassement du volume autorisée de ");
     printf("%.2f litres\n", volmax-volTT);
     printf("\nCharge Actuelle\t: %.2f kg\n", chargeTT);
-    printf("Charge restante: ");
+    printf("Charge restante\t: ");
     if (poidmax-chargeTT < 0) printf("Attention dépassement de la charge autorisée de ");
     printf("%.2f kg\n", poidmax-chargeTT);
 
+    *prixTT=prixC;
     return cagnotte;
 }
 
@@ -442,7 +445,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     scanf("%f", &volMax);
     printf("Voulez vous définir une limite budgétaire ? (y/n)\n");
     scanf("%*c%c", &choix);
-    while (choix=='y' || choix=='Y' || choix=='n' || choix=='N')
+    while (choix!='y' && choix!='Y' && choix!='n' && choix!='N')
     {
         printf("Attention : réponse non conforme\n");
         printf("Voulez vous définir une limite budgétaire ? (y/n)\n");
@@ -450,7 +453,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     if (choix=='y' || choix=='Y'){
         printf("Veillez définir une limitation: ");
-        scanf("%d", &prixMax);
+        scanf("%f", &prixMax);
     } else if (choix=='n' || choix=='N') prixMax=-1;
     while (action!=-1)
     {
@@ -534,6 +537,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 scanf("%*c%c", &choix);
                 if (choix=='y' || choix=='Y') ptaille = 0;
             }
+            printf("%.2f\n", prixMax);
             nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax, prixMax, &prixTT);
         }
     }
@@ -674,11 +678,7 @@ void Menu(void)
     float poids[100] , prix[100] ;
     int tl1 ;
     tl1= loadArticle(ref,poids,volume,prix,tp);
-    printf("%d\n",tl1);
     tl = loadClient(numClient, cagnotte, suspendue, tp);
-    //saveClient(numClient,cagnotte,suspendue,tp,tl); a changer
-    ShowClient(numClient,cagnotte,suspendue,tl);
-    ShowArticle(ref,poids,volume,prix,tl1);
     printf("Bienvenue  sur l'application de BricoConstruction!\nRentrez votre identifiant\n");
     scanf("%d",&id);
     if (id==admin)
@@ -696,8 +696,6 @@ void Menu(void)
                     Client(ref, poids, volume,  prix,tp, *volume, numClient[i], cagnotte[i]);
                 else 
                     printf("Cette carte a été suspendue. Veuillez contacter l'assistance.");
-            else
-                printf("Cette carte a été suspendue. Veuillez contacter l'assistance.");
         }
                     
                 
@@ -707,15 +705,20 @@ void Menu(void)
 
 void test(void)
 {
+    Menu();
+    /*
     int numClient[200],  suspendue[200], tp=200;
     float cagnotte[200];
     int  ref[100] ;
     float volume[100] ;
     float poids[100] , prix[100] ;
     int tl1 ;
-    Client();
+    //Client();
     tl1= loadArticle(ref,poids,volume,prix,tp);
     DelArticle(ref,poids,volume,prix,&tl1,100);
     ShowArticle(ref,poids,volume,prix,tl1);
     Client(ref, poids, volume, prix, tp, tl1, 42, 0);
+        ShowClient(numClient,cagnotte,suspendue,tl);
+    ShowArticle(ref,poids,volume,prix,tl1);
+    */
 }

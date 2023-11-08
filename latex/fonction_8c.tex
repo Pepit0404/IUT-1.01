@@ -6,8 +6,7 @@ Fichier contenant toute les fonctions applications.
 
 
 {\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
-Include dependency graph for fonction.\+c\+:
-\nopagebreak
+Include dependency graph for fonction.\+c\+:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -22,11 +21,11 @@ int \mbox{\hyperlink{fonction_8c_adfe2baac338af80bf88bdf29909e5c34}{load\+Client
 int \mbox{\hyperlink{fonction_8c_acf79f3ad6f9fce927ee2766dc9a1798a}{load\+Article}} (int id\mbox{[}$\,$\mbox{]}, float poid\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int taille\+Max)
 \begin{DoxyCompactList}\small\item\em Fonction qui charge le fichier contenant les informations des articles dans des tableaux. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{fonction_8c_aeaa4601c2a97598b0e8c585a70b43ad7}{frecherche}} (int tab\mbox{[}$\,$\mbox{]}, int val, int taille, int $\ast$trouve)
-\begin{DoxyCompactList}\small\item\em Fonction qui recherche une valeurt dans un tableau donné \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Fonction qui recherche une valeur dans un tableau donné \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{fonction_8c_a48f33c7411d3cec4a3c8c4c1b9ef291b}{Add\+Client}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int $\ast$taille, int taille\+Max)
 \begin{DoxyCompactList}\small\item\em Fonctions qui sert a l\textquotesingle{}administrateur pour ajouter des clients aux tableaux. \end{DoxyCompactList}\item 
 int \mbox{\hyperlink{fonction_8c_af5e490dbfbec2a694552adc839bb386b}{Add\+Article}} (int ref\mbox{[}$\,$\mbox{]}, float poids\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int $\ast$taille, int taille\+Max)
-\begin{DoxyCompactList}\small\item\em Fonctions qui sert a l\textquotesingle{}administrateur pour ajouter des articles aux tableaux. \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Fonction qui sert a l\textquotesingle{}administrateur pour ajouter des articles aux tableaux. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{fonction_8c_adf1d687649973e54e3accc060a3f9397}{Show\+Client}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int taille)
 \begin{DoxyCompactList}\small\item\em Fonction qui affiche tout les clients des tableaux. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{fonction_8c_a96fb5cabd4ae01144a04f7d6163a8e3c}{Show\+Client\+Precis}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int taille)
@@ -44,7 +43,7 @@ void \mbox{\hyperlink{fonction_8c_a253e7e09bb2194e71f03d4608f833cc5}{save\+Clien
 \begin{DoxyCompactList}\small\item\em Fonction qui prend les tableaux des données des clients et ecris ces données dans le fichier csv. \end{DoxyCompactList}\item 
 void \mbox{\hyperlink{fonction_8c_aabb7c9bc024ef4babc1f9f6dd34679bc}{save\+Article}} (int Tref\mbox{[}$\,$\mbox{]}, float Tpoid\mbox{[}$\,$\mbox{]}, float Tvolume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int taille)
 \begin{DoxyCompactList}\small\item\em Fonction qui prend les tableaux des données des Artciles et écris ces données dans le fichier csv. \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{fonction_8c_a38cfe018defb5aa7f0d9e6cec45088a7}{affiche\+Recap}} (int p\+Ref\mbox{[}$\,$\mbox{]}, int p\+Quantite\mbox{[}$\,$\mbox{]}, int ptaille, int Tref\mbox{[}$\,$\mbox{]}, float Tpoids\mbox{[}$\,$\mbox{]}, float Tvolume\mbox{[}$\,$\mbox{]}, float Tprix\mbox{[}$\,$\mbox{]}, int Ttaille, float cagnotte, float volmax, float poidmax)
+float \mbox{\hyperlink{fonction_8c_a10fa0a1258ab924d3cf47330f7f5631b}{affiche\+Recap}} (int p\+Ref\mbox{[}$\,$\mbox{]}, int p\+Quantite\mbox{[}$\,$\mbox{]}, int ptaille, int Tref\mbox{[}$\,$\mbox{]}, float Tpoids\mbox{[}$\,$\mbox{]}, float Tvolume\mbox{[}$\,$\mbox{]}, float Tprix\mbox{[}$\,$\mbox{]}, int Ttaille, float cagnotte, float volmax, float poidmax, float prix\+Max, float $\ast$prix\+TT)
 \item 
 \mbox{\Hypertarget{fonction_8c_a89d20bb692528ba0702f58e5535b9515}\label{fonction_8c_a89d20bb692528ba0702f58e5535b9515}} 
 float {\bfseries Client} (int Tref\mbox{[}$\,$\mbox{]}, float Tpoids\mbox{[}$\,$\mbox{]}, float Tvolume\mbox{[}$\,$\mbox{]}, float Tprix\mbox{[}$\,$\mbox{]}, int taille\+Max, int Ttaille, int id, float cagnotte)
@@ -80,7 +79,7 @@ Enzo Gubbiotti , Maeva Colle ,Samuel Pinto
 
 
 
-Fonctions qui sert a l\textquotesingle{}administrateur pour ajouter des articles aux tableaux. 
+Fonction qui sert a l\textquotesingle{}administrateur pour ajouter des articles aux tableaux. 
 
 
 \begin{DoxyParams}[1]{Parameters}
@@ -133,11 +132,11 @@ Enzo gubbiotti
 \begin{DoxyReturn}{Returns}
 1 si tout c\textquotesingle{}est bien passé sinon -\/1 
 \end{DoxyReturn}
-\mbox{\Hypertarget{fonction_8c_a38cfe018defb5aa7f0d9e6cec45088a7}\label{fonction_8c_a38cfe018defb5aa7f0d9e6cec45088a7}} 
+\mbox{\Hypertarget{fonction_8c_a10fa0a1258ab924d3cf47330f7f5631b}\label{fonction_8c_a10fa0a1258ab924d3cf47330f7f5631b}} 
 \index{fonction.c@{fonction.c}!afficheRecap@{afficheRecap}}
 \index{afficheRecap@{afficheRecap}!fonction.c@{fonction.c}}
 \doxysubsubsection{\texorpdfstring{afficheRecap()}{afficheRecap()}}
-{\footnotesize\ttfamily float affiche\+Recap (\begin{DoxyParamCaption}\item[{int}]{p\+Ref\mbox{[}$\,$\mbox{]},  }\item[{int}]{p\+Quantite\mbox{[}$\,$\mbox{]},  }\item[{int}]{ptaille,  }\item[{int}]{Tref\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tpoids\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tvolume\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tprix\mbox{[}$\,$\mbox{]},  }\item[{int}]{Ttaille,  }\item[{float}]{cagnotte,  }\item[{float}]{volmax,  }\item[{float}]{poidmax }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily float affiche\+Recap (\begin{DoxyParamCaption}\item[{int}]{p\+Ref\mbox{[}$\,$\mbox{]},  }\item[{int}]{p\+Quantite\mbox{[}$\,$\mbox{]},  }\item[{int}]{ptaille,  }\item[{int}]{Tref\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tpoids\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tvolume\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tprix\mbox{[}$\,$\mbox{]},  }\item[{int}]{Ttaille,  }\item[{float}]{cagnotte,  }\item[{float}]{volmax,  }\item[{float}]{poidmax,  }\item[{float}]{prix\+Max,  }\item[{float $\ast$}]{prix\+TT }\end{DoxyParamCaption})}
 
 \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \mbox{\Hypertarget{fonction_8c_a7bc428fb55e8e497e95c734fe276b3aa}\label{fonction_8c_a7bc428fb55e8e497e95c734fe276b3aa}} 
 \index{fonction.c@{fonction.c}!DelArticle@{DelArticle}}
@@ -205,7 +204,7 @@ renvoi 1 si tout s\textquotesingle{}est bien passé sinon -\/1
 
 
 
-Fonction qui recherche une valeurt dans un tableau donné 
+Fonction qui recherche une valeur dans un tableau donné 
 
 
 \begin{DoxyParams}[1]{Parameters}
