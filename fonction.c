@@ -72,7 +72,7 @@ int loadArticle(int id[], float poid[], float volume[], float prix[], int taille
 }
 
 /**
-* \brief Fonction qui recherche une valeurt dans un tableau donné 
+* \brief Fonction qui recherche une valeur dans un tableau donné 
 * \param[in] tab tableau dans lequel on recherche 
 * \param[in] val valeur à rechercher dans le tableau 
 * \param[in] taille contient la taille logique du tableau 
@@ -113,12 +113,12 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     int trouve;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
-    printf("Quelle sera la numéros du client a ajouter : \n");
+    printf("Quelle sera le numéro du client à ajouter : \n");
     scanf("%d",&num);
 
     int ind =frecherche(numClient,num,*taille,&trouve);
     while(trouve==1 || num<0) {
-        printf("Erreur Saisir un autre numero client : \n");
+        printf("Erreur Saisir un autre numéro client : \n");
         scanf("%d", &num);
         ind =frecherche(numClient,num,*taille,&trouve);
     }
@@ -137,7 +137,7 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     return 1 ;
 }
 /**
-* \brief Fonctions qui sert a l'administrateur pour ajouter des articles aux tableaux 
+* \brief Fonction qui sert a l'administrateur pour ajouter des articles aux tableaux 
 * \param[in,out] ref tableau des références 
 * \param[in,out] poids tableau des poids 
 * \param[in,out] volume tableau des volumes des articles 
@@ -168,7 +168,7 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         volume[j]=volume[j-1];
         prix[j]=prix[j-1];
     }
-    printf("Veuillez Rentrer le poids de l'article ajouté : \n");
+    printf("Veuillez entrer le poids de l'article ajouté : \n");
     scanf("%f",&poids1);
     printf("Veuillez entrer le volume de produit ajouté : \n");
     scanf("%fm",&vol);
@@ -209,14 +209,14 @@ void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) 
 */
 void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
     int num, dedans;
-    printf("Quelle est le numeros de client recherché  : \n ");
+    printf("Quelle est le numero de client recherché  : \n ");
     scanf("%d",&num);
     int position = frecherche(numClient, num, taille, &dedans);
     if ( dedans==1){
         printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
 
     } else{
-        printf("Le numeros de client rechercher n'existe pas");
+        printf("Le numero de client recherché n'existe pas");
     }
 }
 /**
@@ -240,14 +240,14 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
 void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , int taille )
 {
     int num, dedans;
-    printf("Quelle est le numeros de l'article recherché  : \n ");
+    printf("Quelle est le numero de l'article recherché  : \n ");
     scanf("%d",&num);
     int position = frecherche(ref, num, taille, &dedans);
     if ( dedans==1){
         printf("%d\t%.2f\t%.2f\t%.2f\t\n",ref[position],poids[position],volume[position],prix[position]);
 
     } else{
-        printf("Le numeros d'article rechercher n'existe pas");
+        printf("Le numero d'article recherché n'existe pas");
     }
 }
 /**
