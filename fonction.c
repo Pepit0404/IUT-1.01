@@ -1,25 +1,6 @@
 #include "main.h"
 
 
-/**
-*\file fonction.c
-*\brief Fichier contenant toute les fonctions applications 
-*\author Enzo Gubbiotti , Maeva Colle ,Samuel Pinto 
-*\date 2023
-*Application qui permet de gérer une base de données peu complexe avec une interface client 
-*et une interface administrateur. 
-*/
-
-
-/**
-* \brief Fonction qui charge le fichier contenant les informations des clients dans des tableaux 
-* \param[in,out] numClient tableau des clients 
-* \param[in,out] cagnotte tableau des cagnottes 
-* \param[in,out] suspendue tableau de l'etat de la carte (O/1)
-* \param[in] taille taille physique du tableau qui stock les données
-* \author Samuel Pinto
-* \return la taille logique de tableau ou erreur si il y a  
-*/
 int loadClient(int numClient[], float cagnotte[], int suspendu[], int taille)
 {
     FILE *File;
@@ -40,15 +21,8 @@ int loadClient(int numClient[], float cagnotte[], int suspendu[], int taille)
     if (i==taille && feof(File)==0) return -2; //erreur tableau trop cours
     return i;
 }
-/**
-* \brief Fonction qui charge le fichier contenant les informations des articles dans des tableaux 
-* \param[in,out] id tableau des articles 
-* \param[in,out] poids tableau des poids 
-* \param[in,out] volume tableau des volumes des articles 
-* \param[in,out] prix tableau des prix des articles 
-* \author Samuel Pinto
-* \return la taille logique des tableau ou erreur si il y a  
-*/
+
+
 int loadArticle(int id[], float poid[], float volume[], float prix[], int tailleMax)
 {
     FILE *File;
@@ -71,16 +45,6 @@ int loadArticle(int id[], float poid[], float volume[], float prix[], int taille
     return i;
 }
 
-/**
-* \brief Fonction qui recherche une valeur dans un tableau donné 
-* \param[in] tab tableau dans lequel on recherche 
-* \param[in] val valeur à rechercher dans le tableau 
-* \param[in] taille contient la taille logique du tableau 
-* \param[out] trouve si 0 alors valeur pas trouvé / si 1 alors valeur trouvé  
-* \author Enzo Gubbiotti
-* \return renvoi l'indice de la valeur dans le tableau si elle est trouvé ou renvoi l'indice de là ou elle doit être inseré si elle n'as pas été trouvé
-*/
-// recherche si la valeur (numéro client ou reference objet) est déjà dans le fichier
 int frecherche (int tab[], int val , int taille, int *trouve){
     int i=0 ;
     while (i<taille){
@@ -98,16 +62,6 @@ int frecherche (int tab[], int val , int taille, int *trouve){
     return -1;
 }
 
-/**
-* \brief Fonctions qui sert a l'administrateur pour ajouter des clients aux tableaux 
-* \param[in,out] numClient tableau des clients 
-* \param[in,out] cagnotte tableau des cagnottes 
-* \param[in,out] suspendue tableau de l'etat de la carte (O/1)
-* \param[in,out] taille taille logique des tableaux qui augmente de 1 
-* \param[in] tailleMax taille physique des tableaux 
-* \author Enzo gubbiotti
-* \return 1 si tout c'est bien passé sinon -1 
-*/
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ){
     int num,j ;
     int trouve;
@@ -115,9 +69,18 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
         return -1; //Erreur: tableau trop petit
     printf("Quelle sera le numéro du client à ajouter : \n");
     scanf("%d",&num);
-
+    while (num==777){
+        printf("Ce numéros est reservé\n");
+        printf("Veuillez re saisir une valeur : \n");
+        scanf("%d",&num);
+    }
     int ind =frecherche(numClient,num,*taille,&trouve);
     while(trouve==1 || num<0) {
+        while (num==777){
+            printf("Ce numéros est reservé\n");
+            printf("Veuillez re saisir une valeur : \n");
+            scanf("%d",&num);
+        }
         printf("Erreur Saisir un autre numéro client : \n");
         scanf("%d", &num);
         ind =frecherche(numClient,num,*taille,&trouve);
@@ -136,17 +99,29 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
 
     return 1 ;
 }
-/**
-* \brief Fonction qui sert a l'administrateur pour ajouter des articles aux tableaux 
-* \param[in,out] ref tableau des références 
-* \param[in,out] poids tableau des poids 
-* \param[in,out] volume tableau des volumes des articles 
-* \param[in,out] prix tableau des prix des articles
-* \param [out] taille taille logique des tableaux 
-* \param[in] tailleMax taille physique des tableaux   
-* \author Enzo gubbiotti
-* \return 1 si tout c'est bien passé sinon -1 
-*/
+
+
+int AddNouvelleCarte (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ,int reference){
+    int j ;
+    int trouve;
+    if (*taille+1==tailleMax)
+        return -1; //Erreur: tableau trop petit
+    int ind =frecherche(numClient,reference,*taille,&trouve);
+    for (j=*taille;j>ind;j--) {
+         numClient[j] = numClient[j -1];
+         cagnotte[j] = cagnotte[j - 1];
+         suspendu[j] = suspendu[j -1];
+
+    }
+
+    numClient[ind]=reference;
+    cagnotte[ind]=0;
+    suspendu[ind]=0;
+    *taille+=1;
+
+    return 1 ;
+}
+
 int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *taille, int tailleMax ){
     int  article ,trouve ;
     float vol ;
@@ -183,14 +158,8 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     return 1 ;
 
 }
-/**
-* \brief Fonction qui affiche tout les clients des tableaux 
-* \param[in] numClient tableau des clients 
-* \param[in] cagnotte tableau des cagnottes 
-* \param[in] suspendue tableau des etats de carte 
-* \param[in] taille taille logique des tableaux 
-* \author Enzo gubbiotti 
-*/
+
+
 void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) {
         int i ;
         printf("Num\tcagnotte\tsuspendue\t\n");
@@ -199,14 +168,7 @@ void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) 
         }
 
 }
-/**
-* \brief Fonction qui affiche un clients précis 
-* \param[in] numClient tableau des clients 
-* \param[in] cagnotte tableau des cagnottes 
-* \param[in] suspendue tableau des etats de carte 
-* \param[in] taille taille logique des tableaux 
-* \author Maeva Colle  
-*/
+
 void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
     int num, dedans;
     printf("Quelle est le numero de client recherché  : \n ");
@@ -219,15 +181,7 @@ void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int ta
         printf("Le numero de client recherché n'existe pas");
     }
 }
-/**
-* \brief Affiche tout les articles des tables 
-* \param[in] ref tableau des références 
-* \param[in] poids tableaux des poids 
-* \param[in] volume tableau des volumes 
-* \param[in] prix tableau des prix 
-* \param[in] taille taille logique des tableaux 
-* \author Enzo Gubbiotti 
-*/
+
 void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
     int i ;
     printf("Ref\tPoids\tVolume\tPrix\n");
@@ -250,16 +204,7 @@ void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , 
         printf("Le numero d'article recherché n'existe pas");
     }
 }
-/**
-* \brief Fonction qui permet a l'administrateur de supprimer un client 
-* \param[in,out] numClient tableau des clients 
-* \param[in,out] cagnotte tableau des cagnottes 
-* \param[in,out] suspendue tableau de l'etat de la carte (O/1)
-* \param[in,out] taille taille logique des tableaux qui diminue  de 1
-* \param [in] tailleMax taille physique des tableaux 
-* \author Enzo Gubbiotti , Samuel Pinto 
-* \return renvoi 1 si tout s'est bien passé sinon -1 
-*/
+
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
@@ -285,16 +230,6 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
     return 1;
 }
 
-/**
-* \brief Foncion qui permet a l'administrateur de supprimé un article 
-* \param[in,out] numClient tableau des clients 
-* \param[in,out] cagnotte tableau des cagnottes 
-* \param[in,out] suspendue tableau de l'etat de la carte (O/1)
-* \param[in,out] taille taille logique des tableaux qui diminue de 1 
-* \param[in] tailleMax taille physique des tableaux 
-* \author Enzo gubbiotti
-* \return 1 si tout c'est bien passé sinon -1 
-*/
 int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax )
 {
     int ref1 , i ,trouve ;
@@ -318,20 +253,13 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
 
     }
     *taille-=1;
+    printf("Artcile bien supprimé ! ")
     return 1;
 
 }
 
 
 
-/**
-* \brief Fonction qui prend les tableaux des données des clients et ecris ces données dans le fichier csv 
-* \param[in] Tclient tableau contenant les référence des clients 
-* \param[in] Tcagnotte tableau contenant les cagnottes des clients 
-* \param[in] Tsuspendue tableau qui contient l'etat de la carte des clients (0/1)
-* \param[in] taille taille logique des tableaux
-* \author Samuel Pinto 
-*/
 void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
     FILE *File;
     File = fopen("ressource/client.csv", "w");
@@ -345,15 +273,6 @@ void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
     }
 }
 
-/**
-* \brief Fonction qui prend les tableaux des données des Artciles et écris ces données dans le fichier csv 
-* \param[in] Tref tableau des références des artciles 
-* \param[in] Tpoids tableau des poids des articles 
-* \param[in] Tvolume tableau des volumes des articles 
-* \param[in] prix tableau des prix des articles 
-* \param[in] taille taille logique des tableaux 
-* \author Samuel Pinto 
-*/
 void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int taille){
     FILE *File;
     File = fopen("ressource/articles.csv", "w");
@@ -368,27 +287,6 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 
 }
 
-/**
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-*/
-//a ajouter cagnotte (oui c'est la flemme)
 float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax, float prixMax, float *prixTT){
     int place, trouve, quantite;
     float volTT=0, chargeTT=0, cagnotteA=0, prixC=0;
@@ -432,7 +330,7 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
 //utilisation cagnotte entiérement ou partiellement
 //mise a jour cagnotte (10%)
 //Ajouter liite budget 
-float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, int id, float cagnotte){
+float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, float cagnotte){
     int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action=0;
     float volMax, poidMax, cagnotteTT, nCagnotte, prixMax, prixTT=0;
     char choix;
@@ -543,7 +441,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     return nCagnotte;
 }
-int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
+void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
     int choix,choixa, refa, refc, choixc, id, trouve,num, modifa, modifc, nvref,erreur;
     float nvvol,nvpo,nvpr;
@@ -554,11 +452,15 @@ int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[]
     
     while(choix!=-1)
     {
-        printf("Voulez vous modifier un article (tapez 0) modifier une carte (tapez 1) si vous voulez afficher un client en particulier tapez 2 ou 3 pour un article");
+        printf("===========================================================\n");
+        printf("||Voulez vous\n ||modifier un article (tapez 0)\n ||modifier une carte (tapez 1)\n ||si vous voulez afficher un client en particulier tapez 2 ou 3 pour un article\n");
+        printf("===========================================================\n");
         scanf("%d",&choix);
         if (choix==0)
         { 
-            printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 si vous voulez en ajouter un faites le 2 et si vous voulez modifier la reference faites le 3 \n");
+            printf("===========================================================\n");
+            printf("||si vous voulez modifier un article tapez 0\n ||si vous voulez supprimer un article tapez 1\n ||si vous voulez en ajouter un faites le 2\n ||si vous voulez modifier la reference faites le 3 \n");
+            printf("===========================================================\n");
             scanf("%d",&choixa);
             if (choixa==0)
             {
@@ -654,10 +556,6 @@ int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[]
 
 
 
-return -1;
-
-
-
 }
 
 //Faire fonction Ajouts article (Enzo)
@@ -693,7 +591,7 @@ void Menu(void)
         {
             if (id==numClient[i])
                 if (suspendue[i]==0)
-                    Client(ref, poids, volume,  prix,tp, *volume, numClient[i], cagnotte[i]);
+                    Client(ref, poids, volume,  prix,tp, *volume, cagnotte[i]);
                 else 
                     printf("Cette carte a été suspendue. Veuillez contacter l'assistance.");
         }
@@ -713,6 +611,7 @@ void test(void)
     float volume[100] ;
     float poids[100] , prix[100] ;
     int tl1 ;
+<<<<<<< HEAD
     //Client();
     tl1= loadArticle(ref,poids,volume,prix,tp);
     DelArticle(ref,poids,volume,prix,&tl1,100);
@@ -721,4 +620,11 @@ void test(void)
         ShowClient(numClient,cagnotte,suspendue,tl);
     ShowArticle(ref,poids,volume,prix,tl1);
     */
+=======
+    Menu();
+    tl1= loadArticle(ref,poids,volume,prix,tp);
+    DelArticle(ref,poids,volume,prix,&tl1,100);
+    ShowArticle(ref,poids,volume,prix,tl1);
+    Client(ref, poids, volume, prix, tp, tl1, 0);
+>>>>>>> 8cce7d8e6b86c4fa971c0c5160dafe5262ed676f
 }
