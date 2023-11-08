@@ -96,7 +96,7 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     cagnotte[ind]=0;
     suspendu[ind]=0;
     *taille+=1;
-
+    printf("Client bien ajouté !\n");
     return 1 ;
 }
 
@@ -118,7 +118,7 @@ int AddNouvelleCarte (int numClient[], float cagnotte[], int suspendu[], int *ta
     cagnotte[ind]=0;
     suspendu[ind]=0;
     *taille+=1;
-
+    printf("Client bien ajouté !\n");
     return 1 ;
 }
 
@@ -227,6 +227,7 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
         suspendu[i]=suspendu[i+1];
     }
     *taille-=1;
+    printf("Client bien supprimé ! \n");    
     return 1;
 }
 
@@ -253,7 +254,7 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
 
     }
     *taille-=1;
-    printf("Artcile bien supprimé ! ");
+    printf("Artcile bien supprimé ! \n");
     return 1;
 
 }
@@ -355,6 +356,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     } else if (choix=='n' || choix=='N') prixMax=-1;
     while (action!=-1)
     {
+        
         printf("\n\n===========================================================\n");
         printf("||Si vous voulez arréter là tapez -1\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez payer tapez 1\n||Si vous voulez modifier un article taper 2\n||Si vous voulez suprimer un article tapez 3\n||Si vous voulez rénitialiser le panier tapez 4\n||Si vous voulez voir les articles tapez 5\n");
         scanf("%d", &action);
@@ -456,14 +458,13 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
     
     while(choix!=-1)
     {
-        printf("===========================================================\n");
-        printf("||Voulez vous\n ||modifier un article (tapez 0)\n ||modifier une carte (tapez 1)\n ||si vous voulez afficher un client en particulier tapez 2 ou 3 pour un article\n");
+        printf(" ====Voulez vous====\n ||modifier un article (tapez 0)\n ||modifier une carte (tapez 1)\n ||si vous voulez afficher un client en particulier tapez 2\n ||si vous voulez afficher un article particulier taper 3\n");
         printf("===========================================================\n");
         scanf("%d",&choix);
         if (choix==0)
         { 
             printf("===========================================================\n");
-            printf("||si vous voulez modifier un article tapez 0\n ||si vous voulez supprimer un article tapez 1\n ||si vous voulez en ajouter un faites le 2\n ||si vous voulez modifier la reference faites le 3 \n");
+            printf(" ||si vous voulez modifier un article tapez 0\n ||si vous voulez supprimer un article tapez 1\n ||si vous voulez en ajouter un faites le 2\n ||si vous voulez modifier la reference faites le 3 \n");
             printf("===========================================================\n");
             scanf("%d",&choixa);
             if (choixa==0)
