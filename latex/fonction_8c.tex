@@ -1,0 +1,408 @@
+\hypertarget{fonction_8c}{}\doxysection{fonction.\+c File Reference}
+\label{fonction_8c}\index{fonction.c@{fonction.c}}
+
+
+Fichier contenant toute les fonctions applications.  
+
+
+{\ttfamily \#include \char`\"{}main.\+h\char`\"{}}\newline
+Include dependency graph for fonction.\+c\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=145pt]{fonction_8c__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{fonction_8c_adfe2baac338af80bf88bdf29909e5c34}{load\+Client}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui charge le fichier contenant les informations des clients dans des tableaux. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonction_8c_acf79f3ad6f9fce927ee2766dc9a1798a}{load\+Article}} (int id\mbox{[}$\,$\mbox{]}, float poid\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int taille\+Max)
+\begin{DoxyCompactList}\small\item\em Fonction qui charge le fichier contenant les informations des articles dans des tableaux. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonction_8c_aeaa4601c2a97598b0e8c585a70b43ad7}{frecherche}} (int tab\mbox{[}$\,$\mbox{]}, int val, int taille, int $\ast$trouve)
+\begin{DoxyCompactList}\small\item\em Fonction qui recherche une valeurt dans un tableau donné \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonction_8c_a48f33c7411d3cec4a3c8c4c1b9ef291b}{Add\+Client}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int $\ast$taille, int taille\+Max)
+\begin{DoxyCompactList}\small\item\em Fonctions qui sert a l\textquotesingle{}administrateur pour ajouter des clients aux tableaux. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonction_8c_af5e490dbfbec2a694552adc839bb386b}{Add\+Article}} (int ref\mbox{[}$\,$\mbox{]}, float poids\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int $\ast$taille, int taille\+Max)
+\begin{DoxyCompactList}\small\item\em Fonctions qui sert a l\textquotesingle{}administrateur pour ajouter des articles aux tableaux. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonction_8c_adf1d687649973e54e3accc060a3f9397}{Show\+Client}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche tout les clients des tableaux. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonction_8c_a96fb5cabd4ae01144a04f7d6163a8e3c}{Show\+Client\+Precis}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui affiche un clients précis. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonction_8c_a4876f6e3e4b2708ab840d127a168fdd1}{Show\+Article}} (int ref\mbox{[}$\,$\mbox{]}, float poids\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int taille)
+\begin{DoxyCompactList}\small\item\em Affiche tout les articles des tables. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{fonction_8c_afdf1d7ebf4025aefbbd66da5537f8ec4}\label{fonction_8c_afdf1d7ebf4025aefbbd66da5537f8ec4}} 
+void {\bfseries Show\+Article\+Precis} (int ref\mbox{[}$\,$\mbox{]}, float poids\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int taille)
+\item 
+int \mbox{\hyperlink{fonction_8c_a122f8caa444388f012f6c00850655c6b}{Del\+Client}} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendu\mbox{[}$\,$\mbox{]}, int $\ast$taille, int taille\+Max)
+\begin{DoxyCompactList}\small\item\em Fonction qui permet a l\textquotesingle{}administrateur de supprimer un client. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{fonction_8c_a7bc428fb55e8e497e95c734fe276b3aa}{Del\+Article}} (int ref\mbox{[}$\,$\mbox{]}, float poids\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int $\ast$taille, int taille\+Max)
+\begin{DoxyCompactList}\small\item\em Foncion qui permet a l\textquotesingle{}administrateur de supprimé un article. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonction_8c_a253e7e09bb2194e71f03d4608f833cc5}{save\+Client}} (int Tclient\mbox{[}$\,$\mbox{]}, float Tcagnotte\mbox{[}$\,$\mbox{]}, int Tsuspendue\mbox{[}$\,$\mbox{]}, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui prend les tableaux des données des clients et ecris ces données dans le fichier csv. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{fonction_8c_aabb7c9bc024ef4babc1f9f6dd34679bc}{save\+Article}} (int Tref\mbox{[}$\,$\mbox{]}, float Tpoid\mbox{[}$\,$\mbox{]}, float Tvolume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, int taille)
+\begin{DoxyCompactList}\small\item\em Fonction qui prend les tableaux des données des Artciles et écris ces données dans le fichier csv. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{fonction_8c_a38cfe018defb5aa7f0d9e6cec45088a7}{affiche\+Recap}} (int p\+Ref\mbox{[}$\,$\mbox{]}, int p\+Quantite\mbox{[}$\,$\mbox{]}, int ptaille, int Tref\mbox{[}$\,$\mbox{]}, float Tpoids\mbox{[}$\,$\mbox{]}, float Tvolume\mbox{[}$\,$\mbox{]}, float Tprix\mbox{[}$\,$\mbox{]}, int Ttaille, float cagnotte, float volmax, float poidmax)
+\item 
+\mbox{\Hypertarget{fonction_8c_a89d20bb692528ba0702f58e5535b9515}\label{fonction_8c_a89d20bb692528ba0702f58e5535b9515}} 
+float {\bfseries Client} (int Tref\mbox{[}$\,$\mbox{]}, float Tpoids\mbox{[}$\,$\mbox{]}, float Tvolume\mbox{[}$\,$\mbox{]}, float Tprix\mbox{[}$\,$\mbox{]}, int taille\+Max, int Ttaille, int id, float cagnotte)
+\item 
+\mbox{\Hypertarget{fonction_8c_a1e24d677b10683a3e0545500d6085e0d}\label{fonction_8c_a1e24d677b10683a3e0545500d6085e0d}} 
+int {\bfseries administrateur} (int num\+Client\mbox{[}$\,$\mbox{]}, float cagnotte\mbox{[}$\,$\mbox{]}, int suspendue\mbox{[}$\,$\mbox{]}, int ref\mbox{[}$\,$\mbox{]}, float volume\mbox{[}$\,$\mbox{]}, float prix\mbox{[}$\,$\mbox{]}, float poids\mbox{[}$\,$\mbox{]}, int tp, int tl)
+\item 
+\mbox{\Hypertarget{fonction_8c_aeacc4d8e9ea2e47e21aafcb2de0df935}\label{fonction_8c_aeacc4d8e9ea2e47e21aafcb2de0df935}} 
+void {\bfseries Menu} (void)
+\item 
+\mbox{\Hypertarget{fonction_8c_a708a4c1a4d0c4acc4c447310dd4db27f}\label{fonction_8c_a708a4c1a4d0c4acc4c447310dd4db27f}} 
+void {\bfseries test} (void)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Fichier contenant toute les fonctions applications. 
+
+\begin{DoxyAuthor}{Author}
+Enzo Gubbiotti , Maeva Colle ,Samuel Pinto 
+\end{DoxyAuthor}
+\begin{DoxyDate}{Date}
+2023 Application qui permet de gérer une base de données peu complexe avec une interface client et une interface administrateur. 
+\end{DoxyDate}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{fonction_8c_af5e490dbfbec2a694552adc839bb386b}\label{fonction_8c_af5e490dbfbec2a694552adc839bb386b}} 
+\index{fonction.c@{fonction.c}!AddArticle@{AddArticle}}
+\index{AddArticle@{AddArticle}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{AddArticle()}{AddArticle()}}
+{\footnotesize\ttfamily int Add\+Article (\begin{DoxyParamCaption}\item[{int}]{ref\mbox{[}$\,$\mbox{]},  }\item[{float}]{poids\mbox{[}$\,$\mbox{]},  }\item[{float}]{volume\mbox{[}$\,$\mbox{]},  }\item[{float}]{prix\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille,  }\item[{int}]{taille\+Max }\end{DoxyParamCaption})}
+
+
+
+Fonctions qui sert a l\textquotesingle{}administrateur pour ajouter des articles aux tableaux. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em ref} & tableau des références \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em poids} & tableau des poids \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em volume} & tableau des volumes des articles \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em prix} & tableau des prix des articles \\
+\hline
+\mbox{\texttt{ out}}  & {\em taille} & taille logique des tableaux \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille\+Max} & taille physique des tableaux ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Enzo gubbiotti 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+1 si tout c\textquotesingle{}est bien passé sinon -\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonction_8c_a48f33c7411d3cec4a3c8c4c1b9ef291b}\label{fonction_8c_a48f33c7411d3cec4a3c8c4c1b9ef291b}} 
+\index{fonction.c@{fonction.c}!AddClient@{AddClient}}
+\index{AddClient@{AddClient}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{AddClient()}{AddClient()}}
+{\footnotesize\ttfamily int Add\+Client (\begin{DoxyParamCaption}\item[{int}]{num\+Client\mbox{[}$\,$\mbox{]},  }\item[{float}]{cagnotte\mbox{[}$\,$\mbox{]},  }\item[{int}]{suspendu\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille,  }\item[{int}]{taille\+Max }\end{DoxyParamCaption})}
+
+
+
+Fonctions qui sert a l\textquotesingle{}administrateur pour ajouter des clients aux tableaux. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em num\+Client} & tableau des clients \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em cagnotte} & tableau des cagnottes \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em suspendue} & tableau de l\textquotesingle{}etat de la carte (O/1) \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em taille} & taille logique des tableaux qui augmente de 1 \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille\+Max} & taille physique des tableaux \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Enzo gubbiotti 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+1 si tout c\textquotesingle{}est bien passé sinon -\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonction_8c_a38cfe018defb5aa7f0d9e6cec45088a7}\label{fonction_8c_a38cfe018defb5aa7f0d9e6cec45088a7}} 
+\index{fonction.c@{fonction.c}!afficheRecap@{afficheRecap}}
+\index{afficheRecap@{afficheRecap}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{afficheRecap()}{afficheRecap()}}
+{\footnotesize\ttfamily float affiche\+Recap (\begin{DoxyParamCaption}\item[{int}]{p\+Ref\mbox{[}$\,$\mbox{]},  }\item[{int}]{p\+Quantite\mbox{[}$\,$\mbox{]},  }\item[{int}]{ptaille,  }\item[{int}]{Tref\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tpoids\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tvolume\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tprix\mbox{[}$\,$\mbox{]},  }\item[{int}]{Ttaille,  }\item[{float}]{cagnotte,  }\item[{float}]{volmax,  }\item[{float}]{poidmax }\end{DoxyParamCaption})}
+
+\textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \textbackslash{} \mbox{\Hypertarget{fonction_8c_a7bc428fb55e8e497e95c734fe276b3aa}\label{fonction_8c_a7bc428fb55e8e497e95c734fe276b3aa}} 
+\index{fonction.c@{fonction.c}!DelArticle@{DelArticle}}
+\index{DelArticle@{DelArticle}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{DelArticle()}{DelArticle()}}
+{\footnotesize\ttfamily int Del\+Article (\begin{DoxyParamCaption}\item[{int}]{ref\mbox{[}$\,$\mbox{]},  }\item[{float}]{poids\mbox{[}$\,$\mbox{]},  }\item[{float}]{volume\mbox{[}$\,$\mbox{]},  }\item[{float}]{prix\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille,  }\item[{int}]{taille\+Max }\end{DoxyParamCaption})}
+
+
+
+Foncion qui permet a l\textquotesingle{}administrateur de supprimé un article. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em num\+Client} & tableau des clients \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em cagnotte} & tableau des cagnottes \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em suspendue} & tableau de l\textquotesingle{}etat de la carte (O/1) \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em taille} & taille logique des tableaux qui diminue de 1 \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille\+Max} & taille physique des tableaux \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Enzo gubbiotti 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+1 si tout c\textquotesingle{}est bien passé sinon -\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonction_8c_a122f8caa444388f012f6c00850655c6b}\label{fonction_8c_a122f8caa444388f012f6c00850655c6b}} 
+\index{fonction.c@{fonction.c}!DelClient@{DelClient}}
+\index{DelClient@{DelClient}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{DelClient()}{DelClient()}}
+{\footnotesize\ttfamily int Del\+Client (\begin{DoxyParamCaption}\item[{int}]{num\+Client\mbox{[}$\,$\mbox{]},  }\item[{float}]{cagnotte\mbox{[}$\,$\mbox{]},  }\item[{int}]{suspendu\mbox{[}$\,$\mbox{]},  }\item[{int $\ast$}]{taille,  }\item[{int}]{taille\+Max }\end{DoxyParamCaption})}
+
+
+
+Fonction qui permet a l\textquotesingle{}administrateur de supprimer un client. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em num\+Client} & tableau des clients \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em cagnotte} & tableau des cagnottes \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em suspendue} & tableau de l\textquotesingle{}etat de la carte (O/1) \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em taille} & taille logique des tableaux qui diminue de 1 \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille\+Max} & taille physique des tableaux \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Enzo Gubbiotti , Samuel Pinto 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+renvoi 1 si tout s\textquotesingle{}est bien passé sinon -\/1 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonction_8c_aeaa4601c2a97598b0e8c585a70b43ad7}\label{fonction_8c_aeaa4601c2a97598b0e8c585a70b43ad7}} 
+\index{fonction.c@{fonction.c}!frecherche@{frecherche}}
+\index{frecherche@{frecherche}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{frecherche()}{frecherche()}}
+{\footnotesize\ttfamily int frecherche (\begin{DoxyParamCaption}\item[{int}]{tab\mbox{[}$\,$\mbox{]},  }\item[{int}]{val,  }\item[{int}]{taille,  }\item[{int $\ast$}]{trouve }\end{DoxyParamCaption})}
+
+
+
+Fonction qui recherche une valeurt dans un tableau donné 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em tab} & tableau dans lequel on recherche \\
+\hline
+\mbox{\texttt{ in}}  & {\em val} & valeur à rechercher dans le tableau \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille} & contient la taille logique du tableau \\
+\hline
+\mbox{\texttt{ out}}  & {\em trouve} & si 0 alors valeur pas trouvé / si 1 alors valeur trouvé ~\newline
+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Enzo Gubbiotti 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+renvoi l\textquotesingle{}indice de la valeur dans le tableau si elle est trouvé ou renvoi l\textquotesingle{}indice de là ou elle doit être inseré si elle n\textquotesingle{}as pas été trouvé 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonction_8c_acf79f3ad6f9fce927ee2766dc9a1798a}\label{fonction_8c_acf79f3ad6f9fce927ee2766dc9a1798a}} 
+\index{fonction.c@{fonction.c}!loadArticle@{loadArticle}}
+\index{loadArticle@{loadArticle}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{loadArticle()}{loadArticle()}}
+{\footnotesize\ttfamily int load\+Article (\begin{DoxyParamCaption}\item[{int}]{id\mbox{[}$\,$\mbox{]},  }\item[{float}]{poid\mbox{[}$\,$\mbox{]},  }\item[{float}]{volume\mbox{[}$\,$\mbox{]},  }\item[{float}]{prix\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille\+Max }\end{DoxyParamCaption})}
+
+
+
+Fonction qui charge le fichier contenant les informations des articles dans des tableaux. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em id} & tableau des articles \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em poids} & tableau des poids \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em volume} & tableau des volumes des articles \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em prix} & tableau des prix des articles \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Samuel Pinto 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+la taille logique des tableau ou erreur si il y a ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonction_8c_adfe2baac338af80bf88bdf29909e5c34}\label{fonction_8c_adfe2baac338af80bf88bdf29909e5c34}} 
+\index{fonction.c@{fonction.c}!loadClient@{loadClient}}
+\index{loadClient@{loadClient}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{loadClient()}{loadClient()}}
+{\footnotesize\ttfamily int load\+Client (\begin{DoxyParamCaption}\item[{int}]{num\+Client\mbox{[}$\,$\mbox{]},  }\item[{float}]{cagnotte\mbox{[}$\,$\mbox{]},  }\item[{int}]{suspendu\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui charge le fichier contenant les informations des clients dans des tableaux. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in,out}}  & {\em num\+Client} & tableau des clients \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em cagnotte} & tableau des cagnottes \\
+\hline
+\mbox{\texttt{ in,out}}  & {\em suspendue} & tableau de l\textquotesingle{}etat de la carte (O/1) \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille} & taille physique du tableau qui stock les données \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Samuel Pinto 
+\end{DoxyAuthor}
+\begin{DoxyReturn}{Returns}
+la taille logique de tableau ou erreur si il y a ~\newline
+ 
+\end{DoxyReturn}
+\mbox{\Hypertarget{fonction_8c_aabb7c9bc024ef4babc1f9f6dd34679bc}\label{fonction_8c_aabb7c9bc024ef4babc1f9f6dd34679bc}} 
+\index{fonction.c@{fonction.c}!saveArticle@{saveArticle}}
+\index{saveArticle@{saveArticle}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{saveArticle()}{saveArticle()}}
+{\footnotesize\ttfamily void save\+Article (\begin{DoxyParamCaption}\item[{int}]{Tref\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tpoid\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tvolume\mbox{[}$\,$\mbox{]},  }\item[{float}]{prix\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui prend les tableaux des données des Artciles et écris ces données dans le fichier csv. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Tref} & tableau des références des artciles \\
+\hline
+\mbox{\texttt{ in}}  & {\em Tpoids} & tableau des poids des articles \\
+\hline
+\mbox{\texttt{ in}}  & {\em Tvolume} & tableau des volumes des articles \\
+\hline
+\mbox{\texttt{ in}}  & {\em prix} & tableau des prix des articles \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille} & taille logique des tableaux \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Samuel Pinto 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{fonction_8c_a253e7e09bb2194e71f03d4608f833cc5}\label{fonction_8c_a253e7e09bb2194e71f03d4608f833cc5}} 
+\index{fonction.c@{fonction.c}!saveClient@{saveClient}}
+\index{saveClient@{saveClient}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{saveClient()}{saveClient()}}
+{\footnotesize\ttfamily void save\+Client (\begin{DoxyParamCaption}\item[{int}]{Tclient\mbox{[}$\,$\mbox{]},  }\item[{float}]{Tcagnotte\mbox{[}$\,$\mbox{]},  }\item[{int}]{Tsuspendue\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui prend les tableaux des données des clients et ecris ces données dans le fichier csv. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em Tclient} & tableau contenant les référence des clients \\
+\hline
+\mbox{\texttt{ in}}  & {\em Tcagnotte} & tableau contenant les cagnottes des clients \\
+\hline
+\mbox{\texttt{ in}}  & {\em Tsuspendue} & tableau qui contient l\textquotesingle{}etat de la carte des clients (0/1) \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille} & taille logique des tableaux \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Samuel Pinto 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{fonction_8c_a4876f6e3e4b2708ab840d127a168fdd1}\label{fonction_8c_a4876f6e3e4b2708ab840d127a168fdd1}} 
+\index{fonction.c@{fonction.c}!ShowArticle@{ShowArticle}}
+\index{ShowArticle@{ShowArticle}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{ShowArticle()}{ShowArticle()}}
+{\footnotesize\ttfamily void Show\+Article (\begin{DoxyParamCaption}\item[{int}]{ref\mbox{[}$\,$\mbox{]},  }\item[{float}]{poids\mbox{[}$\,$\mbox{]},  }\item[{float}]{volume\mbox{[}$\,$\mbox{]},  }\item[{float}]{prix\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Affiche tout les articles des tables. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em ref} & tableau des références \\
+\hline
+\mbox{\texttt{ in}}  & {\em poids} & tableaux des poids \\
+\hline
+\mbox{\texttt{ in}}  & {\em volume} & tableau des volumes \\
+\hline
+\mbox{\texttt{ in}}  & {\em prix} & tableau des prix \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille} & taille logique des tableaux \\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Enzo Gubbiotti 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{fonction_8c_adf1d687649973e54e3accc060a3f9397}\label{fonction_8c_adf1d687649973e54e3accc060a3f9397}} 
+\index{fonction.c@{fonction.c}!ShowClient@{ShowClient}}
+\index{ShowClient@{ShowClient}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{ShowClient()}{ShowClient()}}
+{\footnotesize\ttfamily void Show\+Client (\begin{DoxyParamCaption}\item[{int}]{num\+Client\mbox{[}$\,$\mbox{]},  }\item[{float}]{cagnotte\mbox{[}$\,$\mbox{]},  }\item[{int}]{suspendu\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui affiche tout les clients des tableaux. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em num\+Client} & tableau des clients \\
+\hline
+\mbox{\texttt{ in}}  & {\em cagnotte} & tableau des cagnottes \\
+\hline
+\mbox{\texttt{ in}}  & {\em suspendue} & tableau des etats de carte \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille} & taille logique des tableaux ~\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Enzo gubbiotti 
+\end{DoxyAuthor}
+\mbox{\Hypertarget{fonction_8c_a96fb5cabd4ae01144a04f7d6163a8e3c}\label{fonction_8c_a96fb5cabd4ae01144a04f7d6163a8e3c}} 
+\index{fonction.c@{fonction.c}!ShowClientPrecis@{ShowClientPrecis}}
+\index{ShowClientPrecis@{ShowClientPrecis}!fonction.c@{fonction.c}}
+\doxysubsubsection{\texorpdfstring{ShowClientPrecis()}{ShowClientPrecis()}}
+{\footnotesize\ttfamily void Show\+Client\+Precis (\begin{DoxyParamCaption}\item[{int}]{num\+Client\mbox{[}$\,$\mbox{]},  }\item[{float}]{cagnotte\mbox{[}$\,$\mbox{]},  }\item[{int}]{suspendu\mbox{[}$\,$\mbox{]},  }\item[{int}]{taille }\end{DoxyParamCaption})}
+
+
+
+Fonction qui affiche un clients précis. 
+
+
+\begin{DoxyParams}[1]{Parameters}
+\mbox{\texttt{ in}}  & {\em num\+Client} & tableau des clients \\
+\hline
+\mbox{\texttt{ in}}  & {\em cagnotte} & tableau des cagnottes \\
+\hline
+\mbox{\texttt{ in}}  & {\em suspendue} & tableau des etats de carte \\
+\hline
+\mbox{\texttt{ in}}  & {\em taille} & taille logique des tableaux ~\\
+\hline
+\end{DoxyParams}
+\begin{DoxyAuthor}{Author}
+Maeva Colle ~\newline
+ 
+\end{DoxyAuthor}

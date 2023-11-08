@@ -3,7 +3,6 @@
 int main(void)
 {
     //Menu();
-    //test();
-    admin();
+    test();
     return 0;
 }
