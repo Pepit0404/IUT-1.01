@@ -253,7 +253,7 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
 
     }
     *taille-=1;
-    printf("Artcile bien supprimé ! ")
+    printf("Artcile bien supprimé ! ");
     return 1;
 
 }
@@ -303,7 +303,6 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
         chargeTT += Tpoids[place]*quantite;
         printf("%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\t%.2f\t%.2f\n", pRef[i], quantite, Tpoids[place], Tvolume[place], Tprix[place], Tpoids[place]*quantite, Tvolume[place]*quantite, Tprix[place]*quantite, cagnotteA);
     }
-    printf("%.2f", prixMax);
     printf("\nPrix total à payer:\t%.2f euros\n", *prixTT);
     if (prixMax!=-1) {
         if (prixMax-(*prixTT)<0){
@@ -591,7 +590,7 @@ void Menu(void)
         {
             if (id==numClient[i])
                 if (suspendue[i]==0)
-                    Client(ref, poids, volume,  prix,tp, *volume, cagnotte[i]);
+                    Client(ref, poids, volume,  prix, tp, tl, cagnotte[i]);
                 else 
                     printf("Cette carte a été suspendue. Veuillez contacter l'assistance.");
         }
@@ -611,7 +610,6 @@ void test(void)
     float volume[100] ;
     float poids[100] , prix[100] ;
     int tl1 ;
-<<<<<<< HEAD
     //Client();
     tl1= loadArticle(ref,poids,volume,prix,tp);
     DelArticle(ref,poids,volume,prix,&tl1,100);
@@ -620,11 +618,4 @@ void test(void)
         ShowClient(numClient,cagnotte,suspendue,tl);
     ShowArticle(ref,poids,volume,prix,tl1);
     */
-=======
-    Menu();
-    tl1= loadArticle(ref,poids,volume,prix,tp);
-    DelArticle(ref,poids,volume,prix,&tl1,100);
-    ShowArticle(ref,poids,volume,prix,tl1);
-    Client(ref, poids, volume, prix, tp, tl1, 0);
->>>>>>> 8cce7d8e6b86c4fa971c0c5160dafe5262ed676f
 }
