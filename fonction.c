@@ -109,7 +109,7 @@ int frecherche (int tab[], int val , int taille, int *trouve){
 * \return 1 si tout c'est bien passé sinon -1 
 */
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ){
-    int num,j ;h
+    int num,j ;
     int trouve;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
@@ -260,7 +260,6 @@ void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , 
 * \author Enzo Gubbiotti , Samuel Pinto 
 * \return renvoi 1 si tout s'est bien passé sinon -1 
 */
->>>>>>> 12c1190842d0f480e2474cd270598c8ae699fff1
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
@@ -346,7 +345,15 @@ void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
     }
 }
 
-//permet de rajouter les clients dans le fichier
+/**
+* \brief Fonction qui prend les tableaux des données des Artciles et écris ces données dans le fichier csv 
+* \param[in] Tref tableau des références des artciles 
+* \param[in] Tpoids tableau des poids des articles 
+* \param[in] Tvolume tableau des volumes des articles 
+* \param[in] prix tableau des prix des articles 
+* \param[in] taille taille logique des tableaux 
+* \author Samuel Pinto 
+*/
 void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int taille){
     FILE *File;
     File = fopen("ressource/articles.csv", "w");
@@ -361,6 +368,26 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 
 }
 
+/**
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+* \
+*/
 //a ajouter cagnotte (oui c'est la flemme)
 float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax){
     int place, trouve, quantite;
@@ -454,7 +481,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     scanf("%d", &quantite);
                 }
                 pQuantite[place] = quantite;
-            }
+            }/documentation/samuel.pinto
             else if (action == 2) {
                 int ref, trouve, place, quantite;
                 printf("\n\nReference article: ");
@@ -659,7 +686,7 @@ void test(void)
     float volume[100] ;
     float poids[100] , prix[100] ;
     int tl1 ;
-    Menu();
+    Client();
     tl1= loadArticle(ref,poids,volume,prix,tp);
     DelArticle(ref,poids,volume,prix,&tl1,100);
     ShowArticle(ref,poids,volume,prix,tl1);
