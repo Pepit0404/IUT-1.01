@@ -1,8 +1,5 @@
 var searchData=
 [
-  ['savearticle_24',['saveArticle',['../fonction_8c.html#aabb7c9bc024ef4babc1f9f6dd34679bc',1,'fonction.c']]],
-  ['saveclient_25',['saveClient',['../fonction_8c.html#a253e7e09bb2194e71f03d4608f833cc5',1,'fonction.c']]],
-  ['showarticle_26',['ShowArticle',['../fonction_8c.html#a4876f6e3e4b2708ab840d127a168fdd1',1,'fonction.c']]],
-  ['showclient_27',['ShowClient',['../fonction_8c.html#adf1d687649973e54e3accc060a3f9397',1,'fonction.c']]],
-  ['showclientprecis_28',['ShowClientPrecis',['../fonction_8c.html#a96fb5cabd4ae01144a04f7d6163a8e3c',1,'fonction.c']]]
+  ['loadarticle_27',['loadArticle',['../fonction_8c.html#acf79f3ad6f9fce927ee2766dc9a1798a',1,'fonction.c']]],
+  ['loadclient_28',['loadClient',['../fonction_8c.html#adfe2baac338af80bf88bdf29909e5c34',1,'fonction.c']]]
 ];

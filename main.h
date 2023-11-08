@@ -149,20 +149,53 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 * \brief Fonction qui affiche le récapitulatif de la commande du client 
 * \param[in] pRef tableau des references articles dans le panier du client 
 * \param[in] pQuantite tableau des quantités des articles  dans le panier du client 
-* \param[in,out] ptaille des tableaux des paniers 
-* \param[in] Tref 
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
+* \param[in] ptaille des tableaux des paniers 
+* \param[in] Tref tableau des references des articles 
+* \param[in] Tpoids tableau des poids des articles 
+* \param[in] Tprix tableau des prix des articles 
+* \param[in] Ttaille Taille des tableaux articles 
+* \param[in] cagnotte Cagnotte du client 
+* \param[in] volmax volume maximum du client 
+* \param[in] poidsmax poids maximum du client  
+* \param[in] prixMax prix maximum du client 
+* \param[out] prixTT prix de la commande du client 
+* \author Samuel Pinto
+* \return La cagnotte Mise a jours  a la fonction Client()
+*/
+float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax, float prixMax, float *prixTT);
+
+
+/**
+* \brief Fonction de l'interface client permet de gerer le cotés client de l'application
+* \param[in] Tref tableau des references des articles 
+* \param[in] Tpoids tableau des poids des articles 
+* \param[in] Tvolume tableau des volumes artciles 
+* \param[in] Tprix tableau des prix des articles 
+* \param[in] tailleMax taille physique des tableaux 
+* \param[in] Ttaille taille logique des tableaux 
+* \param[in] cagnotte cagnotte du client 
+* \author Samuel Pinto , Maeva Colle 
+* \return La cagnotte Mise a jours a l'utilisateur
+*/
+float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, float cagnotte);
+/**
+* \brief
+* \param
+* \param
+* \param
+* \param
+* \param
+* \author Maeva Colle 
 * \
 */
-float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax)
+
+int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl);
+
+/**
+* \brief Fonction qui mets ensemble tout les elements du menu 
+* \author Maeva Colle 
+*/
+void Menu(void)
 
 
-//void Menu(void);
 void test(void); 

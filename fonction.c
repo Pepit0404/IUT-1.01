@@ -254,27 +254,6 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 
 }
 
-/**
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-* \
-*/
-//a ajouter cagnotte (oui c'est la flemme)
 float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax, float prixMax, float *prixTT){
     int place, trouve, quantite;
     float volTT=0, chargeTT=0, cagnotteA=0;
@@ -315,7 +294,7 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
 //utilisation cagnotte entiérement ou partiellement
 //mise a jour cagnotte (10%)
 //Ajouter liite budget 
-float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, int id, float cagnotte){
+float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, float cagnotte){
     int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action=0;
     float volMax, poidMax, cagnotteTT, nCagnotte, prixMax, prixTT=0;
     char choix;
@@ -579,7 +558,7 @@ void Menu(void)
         {
             if (id==numClient[i])
                 if (suspendue[i]==0)
-                    Client(ref, poids, volume,  prix,tp, *volume, numClient[i], cagnotte[i]);
+                    Client(ref, poids, volume,  prix,tp, *volume, cagnotte[i]);
                 else 
                     printf("Cette carte a été suspendue. Veuillez contacter l'assistance.");
             else
@@ -603,5 +582,5 @@ void test(void)
     tl1= loadArticle(ref,poids,volume,prix,tp);
     DelArticle(ref,poids,volume,prix,&tl1,100);
     ShowArticle(ref,poids,volume,prix,tl1);
-    Client(ref, poids, volume, prix, tp, tl1, 42, 0);
+    Client(ref, poids, volume, prix, tp, tl1, 0);
 }
