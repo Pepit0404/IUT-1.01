@@ -106,10 +106,11 @@ int AddNouvelleCarte (int numClient[], float cagnotte[], int suspendu[], int *ta
     int trouve;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
-   for (j=*taille;j>ind;j--) {
-        numClient[j] = numClient[j -1];
-        cagnotte[j] = cagnotte[j - 1];
-        suspendu[j] = suspendu[j -1];
+    int ind =frecherche(numClient,reference,*taille,&trouve);
+    for (j=*taille;j>ind;j--) {
+         numClient[j] = numClient[j -1];
+         cagnotte[j] = cagnotte[j - 1];
+         suspendu[j] = suspendu[j -1];
 
     }
 
