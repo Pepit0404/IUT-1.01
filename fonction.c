@@ -169,16 +169,19 @@ void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) 
 
 }
 
-void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
+int ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
     int num, dedans;
     printf("Quelle est le numero de client recherché  : \n ");
     scanf("%d",&num);
     int position = frecherche(numClient, num, taille, &dedans);
     if ( dedans==1){
         printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
-
+            
+            
     } else{
         printf("Le numero de client recherché n'existe pas");
+    if (suspendu[position]==1)
+    return -1;
     }
 }
 
@@ -253,7 +256,7 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
 
     }
     *taille-=1;
-    printf("Artcile bien supprimé ! ")
+    printf("Artcile bien supprimé ! ");
     return 1;
 
 }
@@ -439,7 +442,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 }
 void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
-    int choix,choixa, refa, refc, choixc, id, trouve,num, modifa, modifc, nvref,erreur;
+    int choix,choixa, refa, refc, choixc, id1,id2, trouve,num, modifa, modifc, nvref,erreur,nvcarte,reference, susp;
     float nvvol,nvpo,nvpr;
     printf("===========================================================\n");
     printf("|| Bienvenue sur l'interface administrative du magasin\n");
@@ -470,7 +473,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     scanf("%d",&num);
                     id = frecherche(ref,num,tl,&trouve);
                 }
-                printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) ");
+                printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) , la reference ()");
                 scanf("%d",&modifa);
 
 
@@ -525,10 +528,18 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             {
                 printf("Quel carte voulez vous suspendre");
                 scanf("%d",&num);
-                id=frecherche(numClient,num,tl,&trouve);
-                suspendue[id]=1;
+                id1=frecherche(numClient,num,tl,&trouve);
+                suspendue[id1]=1;
                 printf("voulez vous à présent créer une nouvel carte pour se client (si oui tapez 0 si non tapez 1)\n");
-                scanf("%d",&choixc);
+                scanf("%d",&nvcarte);
+                if (nvcarte==0)
+                {
+                    printf("Quel sera le numéro de cette nouvelle carte ?");
+                    scanf("%d", reference);
+                    AddNouvelleCarte (numClient, cagnotte,suspendu[], tl,tp ,reference);
+                    id2=frecherche(numClient,num,tl,&trouve);
+                    cagnotte[id2]=cagnotte[id2];
+                }
             }
             if (choixc==1)
             {
@@ -543,7 +554,25 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             }
         }
         if (choix == 2)
-            ShowClientPrecis(numClient, cagnotte, suspendue,tl);
+            susp=ShowClientPrecis(numClient, cagnotte, suspendue,tl);
+            if (susp==-1)
+                {
+                    printf("Cette carte a été suspendue, voulez vous en refaire une autre ?")
+                    scanf("%d",&nvcarte);
+                    if (nvcarte==0)
+                    {
+                        printf("Quel sera le numéro de cette nouvelle carte ?");
+                        scanf("%d", reference);
+                        AddNouvelleCarte (numClient, cagnotte,suspendu[], tl,tp ,reference);
+                        id2=frecherche(numClient,num,tl,&trouve);
+                        cagnotte[id2]=cagnotte[id2];
+                    }
+                }
+
+                    
+
+            
+            
         if (choix == 3)
             ShowArticlePrecis(ref,poids,volume,prix,tl);
 

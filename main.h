@@ -100,7 +100,7 @@ void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille);
 * \param[in] taille taille logique des tableaux 
 * \author Maeva Colle  
 */
-void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille);
+int ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille);
 
 /**
 * \brief Affiche tout les articles des tables 
