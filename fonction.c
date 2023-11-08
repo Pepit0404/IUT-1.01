@@ -319,6 +319,7 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     printf("Charge restante\t: ");
     if (poidmax-chargeTT < 0) printf("Attention dépassement de la charge autorisée de ");
     printf("%.2f kg\n", poidmax-chargeTT);
+    printf("===========================================================\n");
 
     *prixTT=prixC;
     return cagnotte;
@@ -355,7 +356,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     while (action!=-1)
     {
         printf("\n\n===========================================================\n");
-        printf("||Si vous voulez arréter là tapez -1\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez payer tapez 1\n||Si vous voulez modifier un article taper 2\n||Si vous voulez suprimer un article tapez 3\n||Si vous voulez rénitialiser le panier tapez 4\n");
+        printf("||Si vous voulez arréter là tapez -1\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez payer tapez 1\n||Si vous voulez modifier un article taper 2\n||Si vous voulez suprimer un article tapez 3\n||Si vous voulez rénitialiser le panier tapez 4\n||Si vous voulez voir les articles tapez 5\n");
         scanf("%d", &action);
         if (action!=-1){
             if (action==0){
@@ -380,6 +381,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 }else printf("L'article %d déjà present dans votre panier \n", ref);
             }
             else if (action==1) {
+                printf("%f", prixTT);
                 if (prixMax<prixTT) {
                     printf("\n\nAttention votre panier dépasse de %.2f €", (prixMax-prixTT)*-1);
                     printf("Continuer quand même tapez 1\n");
@@ -434,8 +436,11 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 scanf("%*c%c", &choix);
                 if (choix=='y' || choix=='Y') ptaille = 0;
             }
-            printf("%.2f\n", prixMax);
-            nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax, prixMax, &prixTT);
+            if (action == 5) {
+                printf("\n\n");
+                ShowArticle(Tref, Tpoids, Tvolume, Tprix, Ttaille);
+            }
+            else nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax, prixMax, &prixTT);
         }
     }
     return nCagnotte;
