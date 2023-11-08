@@ -453,13 +453,13 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
     
     while(choix!=-1)
     {
-        printf(" ====Voulez vous====\n ||modifier un article (tapez 0)\n ||modifier une carte (tapez 1)\n ||si vous voulez afficher un client en particulier tapez 2\n ||si vous voulez afficher un article particulier taper 3\n");
+        printf(" ====Voulez vous====\n ||Modifier un article (tapez 0)\n ||Modifier une carte (tapez 1)\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
         printf("===========================================================\n");
         scanf("%d",&choix);
         if (choix==0)
         { 
             printf("===========================================================\n");
-            printf(" ||si vous voulez modifier un article tapez 0\n ||si vous voulez supprimer un article tapez 1\n ||si vous voulez en ajouter un faites le 2\n ||si vous voulez modifier la reference faites le 3 \n");
+            printf(" ||Si vous voulez modifier un article tapez 0\n ||Si vous voulez supprimer un article tapez 1\n ||Si vous voulez en ajouter un faites le 2\n ||Si vous voulez modifier la reference faites le 3 \n ");
             printf("===========================================================\n");
             scanf("%d",&choixa);
             if (choixa==0)
@@ -523,7 +523,9 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
         }
         if (choix == 1)
         {
-            printf("si vous voulez modifier le statut d'une carte tapez 0, si vous voulez creer une carte tapez 1, si vous voulez supprimer une carte faites le 2");
+            printf("===========================================================\n");
+            printf(" ||si vous voulez modifier le statut d'une carte tapez 0, si vous voulez creer une carte tapez 1, si vous voulez supprimer une carte faites le 2\n");
+            printf("===========================================================\n");
             scanf("%d",&choixc);
             if (choixc==0)
             {
@@ -550,6 +552,11 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             ShowClientPrecis(numClient, cagnotte, suspendue,tl);
         if (choix == 3)
             ShowArticlePrecis(ref,poids,volume,prix,tl);
+        if (choix == 4){
+            printf("===========================================================\n");
+            printf("Au revoir l administrateur\n");
+            return ;
+        }
 
 
     }
