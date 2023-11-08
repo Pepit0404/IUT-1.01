@@ -57,6 +57,19 @@ int frecherche (int tab[], int val , int taille, int *trouve);
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax );
 
 /**
+* \brief Fonctions qui sert a l'administrateur pour ajouter des clients aux tableaux avec une reference deja defini
+* \param[in,out] numClient tableau des clients 
+* \param[in,out] cagnotte tableau des cagnottes 
+* \param[in,out] suspendue tableau de l'etat de la carte (O/1)
+* \param[in,out] taille taille logique des tableaux qui augmente de 1 
+* \param[in] tailleMax taille physique des tableaux 
+* \param[in] references nouvelle reference a ajouter 
+* \author Enzo gubbiotti
+* \return 1 si tout c'est bien passé sinon -1 
+*/
+int AddNouvelleCarte (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ,int reference);
+
+/**
 * \brief Fonction qui sert a l'administrateur pour ajouter des articles aux tableaux 
 * \param[in,out] ref tableau des références 
 * \param[in,out] poids tableau des poids 
@@ -180,22 +193,25 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
 float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, float cagnotte);
 /**
 * \brief
-* \param
-* \param
-* \param
-* \param
-* \param
+* \param[in] numClient tableau des numeros des clients 
+* \param[in] cagnotte tableau des cagnottes des clients 
+* \param[in,out] suspendue tableaux des etats de carte des clients 
+* \param[in,out] ref tableau des references des articles 
+* \param[in,out] volume tableau des volumes des articles 
+* \param[in,out] prix tableau des prix des articles 
+* \param[in,out] poids tableau des poids des articles 
+* \param[in] tp taille phyisque des tableaux 
+* \param[in] tl taille logique des tableaux 
 * \author Maeva Colle 
-* \
 */
 
-int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl);
+void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl);
 
 /**
 * \brief Fonction qui mets ensemble tout les elements du menu 
 * \author Maeva Colle 
 */
-void Menu(void)
+void Menu(void);
 
 
 void test(void); 

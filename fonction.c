@@ -69,9 +69,18 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
         return -1; //Erreur: tableau trop petit
     printf("Quelle sera le numéro du client à ajouter : \n");
     scanf("%d",&num);
-
+    while (num==777){
+        printf("Ce numéros est reservé\n");
+        printf("Veuillez re saisir une valeur : \n");
+        scanf("%d",&num);
+    }
     int ind =frecherche(numClient,num,*taille,&trouve);
     while(trouve==1 || num<0) {
+        while (num==777){
+            printf("Ce numéros est reservé\n");
+            printf("Veuillez re saisir une valeur : \n");
+            scanf("%d",&num);
+        }
         printf("Erreur Saisir un autre numéro client : \n");
         scanf("%d", &num);
         ind =frecherche(numClient,num,*taille,&trouve);
@@ -84,6 +93,27 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     }
 
     numClient[ind]=num;
+    cagnotte[ind]=0;
+    suspendu[ind]=0;
+    *taille+=1;
+
+    return 1 ;
+}
+
+
+int AddNouvelleCarte (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ,int reference){
+    int j ;
+    int trouve;
+    if (*taille+1==tailleMax)
+        return -1; //Erreur: tableau trop petit
+   for (j=*taille;j>ind;j--) {
+        numClient[j] = numClient[j -1];
+        cagnotte[j] = cagnotte[j - 1];
+        suspendu[j] = suspendu[j -1];
+
+    }
+
+    numClient[ind]=reference;
     cagnotte[ind]=0;
     suspendu[ind]=0;
     *taille+=1;
@@ -127,6 +157,7 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     return 1 ;
 
 }
+
 
 void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) {
         int i ;
@@ -221,6 +252,7 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
 
     }
     *taille-=1;
+    printf("Artcile bien supprimé ! ")
     return 1;
 
 }
@@ -404,7 +436,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     return nCagnotte;
 }
-int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
+void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
     int choix,choixa, refa, refc, choixc, id, trouve,num, modifa, modifc, nvref,erreur;
     float nvvol,nvpo,nvpr;
@@ -415,11 +447,15 @@ int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[]
     
     while(choix!=-1)
     {
-        printf("Voulez vous modifier un article (tapez 0) modifier une carte (tapez 1) si vous voulez afficher un client en particulier tapez 2 ou 3 pour un article");
+        printf("===========================================================\n");
+        printf("||Voulez vous\n ||modifier un article (tapez 0)\n ||modifier une carte (tapez 1)\n ||si vous voulez afficher un client en particulier tapez 2 ou 3 pour un article\n");
+        printf("===========================================================\n");
         scanf("%d",&choix);
         if (choix==0)
         { 
-            printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 si vous voulez en ajouter un faites le 2 et si vous voulez modifier la reference faites le 3 \n");
+            printf("===========================================================\n");
+            printf("||si vous voulez modifier un article tapez 0\n ||si vous voulez supprimer un article tapez 1\n ||si vous voulez en ajouter un faites le 2\n ||si vous voulez modifier la reference faites le 3 \n");
+            printf("===========================================================\n");
             scanf("%d",&choixa);
             if (choixa==0)
             {
@@ -512,10 +548,6 @@ int administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[]
 
 
     }
-
-
-
-return -1;
 
 
 
