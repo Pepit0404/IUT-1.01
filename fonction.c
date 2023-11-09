@@ -514,13 +514,12 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
         printf("===========================================================\n");
         scanf("%d",&choix);
         
-        if (choix>4) 
+           
+        while (choix!=0 && choix!=1 && choix!=2 && choix!=3 && choix!=4)
         {
-            printf("tu vien de dekouvrir la seule faille de notre super programme\n");
-            printf("mais dcp ya tout qui va fermer\n ");
-            printf("trop dommage\n");
-            printf("adieu\n");
-            exit(-1);
+        printf(" ====Voulez vous====\n ||Gérer les articles (tapez 0)\n ||Gérer les cartes (tapez 1)\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
+        printf("===========================================================\n");
+        scanf("%*c%d", &choix);
         }
         if (choix==0)
         { 
@@ -528,6 +527,13 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             printf(" ||Si vous voulez modifier un article tapez 0\n ||Si vous voulez supprimer un article tapez 1\n ||Si vous voulez en ajouter un faites le 2\n ||Si vous voulez modifier la reference faites le 3 \n ");
             printf("===========================================================\n");
             scanf("%d",&choixa);
+            while (choixa!=0 && choixa!=1 && choixa!=2 && choixa!=3 )
+            {
+                printf("===========================================================\n");
+                printf(" ||Si vous voulez modifier un article tapez 0\n ||Si vous voulez supprimer un article tapez 1\n ||Si vous voulez en ajouter un faites le 2\n ||Si vous voulez modifier la reference faites le 3 \n ");
+                printf("===========================================================\n");
+                scanf("%*c%d",&choixa);
+            }
             if (choixa==0)
             {
 
@@ -594,11 +600,20 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             }
         }
         if (choix == 1)
+        
         {
             printf("===========================================================\n");
             printf(" ||si vous voulez modifier le statut d'une carte tapez 0\n ||Si vous voulez creer une carte tapez 1\n ||Si vous voulez supprimer une carte tapez le 2\n");
             printf("===========================================================\n");
             scanf("%d",&choixc);
+            while (choixc!=0 && choixc!=1 && choixc!=2  )
+            {
+                printf("===========================================================\n");
+                printf(" ||si vous voulez modifier le statut d'une carte tapez 0\n ||Si vous voulez creer une carte tapez 1\n ||Si vous voulez supprimer une carte tapez le 2\n");
+                printf("===========================================================\n");
+                scanf("%*c%d",&choixc);
+            }
+
             if (choixc==0)
             {
                 printf("Quel carte voulez vous suspendre\n");
