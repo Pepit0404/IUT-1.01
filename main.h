@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+
 /**
 *\file fonction.c
 *\brief Fichier contenant toute les fonctions applications 
