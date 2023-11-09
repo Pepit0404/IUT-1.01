@@ -337,14 +337,15 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     printf("===========================================================\n");
     printf("Veuillez définir la charge max de votre véhicule (kg): ");
     scanf("%f", &poidMax);
-    while (poidMax<0 && poidMax>9999)
+    while (poidMax==0)
     {
         printf("Valeurs impossible\nVeuillez définir la charge max de votre véhicule (kg): ");
         scanf("%*c%f", &poidMax);
     }
     printf("Veuillez définir le volume max de votre véhicule (L): ");
     scanf("%f", &volMax);
-    while (volMax<0 && volMax>9999)
+    printf("%f", volMax);
+    while (volMax==0.0)
     {
         printf("Valeurs impossible\nVeuillez définir le volume max de votre véhicule (L): ");
         scanf("%*c%f", &volMax);
@@ -710,6 +711,11 @@ void Menu(void)
         printf("===========================================================\n");
         printf(" ||Bienvenue  sur l'application de BricoConstruction!\n===========================================================\nRentrez votre identifiant/Ou tapez -1 pour Arreté \n");
         scanf("%d",&id);
+        while (id==0)
+        {
+            printf("Reponse invalide\nRentrez votre identifiant/Ou tapez -1 pour Arreté\n");
+            scanf("%*c%d",&id);
+        }
         printf("===========================================================\n");
         
         if (id==admin)
