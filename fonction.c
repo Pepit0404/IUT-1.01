@@ -287,12 +287,9 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     int place, trouve, quantite;
     float cagnotteA=0, prixC=0;
     *prixTT = 0;
-<<<<<<< HEAD
     *volTT = 0;
     *chargeTT = 0;
-=======
-    printf("\033[0;34m");
->>>>>>> 0e7620be18d21d2369912a5e429afb2e4c9abd76
+    printf("\033[0;32m");
     printf("\n\n===========================================================\n");
     printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
     for (int i=0; i<ptaille; i++){
@@ -308,20 +305,22 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     printf("\nPrix total à payer:\t%.2f euros\n", *prixTT);
     if (prixMax!=-1) {
         if (prixMax-(*prixTT)<0){
-            printf("Attention dépassement de la limite de budget de ");
+            printf("\033[0;31mAttention dépassement de la limite de budget de ");
             printf("%.2f\n", (*prixTT)-prixMax);
+            printf("\033[0;32m");
         } else printf("Budget restant: %.2f\n", prixMax-(*prixTT));
     }
     printf("Cagnotte totale:\t%.2f euros\n", cagnotte);
     printf("\nVolume utilisé\t: %.2f litres\n", *volTT);
     printf("Volume restant\t: ");
-    if (volmax-(*volTT) < 0) printf("Attention dépassement du volume autorisée de ");
-    printf("%.2f litres\n", *(volTT)-volmax);
+    if (volmax-(*volTT) < 0) printf("\033[0;31mAttention dépassement du volume autorisée de %.2f litres\n\033[0;32m", *(volTT)-volmax);
+    else printf("%.2f litres\n", volmax-(*volTT));
     printf("\nCharge Actuelle\t: %.2f kg\n", *chargeTT);
     printf("Charge restante\t: ");
-    if (poidmax-(*chargeTT) < 0) printf("Attention dépassement de la charge autorisée de ");
-    printf("%.2f kg\n", (*chargeTT)-poidmax);
+    if (poidmax-(*chargeTT) < 0) printf("\033[0;31mAttention dépassement de la charge autorisée de %.2f kg\n\033[0;32m", (*chargeTT)-poidmax);
+    else printf("%.2f kg\n", poidmax-(*chargeTT));
     printf("===========================================================\n");
+    printf("\033[0;36m");
 
     return cagnotte;
 }
@@ -401,8 +400,14 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     }
                     if (reponse==1) modif=0;
                     else if (reponse==2) {
-                        nCagnotte += prixMax-prixTT;
-                        modif=0;
+                        if (nCagnotte>prixMax-prixTT) {
+                            nCagnotte += prixMax-prixTT;
+                            modif=0;
+                        }
+                        else {
+                            printf("Désolé mais votre cagnotte ne peut pas compenser la différence\n");
+                            modif=1;
+                        }
                     } else modif=1;
                 }
                 if (poidMax<poidTT && modif!=1) {
@@ -492,10 +497,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
             else nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax, prixMax, &prixTT, &poidTT, &volumeTT);
         }
     }
-<<<<<<< HEAD
-=======
     printf("\033[0;33m");
->>>>>>> 0e7620be18d21d2369912a5e429afb2e4c9abd76
     printf("============================================\n");
     printf("Au revoir cher Client \n");
     return nCagnotte;
