@@ -171,11 +171,13 @@ void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int t
 * \param[in] volmax volume maximum du client 
 * \param[in] poidsmax poids maximum du client  
 * \param[in] prixMax prix maximum du client 
-* \param[out] prixTT prix de la commande du client 
+* \param[out] prixTT prix de la commande du client
+* \param[in,out] chargeTT charge de la commande du client
+* \param[in,out] volTT volume de la commande du client
 * \author Samuel Pinto
 * \return La cagnotte Mise a jours  a la fonction Client()
 */
-float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax, float prixMax, float *prixTT);
+float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax, float prixMax, float *prixTT,  float *chargeTT, float *volTT);
 
 
 /**
