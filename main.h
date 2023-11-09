@@ -208,7 +208,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 * \author Maeva Colle 
 */
 
-void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl);
+void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tla,int tlc);
 
 /**
 * \brief Fonction qui mets ensemble tout les elements du menu 
