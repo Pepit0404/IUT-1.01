@@ -171,7 +171,7 @@ int ShowClientPrecis(int numClient[], float cagnotte[], int suspendu[], int tail
     scanf("%d",&num);
     int position = frecherche(numClient, num, taille, &dedans);
     if (dedans==1) printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
-    else printf("Le numero de client recherché n'existe pas");
+    else printf("Le numero de client recherché n'existe pas\n");
     if (suspendu[position]==1) return -1;
     return 1;
 }
@@ -468,7 +468,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 while (trouve!=1)
                 {
                     printf("Vous n'avez pas l'artile %d dans votre panier\n", ref);
-                    printf("Veuillez réessayer: ");
+                    printf("Veuillez réessayer: \n");
                     scanf("%d", &ref);
                     place = frecherche(pRef, ref, ptaille, &trouve);
                 }
@@ -502,17 +502,26 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
 {
     int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,erreur,nvcarte,reference, susp;
     float nvvol,nvpo,nvpr;
-    printf("\033[0;34m");
+    printf("\033[0;35m");
     printf("===========================================================\n");
     printf("|| Bienvenue sur l'interface administrative du magasin\n");
     printf("===========================================================\n");
     
     while(choix!=-1)
     {
-        printf("\033[0;35m");
+        
         printf(" ====Voulez vous====\n ||Gérer les articles (tapez 0)\n ||Gérer les cartes (tapez 1)\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
         printf("===========================================================\n");
         scanf("%d",&choix);
+        
+        if (choix>4) 
+        {
+            printf("tu vien de dekouvrir la seule faille de notre super programme\n");
+            printf("mais dcp ya tout qui va fermer\n ");
+            printf("trop dommage\n");
+            printf("adieu\n");
+            exit(-1);
+        }
         if (choix==0)
         { 
             printf("===========================================================\n");
@@ -531,7 +540,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     scanf("%d",&num);
                     id = frecherche(ref,num,tla,&trouve);
                 }
-                printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) , la reference (3)\n");
+                printf("Voulez vous modifier, le volume (0), le prix (1), le poids(2) , la reference (3)\n");
                 scanf("%d",&modifa);
 
 
@@ -570,12 +579,12 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             if (choixa==2)
             {
                 erreur=AddArticle(ref,poids,volume,prix,&tla, tp);
-                if (erreur==-1) printf("tableau trop petit\ntutu\n");
+                if (erreur==-1) printf("tableau trop petit\n");
             }
             if (choixa==3)
             {
                 int new_ref ,poubelle;
-                printf("Quelle est la rérérence que vous souhaitez modifié \n");
+                printf("Quelle est la rérérence que vous souhaitez modifier \n");
                 scanf("%d",&ref2);
                 int ind2=frecherche(ref,ref2,tla,&poubelle);
                 printf("Quelle sera la nouvelle référence : \n");
@@ -612,7 +621,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur=AddClient(numClient,cagnotte,suspendue,&tlc,tp);
                 printf("%d", tlc);
                 if (erreur==-1)
-                    printf("tableau trop petit\ntoto\n");
+                    printf("tableau trop petit\n");
             }
             if (choixc==2)
             {
@@ -624,11 +633,11 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             susp=ShowClientPrecis(numClient, cagnotte, suspendue,tlc);
             if (susp==-1)
                 {
-                    printf("Cette carte a été suspendue, voulez vous en refaire une autre ?");
+                    printf("Cette carte a été suspendue, voulez vous en refaire une autre ?\n");
                     scanf("%d",&nvcarte);
                     if (nvcarte==0)
                     {
-                        printf("Quel sera le numéro de cette nouvelle carte ?");
+                        printf("Quel sera le numéro de cette nouvelle carte ?\n");
                         scanf("%d", &reference);
                         AddNouvelleCarte (numClient, cagnotte, suspendue, &tlc,tp ,reference);
                         id2=frecherche(numClient,num,tlc,&trouve);
