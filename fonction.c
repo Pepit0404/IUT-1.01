@@ -1,6 +1,5 @@
 #include "main.h"
 
-
 int loadClient(int numClient[], float cagnotte[], int suspendu[], int taille)
 {
     FILE *File;
@@ -288,6 +287,7 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     int place, trouve, quantite;
     float volTT=0, chargeTT=0, cagnotteA=0, prixC=0;
     *prixTT = 0;
+    printf("\033[0;34m");
     printf("\n\n===========================================================\n");
     printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
     for (int i=0; i<ptaille; i++){
@@ -330,8 +330,11 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action=0;
     float volMax, poidMax, cagnotteTT, nCagnotte, prixMax, prixTT=0;
     char choix;
+    printf("\033[0;36m");
     printf("===========================================================\n");
-    printf("||Bienvenue\n");
+    printf("\033[0;35m");
+    printf("|Bienvenue\n");
+    printf("\033[0;36m");
     printf("===========================================================\n");
     printf("Veuillez définir la charge max de votre véhicule (kg): ");
     scanf("%f", &poidMax);
@@ -457,7 +460,8 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
             else nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax, prixMax, &prixTT);
         }
     }
-    printf("============================================");
+    printf("\033[0;33m");
+    printf("============================================\n");
     printf("Au revoir cher Client \n");
     return nCagnotte;
 }
@@ -465,6 +469,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
 {
     int choix,choixa,ref2, refa, refc, choixc, id, id1,id2, trouve,num, modifa, modifc, nvref,erreur,nvcarte,reference, susp;
     float nvvol,nvpo,nvpr;
+    printf("\033[0;31m");
     printf("===========================================================\n");
     printf("|| Bienvenue sur l'interface administrative du magasin\n");
     printf("===========================================================\n");
@@ -602,7 +607,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             ShowArticlePrecis(ref,poids,volume,prix,tl);
         if (choix == 4){
             printf("===========================================================\n");
-            printf("Au revoir l administrateur\n");
+            printf(" || Au revoir l administrateur\n");
             printf("===========================================================\n");
             return ;
         }
@@ -635,8 +640,12 @@ void Menu(void)
     tl = loadClient(numClient, cagnotte, suspendue, tp);
 
     while (run){
-        printf("Bienvenue  sur l'application de BricoConstruction!\nRentrez votre identifiant\n");
+        printf("\033[0;33m");
+        printf("===========================================================\n");
+        printf(" ||Bienvenue  sur l'application de BricoConstruction!\n===========================================================\nRentrez votre identifiant/Ou tapez -1 pour Arreté \n");
         scanf("%d",&id);
+        printf("===========================================================\n");
+        
         if (id==admin)
         {
             administrateur(numClient, cagnotte, suspendue, ref, volume, prix, poids, tp,  tl);
