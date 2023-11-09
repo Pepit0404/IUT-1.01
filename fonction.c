@@ -457,11 +457,13 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
             else nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax, prixMax, &prixTT);
         }
     }
+    printf("============================================");
+    printf("Au revoir cher Client \n");
     return nCagnotte;
 }
 void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
-    int choix,choixa, refa, refc, choixc, id, id1,id2, trouve,num, modifa, modifc, nvref,erreur,nvcarte,reference, susp;
+    int choix,choixa,ref2, refa, refc, choixc, id, id1,id2, trouve,num, modifa, modifc, nvref,erreur,nvcarte,reference, susp;
     float nvvol,nvpo,nvpr;
     printf("===========================================================\n");
     printf("|| Bienvenue sur l'interface administrative du magasin\n");
@@ -482,7 +484,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             if (choixa==0)
             {
 
-                printf("Quel article voulez vous modifier ?");
+                printf("Quel article voulez vous modifier ?\n");
                 scanf("%d", &id);
                 refa=frecherche (ref, id, tl, &trouve);
                 while (trouve==0 || num <0)
@@ -491,31 +493,31 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     scanf("%d",&num);
                     id = frecherche(ref,num,tl,&trouve);
                 }
-                printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) , la reference ()");
+                printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) , la reference (3)\n");
                 scanf("%d",&modifa);
 
 
                 if (modifa==0)
                 {
-                    printf("Donnez le nouveau volume de l'article");
+                    printf("Donnez le nouveau volume de l'article\n");
                     scanf("%f",&nvvol);
                     volume[id]==nvvol;
                 }
                 if (modifa==1)
                 {
-                    printf("Donnez le nouveau prix de l'article");
+                    printf("Donnez le nouveau prix de l'article\n");
                     scanf("%f",&nvpr);
                     prix[id]==nvpr;
                 }
                 if (modifa==2)
                 {
-                    printf("Donnez le nouveau poids de l'article");
+                    printf("Donnez le nouveau poids de l'article\n");
                     scanf("%f",&nvpo);
                     poids[id]==nvpo;
                 }
                 if (modifa==3)
                 {
-                    printf("Donnez la nouvelle référence de l'article l'article");
+                    printf("Donnez la nouvelle référence de l'article l'article\n");
                     scanf("%d",&nvref);
                     numClient[id]==nvref;
                 }
@@ -532,16 +534,27 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur=AddArticle(ref,poids,volume,prix,&tl, tp);
                 if (erreur==-1) printf("tableau trop petit\ntutu\n");
             }
+            if (choixa==3)
+            {
+                int new_ref ,poubelle;
+                printf("Quelle est la rérérence que vous souhaitez modifié \n");
+                scanf("%d",&ref2);
+                int ind2=frecherche(ref,ref2,tl,&poubelle);
+                printf("Quelle sera la nouvelle référence : \n");
+                scanf("%d",&new_ref);
+                ref[ind2]=new_ref;
+                printf("Référence modifié \n");
+            }
         }
         if (choix == 1)
         {
             printf("===========================================================\n");
-            printf(" ||si vous voulez modifier le statut d'une carte tapez 0, si vous voulez creer une carte tapez 1, si vous voulez supprimer une carte faites le 2\n");
+            printf(" ||si vous voulez modifier le statut d'une carte tapez 0\n ||Si vous voulez creer une carte tapez 1\n ||Si vous voulez supprimer une carte tapez le 2\n");
             printf("===========================================================\n");
             scanf("%d",&choixc);
             if (choixc==0)
             {
-                printf("Quel carte voulez vous suspendre");
+                printf("Quel carte voulez vous suspendre\n");
                 scanf("%d",&num);
                 id1=frecherche(numClient,num,tl,&trouve);
                 suspendue[id1]=1;
@@ -549,9 +562,9 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 scanf("%d",&nvcarte);
                 if (nvcarte==0)
                 {
-                    printf("Quel sera le numéro de cette nouvelle carte ?");
-                    scanf("%d", reference);
-                    AddNouvelleCarte (numClient, cagnotte, suspendue, tl,tp ,reference);
+                    printf("Quel sera le numéro de cette nouvelle carte ?\n");
+                    scanf("%d",&reference);
+                    AddNouvelleCarte(numClient, cagnotte, suspendue, &tl,tp ,reference);
                     id2=frecherche(numClient,num,tl,&trouve);
                     cagnotte[id2]=cagnotte[id2];
                 }
@@ -590,6 +603,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
         if (choix == 4){
             printf("===========================================================\n");
             printf("Au revoir l administrateur\n");
+            printf("===========================================================\n");
             return ;
         }
 
