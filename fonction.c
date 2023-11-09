@@ -337,8 +337,18 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     printf("===========================================================\n");
     printf("Veuillez définir la charge max de votre véhicule (kg): ");
     scanf("%f", &poidMax);
+    while (poidMax<0 && poidMax>9999)
+    {
+        printf("Valeurs impossible\nVeuillez définir la charge max de votre véhicule (kg): ");
+        scanf("%*c%f", &poidMax);
+    }
     printf("Veuillez définir le volume max de votre véhicule (L): ");
     scanf("%f", &volMax);
+    while (volMax<0 && volMax>9999)
+    {
+        printf("Valeurs impossible\nVeuillez définir le volume max de votre véhicule (L): ");
+        scanf("%*c%f", &volMax);
+    }
     printf("Voulez vous définir une limite budgétaire ? (y/n)\n");
     scanf("%*c%c", &choix);
     while (choix!='y' && choix!='Y' && choix!='n' && choix!='N')
