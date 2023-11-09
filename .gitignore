@@ -1,6 +1,7 @@
 *.o
 .ideas
 .idea
+es
 exe
 .DS_Store
 .vscode

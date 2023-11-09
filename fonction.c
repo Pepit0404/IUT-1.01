@@ -43,7 +43,6 @@ int loadArticle(int id[], float poid[], float volume[], float prix[], int taille
     return i;
 }
 
-// recherche si la valeur (numéro client ou reference objet) est déjà dans le fichier
 int frecherche (int tab[], int val , int taille, int *trouve){
     int i=0 ;
     while (i<taille){
@@ -61,18 +60,26 @@ int frecherche (int tab[], int val , int taille, int *trouve){
     return -1;
 }
 
-//Cette Fonction est appelé quand l'admin a choisis d'ajouter un CLient
-int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ){
+int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax){
     int num,j ;
     int trouve;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
-    printf("Quelle sera la numéros du client a ajouter : \n");
+    printf("Quelle sera le numéro du client à ajouter : \n");
     scanf("%d",&num);
-
+    while (num==777){
+        printf("Ce numéros est reservé\n");
+        printf("Veuillez re saisir une valeur : \n");
+        scanf("%d",&num);
+    }
     int ind =frecherche(numClient,num,*taille,&trouve);
     while(trouve==1 || num<0) {
-        printf("Erreur Saisir un autre numero client : \n");
+        while (num==777){
+            printf("Ce numéros est reservé\n");
+            printf("Veuillez re saisir une valeur : \n");
+            scanf("%d",&num);
+        }
+        printf("Erreur Saisir un autre numéro client : \n");
         scanf("%d", &num);
         ind =frecherche(numClient,num,*taille,&trouve);
     }
@@ -87,7 +94,28 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     cagnotte[ind]=0;
     suspendu[ind]=0;
     *taille+=1;
+    printf("Client bien ajouté !\n");
+    return 1 ;
+}
 
+int AddNouvelleCarte (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ,int reference){
+    int j ;
+    int trouve;
+    if (*taille+1==tailleMax)
+        return -1; //Erreur: tableau trop petit
+    int ind =frecherche(numClient,reference,*taille,&trouve);
+    for (j=*taille;j>ind;j--) {
+        numClient[j] = numClient[j -1];
+        cagnotte[j] = cagnotte[j - 1];
+        suspendu[j] = suspendu[j -1];
+
+    }
+
+    numClient[ind]=reference;
+    cagnotte[ind]=0;
+    suspendu[ind]=0;
+    *taille+=1;
+    printf("Client bien ajouté !\n");
     return 1 ;
 }
 
@@ -112,7 +140,7 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         volume[j]=volume[j-1];
         prix[j]=prix[j-1];
     }
-    printf("Veuillez Rentrer le poids de l'article ajouté : \n");
+    printf("Veuillez entrer le poids de l'article ajouté : \n");
     scanf("%f",&poids1);
     printf("Veuillez entrer le volume de produit ajouté : \n");
     scanf("%fm",&vol);
@@ -128,7 +156,7 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
 
 }
 
-void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) {
+void ShowClient(int numClient[], float cagnotte[], int suspendu[], int taille) {
         int i ;
         printf("Num\tcagnotte\tsuspendue\t\n");
         for (i=0;i<taille;i++){
@@ -137,16 +165,15 @@ void ShowClient (int numClient[], float cagnotte[], int suspendu[], int taille) 
 
 }
 
-void ShowClientPrecis (int numClient[], float cagnotte[], int suspendu[], int taille){
+int ShowClientPrecis(int numClient[], float cagnotte[], int suspendu[], int taille){
     int num, dedans;
-    printf("Quelle est le numeros de client recherché  : \n");
+    printf("Quelle est le numero de client recherché  : \n ");
     scanf("%d",&num);
     int position = frecherche(numClient, num, taille, &dedans);
-    if ( dedans==1){
-        printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
-    } else{
-        printf("Le numeros de client rechercher n'existe pas");
-    }
+    if (dedans==1) printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
+    else printf("Le numero de client recherché n'existe pas");
+    if (suspendu[position]==1) return -1;
+    return 1;
 }
 
 void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int taille ) {
@@ -156,9 +183,26 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
         printf("%d\t%.2f\t%.2f\t%.2f\n",ref[i],poids[i],volume[i],prix[i]);
     }
 }
+
+void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , int taille )
+{
+    int num, dedans;
+    printf("Quelle est le numero de l'article recherché  : \n ");
+    scanf("%d",&num);
+    int position = frecherche(ref, num, taille, &dedans);
+    if ( dedans==1){
+        printf("%d\t%.2f\t%.2f\t%.2f\t\n",ref[position],poids[position],volume[position],prix[position]);
+
+    } else{
+        printf("Le numero d'article recherché n'existe pas");
+    }
+}
+
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
     int num ,i , trouve ;
+    if (*taille==0)
+        return -1;
     printf("Voici la liste des clients : \n");
     ShowClient(numClient, cagnotte, suspendu, *taille);
     printf("Quelle est la reference du client  que vous souhaitez supprimer : \n ");
@@ -176,13 +220,15 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
         suspendu[i]=suspendu[i+1];
     }
     *taille-=1;
+    printf("Client bien supprimé ! \n");    
     return 1;
 }
-
 
 int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax )
 {
     int ref1 , i ,trouve ;
+    if (*taille==0)
+        return -1;
     printf("Voicie la liste des articles : \n");
     ShowArticle(ref,poids,volume,prix,*taille);
     printf("Quelle est la ref de l article que vous souhaitez supprimer : \n");
@@ -201,67 +247,75 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
 
     }
     *taille-=1;
+    printf("Artcile bien supprimé ! \n");
     return 1;
 
 }
 
-
-
-//permet de rajouter les clients dans le fichier
 void saveClient(int Tclient[], float Tcagnotte[], int Tsuspendue[], int taille){
     FILE *File;
     File = fopen("ressource/client.csv", "w");
 
     if (File != NULL){
         fprintf(File, "numClient;cagnotte;suspendu");
-        for (int i = 0; i<taille; i++){
+        for (int i = 0; i<=taille; i++){
             fprintf(File, "\n%d;%.2f;%d", Tclient[i], Tcagnotte[i], Tsuspendue[i]);
-        }
-        fclose(File);
+        }  
     }
+    fclose(File);
 }
 
-//permet de rajouter les clients dans le fichier
 void saveArticle(int Tref[], float Tpoid[], float Tvolume[], float prix[], int taille){
     FILE *File;
     File = fopen("ressource/articles.csv", "w");
     
     if (File!=NULL){
         fprintf(File, "reference;poids (kg);volume (l);prix Unitaire");
-        for (int i = 0; i<taille; i++) {
+        for (int i = 0; i<=taille; i++) {
             fprintf(File, "\n%d;%.3f;%.2f;%.2f", Tref[i], Tpoid[i], Tvolume[i], prix[i]);
         }
-        fclose(File);
     }
-
+    fclose(File);
 }
 
-//a ajouter cagnotte (oui c'est la flemme)
-float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax){
+float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int Ttaille, float cagnotte, float volmax, float poidmax, float prixMax, float *prixTT, float *chargeTT, float *volTT){
     int place, trouve, quantite;
-    float volTT=0, chargeTT=0, prixTT=0, cagnotteA=0;
+    float cagnotteA=0;
+    *prixTT = 0;
+    *volTT = 0;
+    *chargeTT = 0;
+    printf("\033[0;32m");
     printf("\n\n===========================================================\n");
     printf("Réf\tQté\tPoids\tVol\tPrixU\tPoidsTot\tVolTot\tPrixTT\tCagnotte\n");
     for (int i=0; i<ptaille; i++){
         quantite = pQuantite[i];
         place = frecherche(Tref, pRef[i], Ttaille, &trouve);
-        prixTT += Tprix[place]*quantite;
+        *prixTT = *prixTT + Tprix[place]*quantite;
         cagnotteA = Tprix[place]*quantite/10.0;
         cagnotte += cagnotteA;
-        volTT += Tvolume[place]*quantite;
-        chargeTT += Tpoids[place]*quantite;
+        *volTT += Tvolume[place]*quantite;
+        *chargeTT += Tpoids[place]*quantite;
         printf("%d\t%d\t%.2f\t%.2f\t%.2f\t%.2f\t\t%.2f\t%.2f\t%.2f\n", pRef[i], quantite, Tpoids[place], Tvolume[place], Tprix[place], Tpoids[place]*quantite, Tvolume[place]*quantite, Tprix[place]*quantite, cagnotteA);
     }
-    printf("\nPrix total à payer:\t%.2f euros\n", prixTT);
+    printf("\nPrix total à payer:\t%.2f euros\n", *prixTT);
+    if (prixMax!=-1) {
+        if (prixMax-(*prixTT)<0){
+            printf("\033[0;31mAttention dépassement de la limite de budget de ");
+            printf("%.2f\n", (*prixTT)-prixMax);
+            printf("\033[0;32m");
+        } else printf("Budget restant: %.2f\n", prixMax-(*prixTT));
+    }
     printf("Cagnotte totale:\t%.2f euros\n", cagnotte);
-    printf("\nVolume utilisé\t: %.2f litres\n", volTT);
-    printf("Volume restant\t:");
-    if (volmax-volTT < 0) printf("Attention dépassement du volume autorisée de ");
-    printf("%.2f litres\n", volmax-volTT);
-    printf("\nCharge Actuelle\t: %.2f kg\n", chargeTT);
-    printf("Charge restante: ");
-    if (poidmax-chargeTT < 0) printf("Attention dépassement de la charge autorisée de ");
-    printf("%.2f kg\n", poidmax-chargeTT);
+    printf("\nVolume utilisé\t: %.2f litres\n", *volTT);
+    printf("Volume restant\t: ");
+    if (volmax-(*volTT) < 0) printf("\033[0;31mAttention dépassement du volume autorisée de %.2f litres\n\033[0;32m", *(volTT)-volmax);
+    else printf("%.2f litres\n", volmax-(*volTT));
+    printf("\nCharge Actuelle\t: %.2f kg\n", *chargeTT);
+    printf("Charge restante\t: ");
+    if (poidmax-(*chargeTT) < 0) printf("\033[0;31mAttention dépassement de la charge autorisée de %.2f kg\n\033[0;32m", (*chargeTT)-poidmax);
+    else printf("%.2f kg\n", poidmax-(*chargeTT));
+    printf("===========================================================\n");
+    printf("\033[0;36m");
 
     return cagnotte;
 }
@@ -270,35 +324,53 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
 //demander action client (ajout, supretion, modification, rénitialisation,...)
 //utilisation cagnotte entiérement ou partiellement
 //mise a jour cagnotte (10%)
-float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, int id, float cagnotte){
-    int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action;
-    float volMax, poidMax, cagnotteTT, nCagnotte;
+//Ajouter liite budget 
+float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tailleMax, int Ttaille, float cagnotte){
+    int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action=0;
+    float volMax, poidMax, nCagnotte=cagnotte, prixMax, prixTT=0, poidTT=0, volumeTT=0;
+    char choix;
+    printf("\033[0;36m");
     printf("===========================================================\n");
-    printf("||Bienvenue Monsieur \n");
+    printf("\033[0;35m");
+    printf("|Bienvenue\n");
+    printf("\033[0;36m");
     printf("===========================================================\n");
     printf("Veuillez définir la charge max de votre véhicule (kg): ");
     scanf("%f", &poidMax);
     printf("Veuillez définir le volume max de votre véhicule (L): ");
     scanf("%f", &volMax);
+    printf("Voulez vous définir une limite budgétaire ? (y/n)\n");
+    scanf("%*c%c", &choix);
+    while (choix!='y' && choix!='Y' && choix!='n' && choix!='N')
+    {
+        printf("Attention : réponse non conforme\n");
+        printf("Voulez vous définir une limite budgétaire ? (y/n)\n");
+        scanf("%*c%c", &choix);
+    }
+    if (choix=='y' || choix=='Y'){
+        printf("Veillez définir une limitation: ");
+        scanf("%f", &prixMax);
+    } else if (choix=='n' || choix=='N') prixMax=-1;
     while (action!=-1)
     {
+        
         printf("\n\n===========================================================\n");
-        printf("||Si vous voulez arréter là tapez -1\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez modifier un article taper 1\n||Si vous voulez suprimer un article tapez 2\n||Si vous voulez rénitialiser le panier tapez 3\n");
+        printf("||Si vous voulez arréter là tapez -1\n||Si vous voulez ajouter au panier tapez 0\n||Si vous voulez payer tapez 1\n||Si vous voulez modifier un article taper 2\n||Si vous voulez suprimer un article tapez 3\n||Si vous voulez rénitialiser le panier tapez 4\n||Si vous voulez voir les articles tapez 5\n");
         scanf("%d", &action);
         if (action!=-1){
             if (action==0){
-                int ref, trouve, place, quantite;
+                int ref, trouve, quantite;
                 printf("\n\nReference article: ");
                 scanf("%d", &ref);
-                place = frecherche(Tref, ref, Ttaille, &trouve);
+                frecherche(Tref, ref, Ttaille, &trouve);
                 while (trouve!=1)
                 {
                     printf("L'artile %d n'existe pas\n", ref);
                     printf("Veuillez réessayer: ");
                     scanf("%d", &ref);
-                    place = frecherche(Tref, ref, Ttaille, &trouve);
+                    frecherche(Tref, ref, Ttaille, &trouve);
                 }
-                place = frecherche(pRef, ref, ptaille, &trouve);
+                frecherche(pRef, ref, ptaille, &trouve);
                 if (trouve == 0){
                     printf("Quantité prise: ");
                     scanf("%d", &quantite);
@@ -308,6 +380,65 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 }else printf("L'article %d déjà present dans votre panier \n", ref);
             }
             else if (action==1) {
+                int modif=0;
+                if (prixMax<prixTT && prixMax!=-1) {
+                    int reponse;
+                    printf("\n\nAttention votre panier dépasse de %.2f euros\n", prixTT-prixMax);
+                    printf("Continuer quand même tapez 1\n");
+                    printf("Prendre depuis la cagnotte tapez 2\n");
+                    printf("Enlever des articles 3\n");
+                    scanf("%d", &reponse);
+                    while (reponse!=1 && reponse!=2 && reponse!=3)
+                    {
+                        printf("Reponse invalide veilliez réessayer: ");
+                        scanf("%d", &reponse);
+                    }
+                    if (reponse==1) modif=0;
+                    else if (reponse==2) {
+                        if (nCagnotte>prixMax-prixTT) {
+                            nCagnotte += prixMax-prixTT;
+                            modif=0;
+                        }
+                        else {
+                            printf("Désolé mais votre cagnotte ne peut pas compenser la différence\n");
+                            modif=1;
+                        }
+                    } else modif=1;
+                }
+                if (poidMax<poidTT && modif!=1) {
+                    int reponse;
+                    printf("\n\nAttention votre panier dépasse de %.2f kilos\n", poidTT-poidMax);
+                    printf("Continuer quand même tapez 1\n");
+                    printf("Enlever des articles 2\n");
+                    scanf("%d", &reponse);
+                    while (reponse!=1 && reponse!=2 && reponse!=3)
+                    {
+                        printf("Reponse invalide veilliez réessayer: ");
+                        scanf("%d", &reponse);
+                    }
+                    if (reponse==1) modif=0;
+                    else modif=1;
+                }
+                if (volMax<volumeTT && modif!=1) {
+                    int reponse;
+                    printf("\n\nAttention votre panier dépasse de %.2f L\n", volumeTT-volMax);
+                    printf("Continuer quand même tapez 1\n");
+                    printf("Enlever des articles 2\n");
+                    scanf("%d", &reponse);
+                    while (reponse!=1 && reponse!=2 && reponse!=3)
+                    {
+                        printf("Reponse invalide veilliez réessayer: ");
+                        scanf("%d", &reponse);
+                    }
+                    if (reponse==1) modif=0;
+                    else modif=1;
+                }
+                if (modif==0) {
+                    printf("Achat de %.2f euros\nCagnotte de %.2f euros\n\nAu revoir\n", prixTT, nCagnotte);
+                    return nCagnotte;
+                }
+            }
+            else if (action==2) {
                 int ref, trouve, place, quantite;
                 printf("\n\nReference article: ");
                 scanf("%d", &ref);
@@ -329,8 +460,8 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 }
                 pQuantite[place] = quantite;
             }
-            else if (action == 2) {
-                int ref, trouve, place, quantite;
+            else if (action == 3) {
+                int ref, trouve, place;
                 printf("\n\nReference article: ");
                 scanf("%d", &ref);
                 place = frecherche(pRef, ref, ptaille, &trouve);
@@ -348,23 +479,40 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 ptaille--;
                 printf("Article %d supprimé\n", ref);
             }
-            else if (action == 3){
+            else if (action == 4){
                 char choix;
                 printf("\nEtes vous sur de vouloir remettre à 0 votre panier ? (y/n)\n");
                 scanf("%*c%c", &choix);
                 if (choix=='y' || choix=='Y') ptaille = 0;
             }
-            nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax);
+            if (action == 5) {
+                printf("\n\n");
+                ShowArticle(Tref, Tpoids, Tvolume, Tprix, Ttaille);
+            }
+            else nCagnotte = afficheRecap(pRef, pQuantite, ptaille, Tref, Tpoids, Tvolume, Tprix, Ttaille, cagnotte, volMax, poidMax, prixMax, &prixTT, &poidTT, &volumeTT);
         }
     }
+    printf("\033[0;33m");
+    printf("============================================\n");
+    printf("Au revoir cher Client \n");
     return nCagnotte;
 }
+<<<<<<< HEAD
 void Admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
     int choix,choixa, refa, refc, choixc, trouve;
+=======
+
+void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
+{
+    int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,erreur,nvcarte,reference, susp;
+    float nvvol,nvpo,nvpr;
+    printf("\033[0;31m");
+>>>>>>> 8e595172be729e90707d30d242bcc2c1e45c870b
     printf("===========================================================\n");
-    printf("|| Bienvenue sur l'interface administrative du magasin");
+    printf("|| Bienvenue sur l'interface administrative du magasin\n");
     printf("===========================================================\n");
+<<<<<<< HEAD
     printf("Que voulez vous faire ?");
     printf("si vous voulez modifier, ajouter ou supprimer un article tapez 0\nsi vous voulez ajouter, supprimer ou suspendre une carte tapez 1\n");
     scanf("%d",&choix);
@@ -388,10 +536,149 @@ void Admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float vo
         if (choixc==2)
             AddClient(numClient,cagnotte,suspendue,&tl,tp);
     }
+=======
+
+>>>>>>> 8e595172be729e90707d30d242bcc2c1e45c870b
     
+    while(choix!=-1)
+    {
+        printf(" ====Voulez vous====\n ||Gérer les articles (tapez 0)\n ||Gérer les cartes (tapez 1)\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
+        printf("===========================================================\n");
+        scanf("%d",&choix);
+        if (choix==0)
+        { 
+            printf("===========================================================\n");
+            printf(" ||Si vous voulez modifier un article tapez 0\n ||Si vous voulez supprimer un article tapez 1\n ||Si vous voulez en ajouter un faites le 2\n ||Si vous voulez modifier la reference faites le 3 \n ");
+            printf("===========================================================\n");
+            scanf("%d",&choixa);
+            if (choixa==0)
+            {
+
+                printf("Quel article voulez vous modifier ?\n");
+                scanf("%d", &id);
+                frecherche (ref, id, tl, &trouve);
+                while (trouve==0 || num <0)
+                {
+                    printf("La reference article est inexistante ou incorrect veuillez re saisir la reference :\n");
+                    scanf("%d",&num);
+                    id = frecherche(ref,num,tl,&trouve);
+                }
+                printf("voulez vous modifier, le volume (0), le prix (1), le poids(2) , la reference (3)\n");
+                scanf("%d",&modifa);
 
 
+                if (modifa==0)
+                {
+                    printf("Donnez le nouveau volume de l'article\n");
+                    scanf("%f",&nvvol);
+                    volume[id]=nvvol;
+                }
+                if (modifa==1)
+                {
+                    printf("Donnez le nouveau prix de l'article\n");
+                    scanf("%f",&nvpr);
+                    prix[id]=nvpr;
+                }
+                if (modifa==2)
+                {
+                    printf("Donnez le nouveau poids de l'article\n");
+                    scanf("%f",&nvpo);
+                    poids[id]=nvpo;
+                }
+                if (modifa==3)
+                {
+                    printf("Donnez la nouvelle référence de l'article l'article\n");
+                    scanf("%d",&nvref);
+                    numClient[id]=nvref;
+                }
+                
+                
+            }   
+            if (choixa==1)
+            {
+                erreur=DelArticle (ref,poids ,volume , prix,  &tl, tp);
+                if (erreur==-1)printf("vous ne pouvez pas supprimer, le tableau est vide\n");
+            }
+            if (choixa==2)
+            {
+                erreur=AddArticle(ref,poids,volume,prix,&tl, tp);
+                if (erreur==-1) printf("tableau trop petit\ntutu\n");
+            }
+            if (choixa==3)
+            {
+                int new_ref ,poubelle;
+                printf("Quelle est la rérérence que vous souhaitez modifié \n");
+                scanf("%d",&ref2);
+                int ind2=frecherche(ref,ref2,tl,&poubelle);
+                printf("Quelle sera la nouvelle référence : \n");
+                scanf("%d",&new_ref);
+                ref[ind2]=new_ref;
+                printf("Référence modifié \n");
+            }
+        }
+        if (choix == 1)
+        {
+            printf("===========================================================\n");
+            printf(" ||si vous voulez modifier le statut d'une carte tapez 0\n ||Si vous voulez creer une carte tapez 1\n ||Si vous voulez supprimer une carte tapez le 2\n");
+            printf("===========================================================\n");
+            scanf("%d",&choixc);
+            if (choixc==0)
+            {
+                printf("Quel carte voulez vous suspendre\n");
+                scanf("%d",&num);
+                id1=frecherche(numClient,num,tl,&trouve);
+                suspendue[id1]=1;
+                printf("voulez vous à présent créer une nouvel carte pour se client (si oui tapez 0 si non tapez 1)\n");
+                scanf("%d",&nvcarte);
+                if (nvcarte==0)
+                {
+                    printf("Quel sera le numéro de cette nouvelle carte ?\n");
+                    scanf("%d",&reference);
+                    AddNouvelleCarte(numClient, cagnotte, suspendue, &tl,tp ,reference);
+                    id2=frecherche(numClient,num,tl,&trouve);
+                    cagnotte[id2]=cagnotte[id2];
+                }
+            }
+            if (choixc==1)
+            {
+                erreur=AddClient(numClient,cagnotte,suspendue,&tl,tp);
+                printf("%d", tl);
+                if (erreur==-1)
+                    printf("tableau trop petit\ntoto\n");
+            }
+            if (choixc==2)
+            {
+                erreur=DelClient(numClient, cagnotte,suspendue, &tl, tp);
+                if (erreur==-1) printf("vous ne pouvez pas supprimer, le tableau est vide\n");
+            }
+        }
+        if (choix == 2){
+            susp=ShowClientPrecis(numClient, cagnotte, suspendue,tl);
+            if (susp==-1)
+                {
+                    printf("Cette carte a été suspendue, voulez vous en refaire une autre ?");
+                    scanf("%d",&nvcarte);
+                    if (nvcarte==0)
+                    {
+                        printf("Quel sera le numéro de cette nouvelle carte ?");
+                        scanf("%d", &reference);
+                        AddNouvelleCarte (numClient, cagnotte, suspendue, &tl,tp ,reference);
+                        id2=frecherche(numClient,num,tl,&trouve);
+                        cagnotte[id2]=cagnotte[id2];
+                    }
+                }
+        }
+        if (choix == 3)
+            ShowArticlePrecis(ref,poids,volume,prix,tl);
+        if (choix == 4){
+            printf("===========================================================\n");
+            printf(" || Au revoir l administrateur\n");
+            printf("===========================================================\n");
+            return ;
+        }
 
+
+    }
 
 
 
@@ -406,8 +693,12 @@ void Admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float vo
 
 void Menu(void)
 {
+<<<<<<< HEAD
     int admin=777, id,tp=200, tl;
     int i;
+=======
+    int admin=777, id, tp=200, tl, run=1, place, trouve;
+>>>>>>> 8e595172be729e90707d30d242bcc2c1e45c870b
     int numClient[200],  suspendue[200];
     float cagnotte[200];
     int  ref[100] ;
@@ -415,8 +706,8 @@ void Menu(void)
     float poids[100] , prix[100] ;
     int tl1 ;
     tl1= loadArticle(ref,poids,volume,prix,tp);
-    printf("%d\n",tl1);
     tl = loadClient(numClient, cagnotte, suspendue, tp);
+<<<<<<< HEAD
     //saveClient(numClient,cagnotte,suspendue,tp,tl); a changer
     ShowClient(numClient,cagnotte,suspendue,tl);
     ShowArticle(ref,poids,volume,prix,tl1);
@@ -425,30 +716,48 @@ void Menu(void)
     if (id==admin)
     {
         //Admin();
+=======
+>>>>>>> 8e595172be729e90707d30d242bcc2c1e45c870b
 
-    }
-    
-    if (id!=admin)
-    {
-        for (i=0; i<=tp; i++)
+    while (run){
+        printf("\033[0;33m");
+        printf("===========================================================\n");
+        printf(" ||Bienvenue  sur l'application de BricoConstruction!\n===========================================================\nRentrez votre identifiant/Ou tapez -1 pour Arreté \n");
+        scanf("%d",&id);
+        printf("===========================================================\n");
+        
+        if (id==admin)
         {
-            if (id==numClient[i])
-                if (suspendue[i]==0)
-                    Client(ref, poids, volume,  prix,tp, *volume, numClient[i], cagnotte[i]);
-                else 
-                    printf("cette carte a été suspendue");
-            else
-                printf("cette carte n'existe pas");
-        }
-                    
-                
-    }
+            administrateur(numClient, cagnotte, suspendue, ref, volume, prix, poids, tp,  tl);
 
+        }
+        else if (id==-1)
+        {
+            run=0;
+            saveClient(numClient, cagnotte, suspendue, tl);
+            saveArticle(ref, poids, volume, prix, tl1);
+        }
+        else if (id!=admin)
+        {
+            place = frecherche(numClient, id, tl, &trouve);
+            if (trouve>0){
+                if (suspendue[place]==0)
+                    cagnotte[place] = Client(ref, poids, volume,  prix, tp, tl, cagnotte[place]);
+                else 
+                    printf("Cette carte a été suspendue. Veuillez contacter l'assistance.\n\n\n");
+            }
+            else printf("Identifiant inconnue\n\n");
+        }
+    }
 }
 
 void test(void)
 {
+<<<<<<< HEAD
     test2();
+=======
+    Menu();
+>>>>>>> 8e595172be729e90707d30d242bcc2c1e45c870b
     /*
     int numClient[200],  suspendue[200], tp=200;
     float cagnotte[200];
@@ -456,9 +765,15 @@ void test(void)
     float volume[100] ;
     float poids[100] , prix[100] ;
     int tl1 ;
+    //Client();
     tl1= loadArticle(ref,poids,volume,prix,tp);
     DelArticle(ref,poids,volume,prix,&tl1,100);
     ShowArticle(ref,poids,volume,prix,tl1);
     Client(ref, poids, volume, prix, tp, tl1, 42, 0);
+<<<<<<< HEAD
+=======
+        ShowClient(numClient,cagnotte,suspendue,tl);
+    ShowArticle(ref,poids,volume,prix,tl1);
+>>>>>>> 8e595172be729e90707d30d242bcc2c1e45c870b
     */
 }
