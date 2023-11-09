@@ -359,9 +359,9 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     return nCagnotte;
 }
-void admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
+void Admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tl)
 {
-    int choix,choixa, refa, refc, choixc, id, trouve;
+    int choix,choixa, refa, refc, choixc, trouve;
     printf("===========================================================\n");
     printf("|| Bienvenue sur l'interface administrative du magasin");
     printf("===========================================================\n");
@@ -371,17 +371,17 @@ void admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float vo
     if (choix==0);
     {
         printf("si vous voulez modifier un article tapez 0 si vous voulez supprimer un article tapez 1 et si vous voulez en ajouter un faites le 3");
-        scanf("%d",choixa);
+        scanf("%d",&choixa);
         //if (choixa==0)
         if (choixa==1)
-            DelArticle (id,poids ,volume , prix,  &tl, tp);
+            DelArticle (ref,poids ,volume , prix,  &tl, tp);
         if (choixa==2)
             AddArticle(ref,poids,volume,prix,&tl, tp);
     }
     if (choix == 1)
     {
         printf("si vous voulez modifier le statut d'un client tapez 0, si vous voulez supprimer un client tapez 1, si vous voulez ajouter unn client faites le 3");
-        scanf("%d",choixc);
+        scanf("%d",&choixc);
         //if (choix==0)
         if (choixc==1)
             DelClient(numClient, cagnotte,suspendue, &tl, tp);
@@ -406,7 +406,7 @@ void admin(int numClient[], int cagnotte[], int suspendue[], int ref[], float vo
 
 void Menu(void)
 {
-    int admin=777, id, cadmin=0, tp=200, tl;
+    int admin=777, id,tp=200, tl;
     int i;
     int numClient[200],  suspendue[200];
     float cagnotte[200];
@@ -424,7 +424,7 @@ void Menu(void)
     scanf("%d",&id);
     if (id==admin)
     {
-        admin();
+        //Admin();
 
     }
     
@@ -448,6 +448,8 @@ void Menu(void)
 
 void test(void)
 {
+    test2();
+    /*
     int numClient[200],  suspendue[200], tp=200;
     float cagnotte[200];
     int  ref[100] ;
@@ -458,4 +460,5 @@ void test(void)
     DelArticle(ref,poids,volume,prix,&tl1,100);
     ShowArticle(ref,poids,volume,prix,tl1);
     Client(ref, poids, volume, prix, tp, tl1, 42, 0);
+    */
 }
