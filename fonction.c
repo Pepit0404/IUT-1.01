@@ -61,26 +61,50 @@ int frecherche (int tab[], int val , int taille, int *trouve){
 }
 
 int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax){
-    int num,j ;
+    int num, j, erreur;
     int trouve;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
     printf("Quel sera le numéro du client à ajouter : \n");
-    scanf("%d",&num);
+    erreur = scanf("%d",&num);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%d", &num);
+    }
     while (num==777){
         printf("Ce numéro est reservé\n");
         printf("Veuillez re saisir une valeur : \n");
-        scanf("%d",&num);
+        erreur = scanf("%d",&num);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &num);
+        }
     }
     int ind =frecherche(numClient,num,*taille,&trouve);
     while(trouve==1 || num<0) {
         while (num==777){
             printf("Ce numéros est reservé\n");
             printf("Veuillez re saisir une valeur : \n");
-            scanf("%d",&num);
+            erreur = scanf("%d",&num);
+            while (erreur==0)
+            {
+                printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                printf("Veuillez réessayer: ");
+                erreur = scanf("%*c%d", &num);
+            }
         }
         printf("Erreur, veuillez saisir un autre numéro client : \n");
-        scanf("%d", &num);
+        erreur = scanf("%d", &num);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &num);
+        }
         ind =frecherche(numClient,num,*taille,&trouve);
     }
    for (j=*taille;j>ind;j--) {
@@ -120,17 +144,29 @@ int AddNouvelleCarte (int numClient[], float cagnotte[], int suspendu[], int *ta
 }
 
 int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *taille, int tailleMax ){
-    int  article ,trouve ;
+    int  article, trouve, erreur;
     float vol ;
     float poids1, prix1;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
     printf("Quelle est la référence de l'article que vous voulez ajouter : \n");
-    scanf("%d" ,&article);
+    erreur = scanf("%d" ,&article);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%d", &article);
+    }
     int ind = frecherche(ref ,article,*taille,&trouve);
     while(trouve==1 || article <0){
         printf("Erreur, veuillez saisir une autre reference : \n");
-        scanf("%d",&article);
+        erreur = scanf("%d",&article);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &article);
+        }
         ind = frecherche(ref ,article,*taille,&trouve);
     }
 
@@ -141,19 +177,35 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         prix[j]=prix[j-1];
     }
     printf("Veuillez entrer le poids de l'article ajouté : \n");
-    scanf("%f",&poids1);
+    erreur = scanf("%f",&poids1);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%d", &poids1);
+    }
     printf("Veuillez entrer le volume de produit ajouté : \n");
-    scanf("%fm",&vol);
+    erreur = scanf("%f",&vol);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%f", &vol);
+    }
     printf("Veuillez entrer le prix du produit ajouté : \n");
-    scanf("%f",&prix1);
-
+    erreur = scanf("%f",&prix1);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%f", &prix1);
+    }
     ref[ind]=article;
     poids[ind]=poids1;
     volume[ind]=vol;
     prix[ind]=prix1;
     *taille+=1;
     return 1 ;
-
 }
 
 void ShowClient(int numClient[], float cagnotte[], int suspendu[], int taille) {
@@ -166,9 +218,15 @@ void ShowClient(int numClient[], float cagnotte[], int suspendu[], int taille) {
 }
 
 int ShowClientPrecis(int numClient[], float cagnotte[], int suspendu[], int taille){
-    int num, dedans;
+    int num, dedans, erreur;
     printf("Quel est le numéro de client recherché  : \n ");
-    scanf("%d",&num);
+    erreur = scanf("%d",&num);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%d", &num);
+    }
     int position = frecherche(numClient, num, taille, &dedans);
     if (dedans==1) printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
     else printf("Le numero de client recherché n'existe pas\n");
@@ -186,9 +244,15 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
 
 void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , int taille )
 {
-    int num, dedans;
+    int num, dedans, erreur;
     printf("Quel est le numero de l'article recherché  : \n ");
-    scanf("%d",&num);
+    erreur = scanf("%d",&num);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%d", &num);
+    }
     int position = frecherche(ref, num, taille, &dedans);
     if ( dedans==1){
         printf("%d\t%.2f\t%.2f\t%.2f\t\n",ref[position],poids[position],volume[position],prix[position]);
@@ -200,17 +264,29 @@ void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , 
 
 int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, int tailleMax ) {
 
-    int num ,i , trouve ;
+    int num ,i , trouve, erreur;
     if (*taille==0)
         return -1;
     printf("Voici la liste des clients : \n");
     ShowClient(numClient, cagnotte, suspendu, *taille);
     printf("Quelle est la reference du client  que vous souhaitez supprimer : \n ");
-    scanf("%d",&num);
+    erreur = scanf("%d",&num);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%d", &num);
+    }
     int indice = frecherche(numClient,num,*taille,&trouve);
     while (trouve==0 || num <0){
         printf("La reference client est inexistante ou incorrecte veuillez re saisir la reference :\n");
-        scanf("%d",&num);
+        erreur = scanf("%d",&num);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &num);
+        }
         indice = frecherche(numClient,num,*taille,&trouve);
     }
     indice = frecherche(numClient,num,*taille,&trouve);
@@ -226,17 +302,29 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
 
 int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *taille , int tailleMax )
 {
-    int ref1 , i ,trouve ;
+    int ref1 , i ,trouve, erreur;
     if (*taille==0)
         return -1;
     printf("Voicie la liste des articles : \n");
     ShowArticle(ref,poids,volume,prix,*taille);
     printf("Quelle est la reference de l'article que vous souhaitez supprimer : \n");
-    scanf("%d",&ref1);
+    erreur = scanf("%d",&ref1);
+    while (erreur==0)
+    {
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("Veuillez réessayer: ");
+        erreur = scanf("%*c%d", &ref1);
+    }
     int indice = frecherche(ref,ref1,*taille,&trouve);
     while (trouve==0 || ref <0){
         printf("La reference de l'article est inexistante ou negative veuillez re saisir : \n");
-        scanf("%d",&ref1);
+        erreur = scanf("%*c%d",&ref1);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &ref1);
+        }
         indice =frecherche(ref,ref1,*taille,&trouve);
     }
     for (i=indice;i<*taille;i++){
@@ -566,7 +654,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 
 void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tla, int tlc)
 {
-    int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,erreur,nvcarte,reference, susp;
+    int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,erreur,nvcarte,reference, susp, erreur;
     float nvvol,nvpo,nvpr;
     printf("\033[0;35m");
     printf("===========================================================\n");
@@ -578,9 +666,13 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
         
         printf(" ====Voulez vous====\n ||Gérer les articles tapez 0\n ||Gérer les cartes tapez 1\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
         printf("===========================================================\n");
-        scanf("%d",&choix);
-        
-           
+        erreur = scanf("%d",&choix);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &choix);
+        }
         while (choix!=0 && choix!=1 && choix!=2 && choix!=3 && choix!=4)
         {
         printf(" ====Voulez vous====\n ||Gérer les articles tapez 0\n ||Gérer les cartes tapez 1\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
@@ -592,52 +684,92 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             printf("===========================================================\n");
             printf(" ||Si vous voulez modifier un article tapez 0\n ||Si vous voulez supprimer un article tapez 1\n ||Si vous voulez en ajouter un faites le 2\n ||Si vous voulez modifier la reference faites le 3 \n ");
             printf("===========================================================\n");
-            scanf("%d",&choixa);
-            while (choixa!=0 && choixa!=1 && choixa!=2 && choixa!=3 )
+            erreur = scanf("%d",&choixa);
+            while (erreur==0 && choixa!=0 && choixa!=1 && choixa!=2 && choixa!=3 )
             {
-                printf("===========================================================\n");
-                printf(" ||Si vous voulez modifier un article tapez 0\n ||Si vous voulez supprimer un article tapez 1\n ||Si vous voulez en ajouter un faites le 2\n ||Si vous voulez modifier la reference faites le 3 \n ");
-                printf("===========================================================\n");
-                scanf("%*c%d",&choixa);
+                while (erreur==0)
+                printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                printf("Veuillez réessayer: ");
+                erreur = scanf("%*c%d",&choixa);
             }
             if (choixa==0)
             {
 
                 printf("Quel article voulez vous modifier ?\n");
-                scanf("%d", &id);
+                erreur = scanf("%d", &id);
+                while (erreur==0)
+                {
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &id);
+                }
                 frecherche (ref, id, tla, &trouve);
                 while (trouve==0 || num <0)
                 {
                     printf("La reference article est inexistante ou incorrect veuillez re saisir la reference :\n");
-                    scanf("%d",&num);
+                    erreur = scanf("%*c%d",&num);
+                    while (erreur==0)
+                    {
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("Veuillez réessayer: ");
+                        erreur = scanf("%*c%d", &num);
+                    }
                     id = frecherche(ref,num,tla,&trouve);
                 }
                 printf("Voulez vous modifier, le volume (0), le prix (1), le poids(2) , la reference (3)\n");
-                scanf("%d",&modifa);
-
-
+                erreur = scanf("%d",&modifa);
+                while (erreur==0)
+                {
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &modifa);
+                }
                 if (modifa==0)
                 {
                     printf("Donnez le nouveau volume de l'article\n");
-                    scanf("%f",&nvvol);
+                    erreur = scanf("%f",&nvvol);
+                    while (erreur==0)
+                    {
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("Veuillez réessayer: ");
+                        erreur = scanf("%*c%f", &nvvol);
+                    }
                     volume[id]=nvvol;
                 }
                 if (modifa==1)
                 {
                     printf("Donnez le nouveau prix de l'article\n");
-                    scanf("%f",&nvpr);
+                    erreur = scanf("%f",&nvpr);
+                    while (erreur==0)
+                    {
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("Veuillez réessayer: ");
+                        erreur = scanf("%*c%f", &nvpr);
+                    }
                     prix[id]=nvpr;
                 }
                 if (modifa==2)
                 {
                     printf("Donnez le nouveau poids de l'article\n");
-                    scanf("%f",&nvpo);
+                    erreur = scanf("%f",&nvpo);
+                    while (erreur==0)
+                    {
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("Veuillez réessayer: ");
+                        erreur = scanf("%*c%f", &nvpo);
+                    }
                     poids[id]=nvpo;
                 }
                 if (modifa==3)
                 {
                     printf("Donnez la nouvelle référence de l'article l'article\n");
-                    scanf("%d",&nvref);
+                    erreur = scanf("%d",&nvref);
+                    while (erreur==0)
+                    {
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("Veuillez réessayer: ");
+                        erreur = scanf("%*c%d", &nvref);
+                    }
                     numClient[id]=nvref;
                 }
                 
@@ -657,10 +789,22 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             {
                 int new_ref ,poubelle;
                 printf("Quelle est la rérérence que vous souhaitez modifier \n");
-                scanf("%d",&ref2);
+                erreur = scanf("%d",&ref2);
+                while (erreur==0)
+                {
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &ref2);
+                }
                 int ind2=frecherche(ref,ref2,tla,&poubelle);
                 printf("Quelle sera la nouvelle référence : \n");
-                scanf("%d",&new_ref);
+                erreur = scanf("%d",&new_ref);
+                while (erreur==0)
+                {
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &new_ref);
+                }
                 ref[ind2]=new_ref;
                 printf("Référence modifiée \n");
             }
@@ -671,27 +815,44 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             printf("===========================================================\n");
             printf(" ||si vous voulez modifier le statut d'une carte tapez 0\n ||Si vous voulez creer une carte tapez 1\n ||Si vous voulez supprimer une carte tapez le 2\n");
             printf("===========================================================\n");
-            scanf("%d",&choixc);
-            while (choixc!=0 && choixc!=1 && choixc!=2  )
+            erreur = scanf("%d",&choixc);
+            while (erreur==0 && choixc!=0 && choixc!=1 && choixc!=2  )
             {
-                printf("===========================================================\n");
-                printf(" ||si vous voulez modifier le statut d'une carte tapez 0\n ||Si vous voulez creer une carte tapez 1\n ||Si vous voulez supprimer une carte tapez le 2\n");
-                printf("===========================================================\n");
-                scanf("%*c%d",&choixc);
+                printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                printf("Veuillez réessayer: ");
+                erreur = scanf("%*c%d",&choixc);
             }
 
             if (choixc==0)
             {
                 printf("Quel carte voulez vous suspendre\n");
-                scanf("%d",&num);
+                erreur = scanf("%d",&num);
+                while (erreur==0)
+                {
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &num);
+                }
                 id1=frecherche(numClient,num,tlc,&trouve);
                 suspendue[id1]=1;
                 printf("voulez vous à présent créer une nouvel carte pour ce client (si oui tapez 0 si non tapez 1)\n");
-                scanf("%d",&nvcarte);
+                erreur = scanf("%d",&nvcarte);
+                while (erreur==0)
+                {
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &nvcarte);
+                }
                 if (nvcarte==0)
                 {
                     printf("Quel sera le numéro de cette nouvelle carte ?\n");
-                    scanf("%d",&reference);
+                    erreur = scanf("%d",&reference);
+                    while (erreur==0)
+                    {
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("Veuillez réessayer: ");
+                        erreur = scanf("%*c%d", &reference);
+                    }
                     AddNouvelleCarte(numClient, cagnotte, suspendue, &tlc,tp,reference);
                     id2=frecherche(numClient,num,tlc,&trouve);
                     cagnotte[id2]=cagnotte[id2];
@@ -715,11 +876,23 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             if (susp==-1)
                 {
                     printf("Cette carte a été suspendue, voulez vous en refaire une autre ?\n");
-                    scanf("%d",&nvcarte);
+                    erreur = scanf("%d",&nvcarte);
+                    while (erreur==0)
+                    {
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("Veuillez réessayer: ");
+                        erreur = scanf("%*c%d", &nvcarte);
+                    }
                     if (nvcarte==0)
                     {
                         printf("Quel sera le numéro de cette nouvelle carte ?\n");
-                        scanf("%d", &reference);
+                        erreur = scanf("%d", &reference);
+                        while (erreur==0)
+                        {
+                            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                            printf("Veuillez réessayer: ");
+                            erreur = scanf("%*c%d", &reference);
+                        }
                         AddNouvelleCarte (numClient, cagnotte, suspendue, &tlc,tp ,reference);
                         id2=frecherche(numClient,num,tlc,&trouve);
                         cagnotte[id2]=cagnotte[id2];
@@ -741,13 +914,6 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
 
 
 }
-
-//Faire fonction Ajouts article (Enzo)
-//Faire Fonction ShowArticle (Enzo)
-//Finir le Menu (Maeva) 
-
-//Faire fonction qui avec (s) ecris dans le cvs les nouveaux tableaux , et avec (e) quite et save (Samuel)
-
 
 void Menu(void)
 {
