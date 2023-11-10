@@ -521,14 +521,14 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
     while(choix!=-1)
     {
         
-        printf(" ====Voulez vous====\n ||Gérer les articles (tapez 0)\n ||Gérer les cartes (tapez 1)\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
+        printf(" ====Voulez vous====\n ||Gérer les articles tapez 0)\n ||Gérer les cartes tapez 1\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
         printf("===========================================================\n");
         scanf("%d",&choix);
         
            
         while (choix!=0 && choix!=1 && choix!=2 && choix!=3 && choix!=4)
         {
-        printf(" ====Voulez vous====\n ||Gérer les articles (tapez 0)\n ||Gérer les cartes (tapez 1)\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
+        printf(" ====Voulez vous====\n ||Gérer les articles tapez 0\n ||Gérer les cartes tapez 1\n ||Si vous voulez afficher un client en particulier tapez 2\n ||Si vous voulez afficher un article particulier taper 3\n ||Si vous voulez vous déconnecter taper 4\n");
         printf("===========================================================\n");
         scanf("%*c%d", &choix);
         }
