@@ -968,13 +968,13 @@ void Menu(void)
 void test(void)
 {
     //Menu();
+    /*
     int ref[25], suspendu[25], tTaille;
     float cagnotte[25];
     tTaille = loadClient(ref, cagnotte, suspendu, 25);
     ShowClient(ref, cagnotte, suspendu, tTaille);
     printf("%d\n",tTaille);
 
-    /*
     int numClient[200],  suspendue[200], tp=200;
     float cagnotte[200];
     int  ref[100] ;
