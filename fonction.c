@@ -685,10 +685,9 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             printf(" ||Si vous voulez modifier un article tapez 0\n ||Si vous voulez supprimer un article tapez 1\n ||Si vous voulez en ajouter un faites le 2\n ||Si vous voulez modifier la reference faites le 3 \n ");
             printf("===========================================================\n");
             erreur = scanf("%d",&choixa);
-            while (erreur==0 && choixa!=0 && choixa!=1 && choixa!=2 && choixa!=3 )
+            while (erreur==0 || (choixa!=0 && choixa!=1 && choixa!=2 && choixa!=3 ) )
             {
-                while (erreur==0)
-                printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                 printf("Veuillez réessayer: ");
                 erreur = scanf("%*c%d",&choixa);
             }
@@ -699,7 +698,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur = scanf("%d", &id);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                     printf("Veuillez réessayer: ");
                     erreur = scanf("%*c%d", &id);
                 }
@@ -710,7 +709,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     erreur = scanf("%*c%d",&num);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%d", &num);
                     }
@@ -720,7 +719,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur = scanf("%d",&modifa);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                     printf("Veuillez réessayer: ");
                     erreur = scanf("%*c%d", &modifa);
                 }
@@ -730,7 +729,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     erreur = scanf("%f",&nvvol);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%f", &nvvol);
                     }
@@ -742,7 +741,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     erreur = scanf("%f",&nvpr);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%f", &nvpr);
                     }
@@ -754,7 +753,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     erreur = scanf("%f",&nvpo);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%f", &nvpo);
                     }
@@ -766,7 +765,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     erreur = scanf("%d",&nvref);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%d", &nvref);
                     }
@@ -792,7 +791,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur = scanf("%d",&ref2);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                     printf("Veuillez réessayer: ");
                     erreur = scanf("%*c%d", &ref2);
                 }
@@ -801,7 +800,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur = scanf("%d",&new_ref);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                     printf("Veuillez réessayer: ");
                     erreur = scanf("%*c%d", &new_ref);
                 }
@@ -818,7 +817,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             erreur = scanf("%d",&choixc);
             while (erreur==0 && choixc!=0 && choixc!=1 && choixc!=2  )
             {
-                printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                 printf("Veuillez réessayer: ");
                 erreur = scanf("%*c%d",&choixc);
             }
@@ -829,7 +828,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur = scanf("%d",&num);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                     printf("Veuillez réessayer: ");
                     erreur = scanf("%*c%d", &num);
                 }
@@ -839,7 +838,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 erreur = scanf("%d",&nvcarte);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                     printf("Veuillez réessayer: ");
                     erreur = scanf("%*c%d", &nvcarte);
                 }
@@ -849,7 +848,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     erreur = scanf("%d",&reference);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%d", &reference);
                     }
@@ -879,7 +878,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     erreur = scanf("%d",&nvcarte);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%d", &nvcarte);
                     }
@@ -889,7 +888,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                         erreur = scanf("%d", &reference);
                         while (erreur==0)
                         {
-                            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+                            printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
                             printf("Veuillez réessayer: ");
                             erreur = scanf("%*c%d", &reference);
                         }
@@ -967,7 +966,7 @@ void Menu(void)
 
 void test(void)
 {
-    //Menu();
+    Menu();
     /*
     int ref[25], suspendu[25], tTaille;
     float cagnotte[25];
