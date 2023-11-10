@@ -1,0 +1,97 @@
+Fichier .csv:
+    Notre structure de donné repose sur des fichiers csv.
+Ils sont appeler dans les fonctions load qui vont lire les fichiers et mettre les valeurs des fichiers dans les tableaux aux indices correspondants.
+Les tableaux ont la même taille logique et les informations qui sont lié ont le même indice.
+Cela nous permet de pouvoir modifié les informations que l'on veut et de pouvoir les retrouver plus facilement.
+Durant le programme, les tableaux vont être modifié celon les actions faites.
+A la fin du programme celle ci sont écrite à nouveau à l’intérieur du fichier csv avec les nouvelles modifications.
+
+Fonction loadClient:
+    Fonction qui permet de charger dans des tableaux toutes les informations contenue dans le fichiers csv client.
+    Elle prends en paramètre des tableaux qu'elle modifie.
+    Elle renvoie la taille logique des tableaux si aucune erreur, si il y en a elle renvoie un code d'erreur.
+
+Fonction loadArticle:
+    Fonction qui permet de charger dans des tableaux toutes les informations contenue dans le fichiers csv article.
+    Elle prends en paramètre des tableaux qu'elle modifie.
+    Elle renvoie la taille logique des tableaux si aucune erreur, si il y en a elle renvoie un code d'erreur.
+
+Fonction frecherche:
+    Fonction qui permet de rechercher si une valeur est présente ou non dans un tableaux.
+    Elle prends en paramètre un tableaux, un entier pour la valeur, un entier pour la taille logique et un pointeur pour renvoyer si la veleur à était trouvé.
+    Elle renvoie la position de la valeur si celle-ci existe, la position où elle devrait être si elle n'existe pas ou un code si une erreur arrive.
+
+Fonction AddClient:
+    Fonction qui permet de rajouter un client dans les tableaux.
+    Elle prends en paramètre les tableaux des informations client, un pointeur pour la taille logique et un entier pour la taille physique.
+    Elle renvoie un code d'erreur.
+
+Fonction AddNouvelleCarte:
+    Fonction qui permet de rajouter une carte en prenant en compte les informations d'une carte suspendu.
+    Elle prends en paramètre les tableaux des informations client, un pointeur pour la taille logique, un entier pour la taille physique et un entier pour le nouveau numero.
+    Elle renvoie un code d'erreur.
+
+Fonction AddArticle:
+    Fonction qui permet de rajouter un article dans les tableaux.
+    Elle prends en paramètre les tableaux des informations article, un pointeur pour la taille logique et un entier pour la taille physique.
+    Elle renvoie un code erreur.
+
+Fonction ShowClient:
+    Fonction qui permet de lister tout les clients présent dans les tableaux.
+    Elle prends en paramètre les tableaux d'informations client et un entier pour la taille logique.
+    Elle renvoie rien.
+
+Fonction ShowClientPrecis:
+    Fonction qui permet de montrer un client en particulier
+    Elle prends en paramètre les tableaux d'informations client et un entier pour la taille logique.
+    Elle renvoie le statue de la carte.
+
+Fonction ShowArticle:
+    Fonction qui permet de lister tout les articles présent dans les tableaux.
+    Elle prends en paramètre les tableaux des informations article et un entier pour la taille logique.
+    Elle renvoie rien.
+
+Fonction ShowArticlePrecis:
+    Fonction qui permet de montrer un article en particulier.
+    Elle prends en paramètre les tableaux d'informations article et un entier pour la taille logique.
+    Elle renvoie rien.
+
+Fonction DelClient:
+    Fonction qui permet de supprimer un client des tableaux.
+    Elle prends en paramètre les tableaux des informations client, un pointeur pour la taille logique et un entier pour la taille physique.
+    Elle renvoie un code d'erreur.
+
+Fonction DelArticle:
+    Fonction qui permet de supprimer un article des tableaux.
+    Elle prends en paramètre les tableaux des informations article, un pointeur pour la taille logique et un entier pour la taille physique.
+    Elle renvoie un code d'erreur.
+
+Fonction saveClient:
+    Fonction qui permet de sauvegarder les tableaux d'informations client dans le fichier client.csv.
+    Elle prends en paramètre les tableaux d'informations client et un entier pour la taille logique.
+    Elle renvoie rien.
+
+Fonction saveArticle:
+    Fonction qui permet de sauvegarder les tableaux d'informations article dans le fichier articles.csv.
+    Elle prends en paramètre les tableaux d'informations article et un entier pour la taille logique.
+    Elle renvoie rien.
+
+Fonction afficheRecap:
+    Fonction qui permet d'afficher le panier du client.
+    Elle prends en paramètre les tableaux d'informations article, les tableaux d'informations du panier, un entier pour la taille logique du panier, un entier pour la taille logique des article, plusieurs flottant pour les informations essentiel et des pointeurs pour les informations du panier.
+    Elle renvoie la cagnottes actuelles.
+
+Fonction Client:
+    Fonction qui permet de rentrer du côté client.
+    Elle prends en paramètre les tableaux d'informations article, un entier pour la taille logique, un entier pour la taille physique et un flottant pour la cagnotte.
+    Elle renvoie la nouvelle cagnotte du client.
+    
+Fonction administrateur:
+    Fonction qui permet de rentrer du côté administrateur.
+    Elle prends en paramètre les tableaux d'informations article, les tableaux d'informations client, des entier pour les tailles logiques et un entier pour les tailles physiques.
+    Elle renvoie rien.
+
+Fonction Menu
+    Fonction qui permet de lancer l'application.
+    Elle prends en paramètre rien.
+    Elle renvoie rien.
