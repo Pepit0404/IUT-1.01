@@ -872,29 +872,41 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                     }
                     numClient[id]=nvref;
                 }
-                if (choixa==1)
+            }
+            if (choixa==1)
+            {
+                erreur=DelArticle (ref,poids ,volume , prix,  &tla, tp);
+                if (erreur==-1)printf("vous ne pouvez pas supprimer, le tableau est vide\n");
+            }
+            if (choixa==2)
+            {
+                erreur=AddArticle(ref,poids,volume,prix,&tla, tp);
+                if (erreur==-1) printf("tableau trop petit\n");
+            }
+            if (choixa==3)
+            {
+                int new_ref ,poubelle;
+                printf("Quelle est la rérérence que vous souhaitez modifier \n");
+                erreur = scanf("%d",&ref2);
+                while (erreur==0)
                 {
-                    erreur=DelArticle (ref,poids ,volume , prix,  &tla, tp);
-                    if (erreur==-1)printf("vous ne pouvez pas supprimer, le tableau est vide\n");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &ref2);
                 }
-                if (choixa==2)
+                int ind2=frecherche(ref,ref2,tla,&poubelle);
+                printf("Quelle sera la nouvelle référence : \n");
+                erreur = scanf("%d",&new_ref);
+                while (erreur==0)
                 {
-                    erreur=AddArticle(ref,poids,volume,prix,&tla, tp);
-                    if (erreur==-1) printf("tableau trop petit\n");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
+                    printf("Veuillez réessayer: ");
+                    erreur = scanf("%*c%d", &new_ref);
                 }
-                if (choixa==3)
+                while (new_ref<0)
                 {
-                    int new_ref ,poubelle;
-                    printf("Quelle est la rérérence que vous souhaitez modifier \n");
-                    erreur = scanf("%d",&ref2);
-                    while (erreur==0)
-                    {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
-                        printf("Veuillez réessayer: ");
-                        erreur = scanf("%*c%d", &ref2);
-                    }
-                    int ind2=frecherche(ref,ref2,tla,&poubelle);
-                    printf("Quelle sera la nouvelle référence : \n");
+                    printf("\033[0;31mLa référence de l'article ne peut pas être négative\n\033[0;35m");
+                    printf("Veuillez re saisir une valeur : \n");
                     erreur = scanf("%d",&new_ref);
                     while (erreur==0)
                     {
@@ -902,20 +914,8 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                         printf("Veuillez réessayer: ");
                         erreur = scanf("%*c%d", &new_ref);
                     }
-                    while (new_ref<0)
-                    {
-                        printf("\033[0;31mLa référence de l'article ne peut pas être négative\n\033[0;35m");
-                        printf("Veuillez re saisir une valeur : \n");
-                        erreur = scanf("%d",&new_ref);
-                        while (erreur==0)
-                        {
-                            printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
-                            printf("Veuillez réessayer: ");
-                            erreur = scanf("%*c%d", &new_ref);
-                        }
-                        ref[ind2]=new_ref;
-                        printf("Référence modifiée \n");
-                    }
+                    ref[ind2]=new_ref;
+                    printf("Référence modifiée \n");
                 }
             }
         }
