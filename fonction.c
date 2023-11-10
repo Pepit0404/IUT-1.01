@@ -182,7 +182,7 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     {
         printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
         printf("Veuillez réessayer: ");
-        erreur = scanf("%*c%d", &poids1);
+        erreur = scanf("%*c%f", &poids1);
     }
     printf("Veuillez entrer le volume de produit ajouté : \n");
     erreur = scanf("%f",&vol);
@@ -654,7 +654,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 
 void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tla, int tlc)
 {
-    int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,erreur,nvcarte,reference, susp, erreur;
+    int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,nvcarte,reference, susp, erreur;
     float nvvol,nvpo,nvpr;
     printf("\033[0;35m");
     printf("===========================================================\n");
