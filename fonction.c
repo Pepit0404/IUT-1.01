@@ -654,7 +654,11 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 
 void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tla, int tlc)
 {
+<<<<<<< HEAD
     int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,nvcarte,reference, susp, erreur;
+=======
+    int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,erreur,nvcarte,reference, susp;
+>>>>>>> eb2aec51c7a349af063624b778ea57f21162b771
     float nvvol,nvpo,nvpr;
     printf("\033[0;35m");
     printf("===========================================================\n");
