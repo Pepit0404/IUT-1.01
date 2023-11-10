@@ -73,6 +73,18 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
         printf("Veuillez réessayer: ");
         erreur = scanf("%*c%d", &num);
     }
+    while (num<0)
+    {
+        printf("\033[0;31mLe numéro de client ne peut pas être négatif\n\033[0;36m");
+        printf("Veuillez re saisir une valeur : \n");
+        erreur = scanf("%d",&num);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &num);
+        }
+    }
     while (num==777){
         printf("Ce numéro est reservé\n");
         printf("Veuillez re saisir une valeur : \n");
@@ -157,6 +169,18 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         printf("Veuillez réessayer: ");
         erreur = scanf("%*c%d", &article);
     }
+    while (article<0)
+    {
+        printf("\033[0;31mLa référence de l'article ne peut pas être négative\n\033[0;36m");
+        printf("Veuillez re saisir une valeur : \n");
+        erreur = scanf("%d",&article);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%d", &article);
+        }
+    }
     int ind = frecherche(ref ,article,*taille,&trouve);
     while(trouve==1 || article <0){
         printf("Erreur, veuillez saisir une autre reference : \n");
@@ -184,8 +208,32 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
         printf("Veuillez réessayer: ");
         erreur = scanf("%*c%f", &poids1);
     }
+    while (poids1<0)
+    {
+        printf("\033[0;31mLe poids ne peut pas être négatif\n\033[0;36m");
+        printf("Veuillez re saisir une valeur : \n");
+        erreur = scanf("%f",&poids1);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%f", &poids1);
+        }
+    }
     printf("Veuillez entrer le volume de produit ajouté : \n");
     erreur = scanf("%f",&vol);
+    while (vol<0)
+    {
+        printf("\033[0;31mLe volume ne peut pas être négatif\n\033[0;36m");
+        printf("Veuillez re saisir une valeur : \n");
+        erreur = scanf("%f",&vol);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%f", &vol);
+        }
+    }
     while (erreur==0)
     {
         printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
@@ -194,6 +242,18 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     }
     printf("Veuillez entrer le prix du produit ajouté : \n");
     erreur = scanf("%f",&prix1);
+    while (prix1<0)
+    {
+        printf("\033[0;31mLe prix de client ne peut pas être négatif\n\033[0;36m");
+        printf("Veuillez re saisir une valeur : \n");
+        erreur = scanf("%f",&prix1);
+        while (erreur==0)
+        {
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("Veuillez réessayer: ");
+            erreur = scanf("%*c%f", &prix1);
+        }
+    }
     while (erreur==0)
     {
         printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
@@ -967,7 +1027,7 @@ void Menu(void)
 
 void test(void)
 {
-    //Menu();
+    Menu();
     /*
     int ref[25], suspendu[25], tTaille;
     float cagnotte[25];
