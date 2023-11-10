@@ -17,7 +17,7 @@ int loadClient(int numClient[], float cagnotte[], int suspendu[], int taille)
         fscanf(File, "%d;%f;%d", &numClient[i], &cagnotte[i], &suspendu[i]);
         i++;
     }
-    if (i==taille && feof(File)==0) return -2; //erreur tableau trop cours
+    if (i==taille && feof(File)==0) return -2; //erreur tableau trop court
     return i;
 }
 
@@ -30,7 +30,7 @@ int loadArticle(int id[], float poid[], float volume[], float prix[], int taille
 
     if (File==NULL)
     {
-        printf("Erreur: fichier vide ou non existant \n");
+        printf("Erreur: fichier vide ou inexistant \n");
         return -1; //erreur fichier
     }
 
@@ -65,10 +65,10 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
     int trouve;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
-    printf("Quelle sera le numéro du client à ajouter : \n");
+    printf("Quel sera le numéro du client à ajouter : \n");
     scanf("%d",&num);
     while (num==777){
-        printf("Ce numéros est reservé\n");
+        printf("Ce numéro est reservé\n");
         printf("Veuillez re saisir une valeur : \n");
         scanf("%d",&num);
     }
@@ -79,7 +79,7 @@ int AddClient (int numClient[], float cagnotte[], int suspendu[], int *taille, i
             printf("Veuillez re saisir une valeur : \n");
             scanf("%d",&num);
         }
-        printf("Erreur Saisir un autre numéro client : \n");
+        printf("Erreur, veuillez saisir un autre numéro client : \n");
         scanf("%d", &num);
         ind =frecherche(numClient,num,*taille,&trouve);
     }
@@ -125,11 +125,11 @@ int AddArticle(int ref[],float poids[] ,float volume[] ,float prix[] , int *tail
     float poids1, prix1;
     if (*taille+1==tailleMax)
         return -1; //Erreur: tableau trop petit
-    printf("Quelle est la reference de l'article que vous voulez ajouter : \n");
+    printf("Quelle est la référence de l'article que vous voulez ajouter : \n");
     scanf("%d" ,&article);
     int ind = frecherche(ref ,article,*taille,&trouve);
     while(trouve==1 || article <0){
-        printf("Erreur Saisir une autre reference : \n");
+        printf("Erreur, veuillez saisir une autre reference : \n");
         scanf("%d",&article);
         ind = frecherche(ref ,article,*taille,&trouve);
     }
@@ -167,7 +167,7 @@ void ShowClient(int numClient[], float cagnotte[], int suspendu[], int taille) {
 
 int ShowClientPrecis(int numClient[], float cagnotte[], int suspendu[], int taille){
     int num, dedans;
-    printf("Quelle est le numero de client recherché  : \n ");
+    printf("Quel est le numéro de client recherché  : \n ");
     scanf("%d",&num);
     int position = frecherche(numClient, num, taille, &dedans);
     if (dedans==1) printf("%d\t%.2f\t%d\n",numClient[position],cagnotte[position],suspendu[position]);
@@ -187,7 +187,7 @@ void ShowArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int ta
 void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , int taille )
 {
     int num, dedans;
-    printf("Quelle est le numero de l'article recherché  : \n ");
+    printf("Quel est le numero de l'article recherché  : \n ");
     scanf("%d",&num);
     int position = frecherche(ref, num, taille, &dedans);
     if ( dedans==1){
@@ -209,7 +209,7 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
     scanf("%d",&num);
     int indice = frecherche(numClient,num,*taille,&trouve);
     while (trouve==0 || num <0){
-        printf("La reference client est inexistante ou incorrect veuillez re saisir la reference :\n");
+        printf("La reference client est inexistante ou incorrecte veuillez re saisir la reference :\n");
         scanf("%d",&num);
         indice = frecherche(numClient,num,*taille,&trouve);
     }
@@ -231,11 +231,11 @@ int DelArticle (int ref[],float poids[] ,float volume[] ,float prix[] , int *tai
         return -1;
     printf("Voicie la liste des articles : \n");
     ShowArticle(ref,poids,volume,prix,*taille);
-    printf("Quelle est la ref de l article que vous souhaitez supprimer : \n");
+    printf("Quelle est la reference de l'article que vous souhaitez supprimer : \n");
     scanf("%d",&ref1);
     int indice = frecherche(ref,ref1,*taille,&trouve);
     while (trouve==0 || ref <0){
-        printf("La reference de l'artcile est inexistante ou negatif veuillez re saisir : \n");
+        printf("La reference de l'article est inexistante ou negative veuillez re saisir : \n");
         scanf("%d",&ref1);
         indice =frecherche(ref,ref1,*taille,&trouve);
     }
@@ -308,7 +308,7 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     printf("Cagnotte totale:\t%.2f euros\n", cagnotte);
     printf("\nVolume utilisé\t: %.2f litres\n", *volTT);
     printf("Volume restant\t: ");
-    if (volmax-(*volTT) < 0) printf("\033[0;31mAttention dépassement du volume autorisée de %.2f litres\n\033[0;32m", *(volTT)-volmax);
+    if (volmax-(*volTT) < 0) printf("\033[0;31mAttention dépassement du volume autorisé de %.2f litres\n\033[0;32m", *(volTT)-volmax);
     else printf("%.2f litres\n", volmax-(*volTT));
     printf("\nCharge Actuelle\t: %.2f kg\n", *chargeTT);
     printf("Charge restante\t: ");
@@ -339,7 +339,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     scanf("%f", &poidMax);
     while (poidMax==0)
     {
-        printf("Valeurs impossible\nVeuillez définir la charge max de votre véhicule (kg): ");
+        printf("Valeurs impossibles\nVeuillez définir la charge max de votre véhicule (kg): ");
         scanf("%*c%f", &poidMax);
     }
     printf("Veuillez définir le volume max de votre véhicule (L): ");
@@ -347,7 +347,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     printf("%f", volMax);
     while (volMax==0.0)
     {
-        printf("Valeurs impossible\nVeuillez définir le volume max de votre véhicule (L): ");
+        printf("Valeurs impossibles\nVeuillez définir le volume max de votre véhicule (L): ");
         scanf("%*c%f", &volMax);
     }
     printf("Voulez vous définir une limite budgétaire ? (y/n)\n");
@@ -376,7 +376,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 frecherche(Tref, ref, Ttaille, &trouve);
                 while (trouve!=1)
                 {
-                    printf("L'artile %d n'existe pas\n", ref);
+                    printf("L'article %d n'existe pas\n", ref);
                     printf("Veuillez réessayer: ");
                     scanf("%d", &ref);
                     frecherche(Tref, ref, Ttaille, &trouve);
@@ -401,7 +401,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     scanf("%d", &reponse);
                     while (reponse!=1 && reponse!=2 && reponse!=3)
                     {
-                        printf("Reponse invalide veilliez réessayer: ");
+                        printf("Reponse invalide veuillez réessayer: ");
                         scanf("%d", &reponse);
                     }
                     if (reponse==1) modif=0;
@@ -420,11 +420,11 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     int reponse;
                     printf("\n\nAttention votre panier dépasse de %.2f kilos\n", poidTT-poidMax);
                     printf("Continuer quand même tapez 1\n");
-                    printf("Enlever des articles 2\n");
+                    printf("Enlever des articles tapez 2\n");
                     scanf("%d", &reponse);
                     while (reponse!=1 && reponse!=2 && reponse!=3)
                     {
-                        printf("Reponse invalide veilliez réessayer: ");
+                        printf("Reponse invalide veuillez réessayer: ");
                         scanf("%d", &reponse);
                     }
                     if (reponse==1) modif=0;
@@ -438,7 +438,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     scanf("%d", &reponse);
                     while (reponse!=1 && reponse!=2 && reponse!=3)
                     {
-                        printf("Reponse invalide veilliez réessayer: ");
+                        printf("Reponse invalide veuillez réessayer: ");
                         scanf("%d", &reponse);
                     }
                     if (reponse==1) modif=0;
@@ -456,16 +456,16 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 place = frecherche(pRef, ref, ptaille, &trouve);
                 while (trouve!=1)
                 {
-                    printf("Vous n'avez pas l'artile %d dans votre panier\n", ref);
+                    printf("Vous n'avez pas l'article %d dans votre panier\n", ref);
                     printf("Veuillez réessayer: ");
                     scanf("%d", &ref);
                     place = frecherche(pRef, ref, ptaille, &trouve);
                 }
-                printf("Nouvelle quantité voulu: ");
+                printf("Nouvelle quantité voulue: ");
                 scanf("%d", &quantite);
                 while (quantite<=0)
                 {
-                    printf("La quantité ne peut pas etre inférieur ou égale à 0\n");
+                    printf("La quantité ne peut pas etre inférieure ou égale à 0\n");
                     printf("Veuillez réessayer: ");
                     scanf("%d", &quantite);
                 }
@@ -478,7 +478,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 place = frecherche(pRef, ref, ptaille, &trouve);
                 while (trouve!=1)
                 {
-                    printf("Vous n'avez pas l'artile %d dans votre panier\n", ref);
+                    printf("Vous n'avez pas l'article %d dans votre panier\n", ref);
                     printf("Veuillez réessayer: \n");
                     scanf("%d", &ref);
                     place = frecherche(pRef, ref, ptaille, &trouve);
@@ -505,7 +505,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     }
     printf("\033[0;33m");
     printf("============================================\n");
-    printf("Au revoir cher Client \n");
+    printf("Au revoir cher(e) client(e) \n");
     return nCagnotte;
 }
 
@@ -607,7 +607,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 printf("Quelle sera la nouvelle référence : \n");
                 scanf("%d",&new_ref);
                 ref[ind2]=new_ref;
-                printf("Référence modifié \n");
+                printf("Référence modifiée \n");
             }
         }
         if (choix == 1)
@@ -631,7 +631,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
                 scanf("%d",&num);
                 id1=frecherche(numClient,num,tlc,&trouve);
                 suspendue[id1]=1;
-                printf("voulez vous à présent créer une nouvel carte pour se client (si oui tapez 0 si non tapez 1)\n");
+                printf("voulez vous à présent créer une nouvel carte pour ce client (si oui tapez 0 si non tapez 1)\n");
                 scanf("%d",&nvcarte);
                 if (nvcarte==0)
                 {
@@ -675,7 +675,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             ShowArticlePrecis(ref,poids,volume,prix,tlc);
         if (choix == 4){
             printf("===========================================================\n");
-            printf(" || Au revoir l administrateur\n");
+            printf(" || Au revoir l administrateur(e)\n");
             printf("===========================================================\n");
             return ;
         }
@@ -709,7 +709,7 @@ void Menu(void)
     while (run){
         printf("\033[0;33m");
         printf("===========================================================\n");
-        printf(" ||Bienvenue  sur l'application de BricoConstruction!\n===========================================================\nRentrez votre identifiant/Ou tapez -1 pour Arreté \n");
+        printf(" ||Bienvenue  sur l'application de BricoConstruction!\n===========================================================\nRentrez votre identifiant/Ou tapez -1 pour Arreter \n");
         scanf("%d",&id);
         while (id==0)
         {
@@ -738,7 +738,7 @@ void Menu(void)
                 else 
                     printf("Cette carte a été suspendue. Veuillez contacter l'assistance.\n\n\n");
             }
-            else printf("Identifiant inconnue\n\n");
+            else printf("Identifiant inconnu\n\n");
         }
     }
 }
