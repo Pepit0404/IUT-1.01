@@ -215,6 +215,3 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
 * \author Maeva Colle 
 */
 void Menu(void);
-
-
-void test(void); 
