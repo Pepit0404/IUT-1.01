@@ -28,7 +28,7 @@ Fonction AddClient:
 
 Fonction AddNouvelleCarte:
     Fonction qui permet de rajouter une carte en prenant en compte les informations d'une carte suspendu.
-    Elle prend en paramètres les tableaux des informations client, un pointeur pour la taille logique, un entier pour la taille physique et un entier pour le nouveau numero.
+    Elle prend en paramètre les tableaux des informations client, un pointeur pour la taille logique, un entier pour la taille physique et un entier pour le nouveau numero.
     Elle renvoie un code d'erreur.
 
 Fonction AddArticle:
@@ -38,60 +38,60 @@ Fonction AddArticle:
 
 Fonction ShowClient:
     Fonction qui permet de lister tout les clients présent dans les tableaux.
-    Elle prends en paramètre les tableaux d'informations client et un entier pour la taille logique.
+    Elle prend en paramètre les tableaux d'informations client et un entier pour la taille logique.
     Elle renvoie rien.
 
 Fonction ShowClientPrecis:
     Fonction qui permet de montrer un client en particulier
-    Elle prends en paramètre les tableaux d'informations client et un entier pour la taille logique.
+    Elle prend en paramètre les tableaux d'informations client et un entier pour la taille logique.
     Elle renvoie le statue de la carte.
 
 Fonction ShowArticle:
     Fonction qui permet de lister tout les articles présent dans les tableaux.
-    Elle prends en paramètre les tableaux des informations article et un entier pour la taille logique.
+    Elle prend en paramètre les tableaux des informations article et un entier pour la taille logique.
     Elle renvoie rien.
 
 Fonction ShowArticlePrecis:
     Fonction qui permet de montrer un article en particulier.
-    Elle prends en paramètre les tableaux d'informations article et un entier pour la taille logique.
+    Elle prend en paramètre les tableaux d'informations article et un entier pour la taille logique.
     Elle renvoie rien.
 
 Fonction DelClient:
     Fonction qui permet de supprimer un client des tableaux.
-    Elle prends en paramètre les tableaux des informations client, un pointeur pour la taille logique et un entier pour la taille physique.
+    Elle prend en paramètre les tableaux des informations client, un pointeur pour la taille logique et un entier pour la taille physique.
     Elle renvoie un code d'erreur.
 
 Fonction DelArticle:
     Fonction qui permet de supprimer un article des tableaux.
-    Elle prends en paramètre les tableaux des informations article, un pointeur pour la taille logique et un entier pour la taille physique.
+    Elle prend en paramètre les tableaux des informations article, un pointeur pour la taille logique et un entier pour la taille physique.
     Elle renvoie un code d'erreur.
 
 Fonction saveClient:
     Fonction qui permet de sauvegarder les tableaux d'informations client dans le fichier client.csv.
-    Elle prends en paramètre les tableaux d'informations client et un entier pour la taille logique.
+    Elle prend en paramètre les tableaux d'informations client et un entier pour la taille logique.
     Elle renvoie rien.
 
 Fonction saveArticle:
     Fonction qui permet de sauvegarder les tableaux d'informations article dans le fichier articles.csv.
-    Elle prends en paramètre les tableaux d'informations article et un entier pour la taille logique.
+    Elle prend en paramètre les tableaux d'informations article et un entier pour la taille logique.
     Elle renvoie rien.
 
 Fonction afficheRecap:
     Fonction qui permet d'afficher le panier du client.
-    Elle prends en paramètre les tableaux d'informations article, les tableaux d'informations du panier, un entier pour la taille logique du panier, un entier pour la taille logique des article, plusieurs flottant pour les informations essentiel et des pointeurs pour les informations du panier.
-    Elle renvoie la cagnottes actuelles.
+    Elle prend en paramètre les tableaux d'informations article, les tableaux d'informations du panier, un entier pour la taille logique du panier, un entier pour la taille logique des article, plusieurs flottant pour les informations essentiel et des pointeurs pour les informations du panier.
+    Elle renvoie la cagnotte actuelle.
 
 Fonction Client:
     Fonction qui permet de rentrer du côté client.
-    Elle prends en paramètre les tableaux d'informations article, un entier pour la taille logique, un entier pour la taille physique et un flottant pour la cagnotte.
+    Elle prend en paramètre les tableaux d'informations article, un entier pour la taille logique, un entier pour la taille physique et un flottant pour la cagnotte.
     Elle renvoie la nouvelle cagnotte du client.
     
 Fonction administrateur:
     Fonction qui permet de rentrer du côté administrateur.
-    Elle prends en paramètre les tableaux d'informations article, les tableaux d'informations client, des entier pour les tailles logiques et un entier pour les tailles physiques.
+    Elle prend en paramètre les tableaux d'informations article, les tableaux d'informations client, des entier pour les tailles logiques et un entier pour les tailles physiques.
     Elle renvoie rien.
 
 Fonction Menu
     Fonction qui permet de lancer l'application.
-    Elle prends en paramètre rien.
+    Elle prend en paramètre rien.
     Elle renvoie rien.
