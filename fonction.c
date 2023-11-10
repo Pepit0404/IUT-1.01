@@ -223,7 +223,7 @@ int ShowClientPrecis(int numClient[], float cagnotte[], int suspendu[], int tail
     erreur = scanf("%d",&num);
     while (erreur==0)
     {
-        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
         printf("Veuillez réessayer: ");
         erreur = scanf("%*c%d", &num);
     }
@@ -249,7 +249,7 @@ void ShowArticlePrecis (int ref[],float poids[] ,float volume[] ,float prix[] , 
     erreur = scanf("%d",&num);
     while (erreur==0)
     {
-        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
         printf("Veuillez réessayer: ");
         erreur = scanf("%*c%d", &num);
     }
@@ -273,7 +273,7 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
     erreur = scanf("%d",&num);
     while (erreur==0)
     {
-        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
         printf("Veuillez réessayer: ");
         erreur = scanf("%*c%d", &num);
     }
@@ -283,7 +283,7 @@ int DelClient  (int numClient[], float cagnotte[], int suspendu[], int *taille, 
         erreur = scanf("%d",&num);
         while (erreur==0)
         {
-            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
             printf("Veuillez réessayer: ");
             erreur = scanf("%*c%d", &num);
         }
@@ -669,7 +669,7 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
         erreur = scanf("%d",&choix);
         while (erreur==0)
         {
-            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
             printf("Veuillez réessayer: ");
             erreur = scanf("%*c%d", &choix);
         }
@@ -809,7 +809,6 @@ void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[
             }
         }
         if (choix == 1)
-        
         {
             printf("===========================================================\n");
             printf(" ||si vous voulez modifier le statut d'une carte tapez 0\n ||Si vous voulez creer une carte tapez 1\n ||Si vous voulez supprimer une carte tapez le 2\n");
