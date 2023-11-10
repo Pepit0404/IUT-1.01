@@ -654,11 +654,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
 
 void administrateur(int numClient[], float cagnotte[], int suspendue[], int ref[], float volume[], float prix[], float poids[], int tp, int tla, int tlc)
 {
-<<<<<<< HEAD
     int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,nvcarte,reference, susp, erreur;
-=======
-    int choix,choixa,ref2, choixc, id, id1,id2, trouve,num, modifa, nvref,erreur,nvcarte,reference, susp;
->>>>>>> eb2aec51c7a349af063624b778ea57f21162b771
     float nvvol,nvpo,nvpr;
     printf("\033[0;35m");
     printf("===========================================================\n");
@@ -971,7 +967,13 @@ void Menu(void)
 
 void test(void)
 {
-    Menu();
+    //Menu();
+    int ref[25], suspendu[25], tTaille;
+    float cagnotte[25];
+    tTaille = loadClient(ref, cagnotte, suspendu, 25);
+    ShowClient(ref, cagnotte, suspendu, tTaille);
+    printf("%d\n",tTaille);
+
     /*
     int numClient[200],  suspendue[200], tp=200;
     float cagnotte[200];
