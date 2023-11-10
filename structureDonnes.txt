@@ -1,24 +1,24 @@
 Fichier .csv:
-    Notre structure de donné repose sur des fichiers csv.
-Ils sont appeler dans les fonctions load qui vont lire les fichiers et mettre les valeurs des fichiers dans les tableaux aux indices correspondants.
-Les tableaux ont la même taille logique et les informations qui sont lié ont le même indice.
-Cela nous permet de pouvoir modifié les informations que l'on veut et de pouvoir les retrouver plus facilement.
-Durant le programme, les tableaux vont être modifié celon les actions faites.
-A la fin du programme celle ci sont écrite à nouveau à l’intérieur du fichier csv avec les nouvelles modifications.
+    Notre structure de données repose sur des fichiers csv.
+Ils sont appelés dans les fonctions load qui vont lire les fichiers et mettre les valeurs des fichiers dans les tableaux aux indices correspondants.
+Les tableaux ont la même taille logique et les informations qui sont liées ont le même indice.
+Cela nous permet de pouvoir modifier les informations que l'on veut et de pouvoir les retrouver plus facilement.
+Durant le programme, les tableaux vont être modifiés selon les actions faites.
+A la fin du programme celle ci sont écrites à nouveau à l’intérieur du fichier csv avec les nouvelles modifications.
 
 Fonction loadClient:
-    Fonction qui permet de charger dans des tableaux toutes les informations contenue dans le fichiers csv client.
-    Elle prends en paramètre des tableaux qu'elle modifie.
+    Fonction qui permet de charger dans des tableaux toutes les informations contenues dans le fichiers csv client.
+    Elle prend en paramètre des tableaux qu'elle modifie.
     Elle renvoie la taille logique des tableaux si aucune erreur, si il y en a elle renvoie un code d'erreur.
 
 Fonction loadArticle:
-    Fonction qui permet de charger dans des tableaux toutes les informations contenue dans le fichiers csv article.
-    Elle prends en paramètre des tableaux qu'elle modifie.
+    Fonction qui permet de charger dans des tableaux toutes les informations contenues dans le fichiers csv article.
+    Elle prend en paramètre des tableaux qu'elle modifie.
     Elle renvoie la taille logique des tableaux si aucune erreur, si il y en a elle renvoie un code d'erreur.
 
 Fonction frecherche:
     Fonction qui permet de rechercher si une valeur est présente ou non dans un tableaux.
-    Elle prends en paramètre un tableaux, un entier pour la valeur, un entier pour la taille logique et un pointeur pour renvoyer si la veleur à était trouvé.
+    Elle prend en paramètre un tableaux, un entier pour la valeur, un entier pour la taille logique et un pointeur pour renvoyer si la veleur à était trouvé.
     Elle renvoie la position de la valeur si celle-ci existe, la position où elle devrait être si elle n'existe pas ou un code si une erreur arrive.
 
 Fonction AddClient:
@@ -28,12 +28,12 @@ Fonction AddClient:
 
 Fonction AddNouvelleCarte:
     Fonction qui permet de rajouter une carte en prenant en compte les informations d'une carte suspendu.
-    Elle prends en paramètre les tableaux des informations client, un pointeur pour la taille logique, un entier pour la taille physique et un entier pour le nouveau numero.
+    Elle prend en paramètres les tableaux des informations client, un pointeur pour la taille logique, un entier pour la taille physique et un entier pour le nouveau numero.
     Elle renvoie un code d'erreur.
 
 Fonction AddArticle:
     Fonction qui permet de rajouter un article dans les tableaux.
-    Elle prends en paramètre les tableaux des informations article, un pointeur pour la taille logique et un entier pour la taille physique.
+    Elle prend en paramètre les tableaux des informations article, un pointeur pour la taille logique et un entier pour la taille physique.
     Elle renvoie un code erreur.
 
 Fonction ShowClient:
