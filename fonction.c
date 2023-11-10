@@ -463,7 +463,7 @@ float afficheRecap(int pRef[], int pQuantite[], int ptaille, int Tref[], float T
     if (poidmax-(*chargeTT) < 0) printf("\033[0;31mAttention dépassement de la charge autorisée de %.2f kg\n\033[0;32m", (*chargeTT)-poidmax);
     else printf("%.2f kg\n", poidmax-(*chargeTT));
     printf("===========================================================\n");
-    printf("\033[0;35m");
+    printf("\033[0;36m");
 
     return cagnotte;
 }
@@ -472,11 +472,11 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     int pRef[tailleMax], pQuantite[tailleMax], ptaille=0, action=0, erreur;
     float volMax, poidMax, nCagnotte=cagnotte, prixMax, prixTT=0, poidTT=0, volumeTT=0;
     char choix;
-    printf("\033[0;35m");
+    printf("\033[0;36m");
     printf("===========================================================\n");
     printf("\033[0;35m");
     printf("|Bienvenue\n");
-    printf("\033[0;35m");
+    printf("\033[0;36m");
     printf("===========================================================\n");
     printf("Veuillez définir la charge max de votre véhicule (kg): ");
     erreur = scanf("%f", &poidMax);
@@ -496,7 +496,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
     erreur = scanf("%*c%c", &choix);
     while (erreur==0 || (choix!='y' && choix!='Y' && choix!='n' && choix!='N') )
     {
-        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
+        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
         printf("Voulez vous définir une limite budgétaire ? (y/n)\n");
         erreur = scanf("%*c%c", &choix);
     }
@@ -505,7 +505,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
         erreur = scanf("%f", &prixMax);
         while (erreur==0 || prixMax<0)
         {
-            printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
             printf("Veillez définir une limitation: ");
             erreur = scanf("%*c%f", &prixMax);
         }
@@ -519,7 +519,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
         erreur = scanf("%*c%d", &action);
         if (erreur==0) {
             action=999;
-            printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
+            printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
         }
         if (action!=-1){
             if (action==0){
@@ -528,7 +528,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 erreur = scanf("%*c%d", &ref);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;56m");
+                    printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
                     printf("\n\nReference article: ");
                     erreur = scanf("%d", &ref);
                 }
@@ -540,7 +540,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     erreur = scanf("%*c%d", &ref);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
                         printf("\n\nReference article: ");
                         erreur = scanf("%*c%d", &ref);
                     }
@@ -552,7 +552,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     erreur = scanf("%*c%d", &quantite);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;35m");
+                        printf("\033[0;31mAttention : réponse non conforme\n\033[0;36m");
                         printf("Quantité prise: ");
                         erreur = scanf("%*c%d", &quantite);
                     }
@@ -626,7 +626,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 erreur = scanf("%d", &ref);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention réponse invalide\n\033[0;35m");
+                    printf("\033[0;31mAttention réponse invalide\n\033[0;36m");
                     erreur = scanf("%*c%d", &ref);
                 }
                 
@@ -637,7 +637,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     erreur = scanf("%d", &ref);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention réponse invalide\n\033[0;35m");
+                        printf("\033[0;31mAttention réponse invalide\n\033[0;36m");
                         erreur = scanf("%*c%d", &ref);
                     }
                     place = frecherche(pRef, ref, ptaille, &trouve);
@@ -647,7 +647,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 while (quantite<=0 || erreur==0)
                 {
                     if (quantite<=0) printf("La quantité ne peut pas etre inférieure ou égale à 0\n");
-                    printf("\033[0;31mAttention réponse invalide\n\033[0;35m");
+                    printf("\033[0;31mAttention réponse invalide\n\033[0;36m");
                     printf("Veuillez réessayer: ");
                     scanf("%*c%d", &quantite);
                 }
@@ -659,7 +659,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 erreur = scanf("%d", &ref);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention réponse invalide\n\033[0;35m");
+                    printf("\033[0;31mAttention réponse invalide\n\033[0;36m");
                     printf("Veilliez réessayer: ");
                     erreur = scanf("%*c%d", &ref);
                 }
@@ -672,7 +672,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                     erreur = scanf("%d", &ref);
                     while (erreur==0)
                     {
-                        printf("\033[0;31mAttention réponse invalide\n\033[0;35m");
+                        printf("\033[0;31mAttention réponse invalide\n\033[0;36m");
                         printf("Veilliez réessayer: ");
                         erreur = scanf("%*c%d", &ref);
                     }
@@ -692,7 +692,7 @@ float Client(int Tref[], float Tpoids[], float Tvolume[], float Tprix[], int tai
                 erreur = scanf("%*c%c", &choix);
                 while (erreur==0)
                 {
-                    printf("\033[0;31mAttention réponse invalide\n\033[0;35m");
+                    printf("\033[0;31mAttention réponse invalide\n\033[0;36m");
                     printf("Veilliez réessayer: ");
                     erreur = scanf("%*c%c", &choix);
                 }
